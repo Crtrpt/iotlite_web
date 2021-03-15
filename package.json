@@ -16,6 +16,7 @@
     "bootstrap-vue": "^2.20.1",
     "codemirror": "^5.58.3",
     "core-js": "^3.6.5",
+    "d3-selection": "^2.0.0",
     "gridstack": "^3.0.0",
     "js-sha256": "^0.9.0",
     "leaflet-contextmenu": "^1.4.0",
