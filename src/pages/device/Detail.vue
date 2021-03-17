@@ -7,7 +7,7 @@
         <b-icon v-if="form.ver!=form.product.ver" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
-        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{"更多"}}</b-link>
+        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{"↑"}}</b-link>
         </p>
     </b-col>
     <b-col cols="12">
@@ -23,22 +23,22 @@
        <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
                     <b-tr>
+                      <b-td  variant="light" class="text-right">产品名称:</b-td>
+                      <b-td>{{form.product.name}}</b-td>
                       <b-td  variant="light" class="text-right">设备名称:</b-td>
                       <b-td>{{form.name}}</b-td>
-                      <b-td  variant="light" class="text-right">设备序号:</b-td>
-                      <b-td>{{form.sn}}</b-td>
                     </b-tr>
                     <b-tr>
                       <b-td  variant="light" class="text-right">产品序号:</b-td>
                       <b-td>{{form.product.sn}}</b-td>
-                      <b-td  variant="light" class="text-right">产品名称:</b-td>
-                      <b-td>{{form.product.name}}</b-td>
+                      <b-td  variant="light" class="text-right">设备序号:</b-td>
+                      <b-td>{{form.sn}}</b-td>
                     </b-tr>
                      <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
                       <b-td>{{form.createdAt}}</b-td>
-                      <b-td  variant="light" class="text-right">维护时间:</b-td>
-                      <b-td>2021年2月4日14:40:42</b-td>
+                      <b-td  variant="light" class="text-right">最后活动时间:</b-td>
+                      <b-td>{{timestamp2Str(form.snap.lastAt)||'暂无'}}</b-td>
                     </b-tr>
                   </b-tbody>
        </b-table-simple>
@@ -79,7 +79,7 @@ export default {
       })
       //取消事件订阅
       eventHub.off(_this.eventSource,(e)=>{
-            console.log("mitt收到"+e)
+
       })
   },
   mounted(){
@@ -95,10 +95,15 @@ export default {
         _this.form=res.data
         
         mqttClient.subscribe(_this.topic,(err)=>{
-          console.log("订阅成功: "+_this.topic)
+         
 
           eventHub.on(_this.eventSource,(e)=>{
-            console.log("mitt收到"+e)
+              var msg=JSON.parse(e);
+              // console.log("解析"+msg.action)
+              if(msg.action=="property"){
+                // console.log("变更")
+                _this.form.snap[msg.name]=msg.value
+              }
           })
         })
 

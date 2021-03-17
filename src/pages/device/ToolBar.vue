@@ -1,5 +1,5 @@
 <template>
-   <b-col cols="12" class="mt-2 mb-2">
+   <b-col cols="12" class="mt-2 mb-2" >
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
                       

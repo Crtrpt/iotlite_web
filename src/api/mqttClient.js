@@ -8,7 +8,7 @@ client.on('connect', function () {
 })
 
 client.on('message', function (topic, message) {
-  console.log(topic,message)
+  // console.log(topic,message)
   eventHub.emit(topic,message)
 })
 

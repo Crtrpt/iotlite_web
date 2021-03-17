@@ -1,5 +1,5 @@
 <template>
-   <b-col cols="12" class="mt-2 mb-2">
+   <b-col cols="12" class="mt-2 mb-2" style="pading-left:0px;pading-right:0px">
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
                       <b-modal id="new" title="新建分组" hide-footer>

@@ -65,14 +65,22 @@ const group  =[
         name:"groupDeviceList"
       }
     },
-  //   {
-  //     path: '3d',
-  //     component: require('../pages/group/group/3D').default,
-  //     name: 'group3D',
-  //     meta:{
-  //       name:"group3D"
-  //     }
-  //   }
+    {
+      path: 'state',
+      component: require('../pages/group/group/State').default,
+      name: 'groupState',
+      meta:{
+        name:"groupState"
+      }
+    },
+    {
+      path: 'env',
+      component: require('../pages/group/group/Env').default,
+      name: 'groupEnv',
+      meta:{
+        name:"groupEnv"
+      }
+    }
   ]
 }
 ]

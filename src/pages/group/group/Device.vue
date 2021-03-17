@@ -1,6 +1,8 @@
 <template>
   <div>
-      <Toolbar :query=query @refresh="getList"/>
+      <b-row>
+         <Toolbar :query=query @refresh="getList"/>
+      </b-row>
 
       <b-table hover :items="items" :fields="fields"  
       @row-contextmenu="(item, index, event)=>{event.preventDefault();$refs.menu.open(event,item)}" 

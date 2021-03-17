@@ -3,7 +3,7 @@
       <b-col cols="3" v-for="(ctr,i) in  form.product.spec.metric" :key="i">
         <b-card :title="ctr.name" >
           <b-card-text>{{ctr.desc}}</b-card-text>
-            <p>TODO 仪表盘 使用echart.js 重构</p>
+          <ChartLine />
         </b-card>
       </b-col>
   </b-row>
@@ -11,10 +11,12 @@
 
 <script>
 
+import ChartLine from "../../../components/chart/ChartLine";
 
 export default {
   name:"Metric",
   components:{
+    ChartLine
   },
   data:()=>{
     return {
@@ -25,9 +27,6 @@ export default {
     form:Object
   },
   methods:{
-  },
-  mounted(){
-    
   }
 }
 </script>
