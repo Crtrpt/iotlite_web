@@ -19,7 +19,7 @@
         <b-nav-item to="map"  active-class="active" >设备地图</b-nav-item>
         <!-- <b-nav-item to="3d"  active-class="active" >3d</b-nav-item> -->
       </b-nav>
-      <router-view  class="content" :form=form></router-view>
+      <router-view  class="content" :form=form ></router-view>
     </b-col>
   </b-row>
 </b-container>
@@ -47,7 +47,6 @@ export default {
     },
     getInfo(){
       var _this=this;
-      console.log(this.$route.params.id)
       product.info({
         id:this.form.id
       }).then(res=>{

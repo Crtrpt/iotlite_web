@@ -51,6 +51,9 @@ const device={
     },
     saveGroupPlayground:(ctx)=>{
       return request.post("device/saveGroupPlayground",ctx)
+    },
+    groupStateClean:(ctx)=>{
+      return request.post("device/groupStateClean",ctx)
     }
 }
 

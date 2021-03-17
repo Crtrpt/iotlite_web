@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-1 mx-1">
+  <div >
        <b-row>
          <b-col cols="12" class="mt-2 mb-2">
            <b-button-toolbar>
                       <b-button-group  class="mr-2">
-                        <b-button size="sm" variant="primary" @click="saveModel" >更新编排策略</b-button>
+                        <b-button size="sm" variant="primary" @click="saveModel" >应用</b-button>
                       </b-button-group>
             </b-button-toolbar>
          </b-col>

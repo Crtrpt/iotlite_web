@@ -1,15 +1,18 @@
 <template>
-  <div class="mt-1 mx-1">
+  <div>
       <b-row>
-         <b-col cols="12" class="mt-2 mb-2">
+          <b-col cols="12" class="mt-2 mb-2">
             <b-button-toolbar>
                 <b-button-group  class="mr-2">
                   <b-button size="sm" variant="primary" @click="setFence" >分组围栏</b-button>
                 </b-button-group>
-            </b-button-toolbar>
-      </b-col>
-        <b-col cols="12" id="map">
-        </b-col>
+          </b-button-toolbar>
+          </b-col>
+
+
+          <b-col cols="12" >
+            <div id="map"></div>
+          </b-col>
       </b-row>
   </div>
 </template>

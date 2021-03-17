@@ -26,14 +26,6 @@ export default {
     init(){ 
         var _this=this;
 
-        var baseMaps = {
-
-        };
-
-        var  overlayMaps={
-          
-        }
-
         var map= this.map=L.map('map').setView([31.23573822772999, 121.48664474487306], 18)
 
         this.map.on("zoomanim",(res)=>{
@@ -61,17 +53,13 @@ export default {
     },
     loadProduct(){
        var _this=this;
-       product.all({}).then((res)=>{
-          res.data.forEach(e=>{
-            console.log("增加产品图层"+e.sn)
-            var product= this.productLayer[e.sn]= L.layerGroup([])
-            var a= product.addTo(this.map);
-            _this.layerContrl.addOverlay(a,e.label);
-          })
-          _this.layerContrl.expand();
+       console.log(this.form);
+       this.productLayer[this.form.sn]= L.layerGroup([])
+       var a= this.productLayer[this.form.sn].addTo(this.map);
+       _this.layerContrl.addOverlay(a,this.form.name);
+       _this.layerContrl.expand();
 
-          this.loadDevice();  
-      })
+       this.loadDevice();  
     },
     loadDevice(){
        var _this=this;
@@ -82,8 +70,6 @@ export default {
        )).then((res)=>{
          res.data.forEach(e=>{
             if(e.location){
-              console.log("增加设备点")
-              console.log(e)
               L.marker([e.location.y, e.location.x])
               .addTo(_this.productLayer[e.productSn])
               .bindPopup("deviceSn:"+e.deviceSn+" / productSn:"+e.productSn)

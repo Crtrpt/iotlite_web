@@ -1,23 +1,14 @@
 <template>
   <div>
-       <b-col cols="12" class="mt-2 mb-2">
+      <b-row>
+      <b-col cols="12" class="mt-2 mb-2">
             <b-button-toolbar>
                       <b-button-group  class="mr-2">
                         <b-button size="sm" variant="primary" @click="saveModel" >更新物模型</b-button>
-                      </b-button-group>
-
-                      <!-- <b-button-group  class="mr-2">
-                        <b-button size="sm" variant="outline-primary" >增加属性</b-button>
-                        <b-button size="sm" variant="outline-primary" >增加事件</b-button>
-                        <b-button size="sm" variant="outline-primary" >增加控制</b-button>
-                        <b-button size="sm" variant="outline-primary" >增加告警</b-button>
-                      </b-button-group> -->
-
-                       <!-- <b-button-group  class="mr-2">
-                        <b-button size="sm" variant="primary" @click="saveModel" >文档</b-button>
-                      </b-button-group> -->
+                       </b-button-group>
             </b-button-toolbar>
       </b-col>
+        </b-row>
       <model-editor ref="editor" :data=d />
   </div>
 </template>

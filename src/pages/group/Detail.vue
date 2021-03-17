@@ -12,10 +12,12 @@
         <b-nav-item to="device"  active-class="active"> 设备</b-nav-item>
         <b-nav-item to="map"  active-class="active" >设备地图</b-nav-item>
         <b-nav-item to="playground"  active-class="active" >编排</b-nav-item>
-        <b-nav-item to="log"  active-class="active" >日志</b-nav-item>
-        <!-- <b-nav-item to="3d"  active-class="active" >3d</b-nav-item> -->
+        <!-- <b-nav-item to="log"  active-class="active" >日志</b-nav-item> -->
+        <!-- <b-nav-item to="env"  active-class="active" >环境变量</b-nav-item>-->
+        <b-nav-item to="state"  active-class="active"  >当前状态</b-nav-item> 
+
       </b-nav>
-      <router-view  class="content" :form=form></router-view>
+      <router-view  class="content" :form=form @refresh="getInfo()"></router-view>
     </b-col>
   </b-row>
 </b-container>

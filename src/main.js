@@ -10,6 +10,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 import mqttClient from "./api/mqttClient"
 
+import dateUtils from './utils/DateUtils'
+Vue.use(dateUtils);
+
 Vue.use(VueLoading)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

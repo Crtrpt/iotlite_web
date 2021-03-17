@@ -6,7 +6,8 @@
                 <b-col>
                   <h4>设备({{helper.total||0}})</h4>
                 </b-col>
-                <Toolbar  :query=query  @refresh="getList" />
+                 <Toolbar  :query=query  @refresh="getList" />
+               
               </b-row>
           </div>
            <div class="widget-content" >

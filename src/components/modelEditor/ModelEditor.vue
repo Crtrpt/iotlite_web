@@ -12,6 +12,7 @@ import CodeMirror from 'codemirror'
 import 'codemirror/lib/codemirror.css'
 import 'codemirror/theme/monokai.css'
 
+import 'codemirror/mode/groovy/groovy.js'
 
 import 'codemirror/mode/javascript/javascript.js'
 import 'codemirror/addon/hint/javascript-hint.js';
@@ -39,12 +40,12 @@ export default {
     },
     methods:{
         changeTheme(){
-            console.log(this.instance.setOption("theme", "idea"));
+            // console.log(this.instance.setOption("theme", "idea"));
         }
     },
     mounted(){
-        console.log(this.$refs.editor)
-        console.log(this.data);
+        // console.log(this.$refs.editor)
+        // console.log(this.data);
         this.instance= CodeMirror(this.$refs.editor, {
             value: this.data.value||"",
             mode:  this.data.mode,
@@ -54,7 +55,7 @@ export default {
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
-        console.log(this.instance);
+        // console.log(this.instance);
     }
 }
 </script>
