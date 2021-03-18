@@ -89,10 +89,9 @@
 
 <script>
 import {device} from "../../api/device"
-import GatewaySelect from '../../components/gateway/GatewaySelect.vue'
 import ProductSelect from '../../components/product/ProductSelect.vue'
 export default {
-  components: { ProductSelect ,GatewaySelect},
+  components: { ProductSelect },
   name:"New",
   data(){
     return {
