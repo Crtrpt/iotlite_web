@@ -1,8 +1,9 @@
 <template>
   <div>
-     <b-row>
-      <Toolbar :query=query @refresh="getList"/>
-     </b-row>
+       <b-row>
+         <Toolbar :query=query @refresh="getList"/>
+      </b-row>
+      
       <b-table hover :items="items" :fields="fields"  
       @row-contextmenu="(item, index, event)=>{event.preventDefault();$refs.menu.open(event,item)}" 
       @row-dblclicked="gotoDevice"
@@ -52,18 +53,15 @@
 </template>
 
 <script>
-import VueContext from 'vue-context';
-import {product} from "../../../api/product"
-import {device} from "../../../api/device"
-import Tag from '../../../components/tags/Tag.vue'
+import DateTimePicker from "../../../components/date/DateTimePicker"
 import Toolbar from "../../device/ToolBar"
-import DeviceGroup from '../../../components/tags/DeviceGroup.vue'
-
+import {device} from "../../../api/device"
+import VueContext from 'vue-context';
 import 'vue-context/dist/css/vue-context.css'
 
 export default {
-  name:"Device",
-  components:{Toolbar,Tag,VueContext,DeviceGroup},
+  name:"Log",
+  components:{DateTimePicker,Toolbar,VueContext},
   props:{
     form:Object
   },
@@ -133,12 +131,6 @@ export default {
     }
   },
   watch:{
-    "form":{
-      handler(){
-        this.getList()
-      },
-      deep:true
-    },
     "query":{
       handler(){
         this.getList()
@@ -150,15 +142,10 @@ export default {
     this.getList();
   },
   methods:{
-    gotoMap(data){
-      this.$router.push({name: 'productDetailMap',query:{
-        deviceSn:data.sn
-      }})
-    },
-    changeTags(payload,d){
+     changeTags(payload,d){
       device.changeTags({
         sn:d.sn,
-        productSn:this.form.sn,
+        productSn:d.product.sn,
         tags:payload
       }).then(res=>{
       })
@@ -169,9 +156,9 @@ export default {
     },
     getList(){
       var _this=this;
-       product.deviceList(Object.assign(
+       device.groupDeviceList(Object.assign(
        {
-          productSn:this.form.sn,
+          groupId:this.form.id,
        },this.query
        )).then((res)=>{
           _this.items=res.data.list;

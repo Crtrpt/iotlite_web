@@ -3,7 +3,7 @@
   <b-row class="mb-2">
     <b-col cols="12">
       <h3>产品# {{form.name}}</h3>
-      <p class="small">{{form.ver}} </p>
+      <p class="small">{{form.version}} </p>
       <p>{{form.description}}</p>
     </b-col>
     <b-col cols="12">
@@ -13,10 +13,11 @@
   <b-row>
     <b-col>
       <b-nav tabs>
-        <b-nav-item to="base"  active-class="active" >基本信息</b-nav-item>
-        <b-nav-item to="model"  active-class="active" ><b-icon icon="code"  /> 物模型</b-nav-item>
+        <b-nav-item to="base"  active-class="active">基本信息</b-nav-item>
+        <b-nav-item to="model"  active-class="active"><b-icon icon="code"  /> 物模型</b-nav-item>
         <b-nav-item to="device"  active-class="active"> 设备</b-nav-item>
-        <b-nav-item to="map"  active-class="active" >设备地图</b-nav-item>
+        <b-nav-item to="version"  active-class="active">版本更新</b-nav-item>
+        <b-nav-item to="map"  active-class="active">设备地图</b-nav-item>
         <!-- <b-nav-item to="3d"  active-class="active" >3d</b-nav-item> -->
       </b-nav>
       <router-view  class="content" :form=form ></router-view>

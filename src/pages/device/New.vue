@@ -89,10 +89,9 @@
 
 <script>
 import {device} from "../../api/device"
-import GatewaySelect from '../../components/gateway/GatewaySelect.vue'
 import ProductSelect from '../../components/product/ProductSelect.vue'
 export default {
-  components: { ProductSelect ,GatewaySelect},
+  components: { ProductSelect },
   name:"New",
   data(){
     return {
@@ -106,7 +105,14 @@ export default {
   },
   methods:{
     onSubmit(){
+      var _this=this;
         device.save(this.form).then((res)=>{
+            if(res.code==0){
+                console.log("saveSuccess")
+                _this.$emit("close",true);
+            }else{
+              //TODO 
+            }
         })
     }
   }

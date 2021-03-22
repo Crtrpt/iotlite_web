@@ -3,7 +3,7 @@
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
                       <b-modal id="new" title="新建分组" hide-footer>
-                        <New />
+                        <New  @close="closeNew"/>
                       </b-modal>
                       <b-button size="sm" variant="primary" v-b-modal.new  >新建分组</b-button>
                     </b-button-group>
@@ -35,5 +35,11 @@ export default {
   },
   name:"Toolbar",
     components:{New,importFile,DateTimePicker},
+  methods:{
+    closeNew(){
+      this.$refs['new'].hide()
+      this.$emit('refresh',{})
+    }
+  }
 }
 </script>

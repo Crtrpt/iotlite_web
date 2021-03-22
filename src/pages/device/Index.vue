@@ -30,10 +30,10 @@
                           </div>
 
                           <div class="card_sub_script">
-                            <b-link v-b-tooltip.hover :title="'新版本'+p.product.ver"  v-if="p.ver!=p.product.ver" >
+                            <b-link v-b-tooltip.hover :title="'新版本'+p.product.version"  v-if="p.ver!=p.product.version" >
                                {{p.ver}}  <b-icon   icon="arrow-up-square"></b-icon>
                             </b-link>
-                             <b-link v-if="p.ver==p.product.ver" >
+                             <b-link v-if="p.ver==p.product.version" >
                                {{p.ver}}  <b-icon   icon="bookmark"></b-icon>
                             </b-link>
                           </div>

@@ -3,7 +3,7 @@
       <b-col cols="3" v-for="(ctr,i) in  form.product.spec.metric" :key="i">
         <b-card :title="ctr.name" >
           <b-card-text>{{ctr.desc}}</b-card-text>
-          <ChartLine />
+          设备指标
         </b-card>
       </b-col>
   </b-row>

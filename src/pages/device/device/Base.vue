@@ -8,7 +8,12 @@
                'text-success':ctr.expect==ctr.value,
                'text-danger':ctr.expect!=ctr.value,
              }">{{form.snap[ctr.name]||ctr.value||'null'}}</b-link>
+
+            <b-link  :id="'last_at-'+ctr.name" ></b-link>
              </b-card-text>
+             <template #footer>
+                <b-icon  icon="clock-history"></b-icon> &nbsp;{{timestamp2Str(form.snap[ctr.name+":last_at"])||"暂无"}}
+             </template>
         </b-card>
       </b-col>
   </b-row>

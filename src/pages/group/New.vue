@@ -47,6 +47,8 @@ export default {
         device.groupSave(this.form).then((res)=>{
             if(res.code==0){
               _this.$emit("close",true);
+            }else{
+              _this.$bvModal.msgBoxOk(res.msg)
             }
         })
     }

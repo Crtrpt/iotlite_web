@@ -1,11 +1,10 @@
 <template>
   <div>
      <b-row>
-      <Toolbar :query=query @refresh="getList"/>
+      <Toolbar :form=form :query=query @refresh="getList"/>
      </b-row>
-      <b-table hover :items="items" :fields="fields"  
+      <b-table hover :items="items" :fields="fields"
       @row-contextmenu="(item, index, event)=>{event.preventDefault();$refs.menu.open(event,item)}" 
-      @row-dblclicked="gotoDevice"
       selectable>
           <template #cell(selected)="{ rowSelected }">
             <template v-if="rowSelected">
@@ -56,7 +55,7 @@ import VueContext from 'vue-context';
 import {product} from "../../../api/product"
 import {device} from "../../../api/device"
 import Tag from '../../../components/tags/Tag.vue'
-import Toolbar from "../../device/ToolBar"
+import Toolbar from "./version/VerToolBar.vue"
 import DeviceGroup from '../../../components/tags/DeviceGroup.vue'
 
 import 'vue-context/dist/css/vue-context.css'
@@ -78,54 +77,46 @@ export default {
        },
 
        fields: [
-        //  {
-        //   key: 'selected',
-        //   label: 'selected'
-        //  },
-          {
-            key: 'sn',
-            label: '设备序号',
-            sortable: true
-          },
-          {
-            key: 'name',
-            label: '设备名称',
-            sortable: true
-          },
-          // {
-          //   key: 'description',
-          //   label: '设备描述',
-          //   sortable: true
-          // },
-          {
-            key: 'location',
-            label: '设备位置',
-            sortable: true
-          },
-          {
-            key: 'ver',
-            label: '产品版本',
-            sortable: true
-          },
-           {
-            key: 'tags',
-            label: '标签',
-            sortable: true
-          },
-          {
-            key: 'deviceGroup',
-            label: '分组',
-          },
           {
             key: 'createdAt',
             label: '创建时间',
             sortable: true
           },
-          // {
-          //   key: 'ops',
-          //   label: '操作',
-          //   sortable: true
-          // },
+          {
+            key: 'version',
+            label: '软件版本',
+            sortable: true
+          },
+          {
+            key: 'minHdVersion',
+            label: '硬件版本',
+            sortable: true
+          },
+          {
+            key: 'verDescription',
+            label: '更新内容简介',
+            sortable: true
+          },
+          {
+            key: 'device_num',
+            label: '设备数量',
+            sortable: true
+          },
+          {
+            key: 'start_at',
+            label: '支持开始时间',
+            sortable: true
+          },
+          {
+            key: 'end_at',
+            label: '支持结束时间',
+            sortable: true
+          },
+           {
+            key: 'op',
+            label: '操作',
+            sortable: true
+          }
         ],
       items: [
          
@@ -150,26 +141,9 @@ export default {
     this.getList();
   },
   methods:{
-    gotoMap(data){
-      this.$router.push({name: 'productDetailMap',query:{
-        deviceSn:data.sn
-      }})
-    },
-    changeTags(payload,d){
-      device.changeTags({
-        sn:d.sn,
-        productSn:this.form.sn,
-        tags:payload
-      }).then(res=>{
-      })
-    },
-    gotoDevice(item,idx,e){
-      console.log(item);
-      this.$router.push({name: 'deviceDetail',params: { id: item.id }})
-    },
     getList(){
       var _this=this;
-       product.deviceList(Object.assign(
+       product.versionList(Object.assign(
        {
           productSn:this.form.sn,
        },this.query

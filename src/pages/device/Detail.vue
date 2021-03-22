@@ -3,7 +3,7 @@
   <b-row class="mb-2">
     <b-col cols="12">
       <h3>设备信息# {{form.name}} </h3>
-      <p class="small">{{form.ver}} 
+      <p class="small">{{form.ver||null}} 
         <b-icon v-if="form.ver!=form.product.ver" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
@@ -17,7 +17,7 @@
       <DeviceGroup v-model="form.deviceGroup" />
     </b-col>
   </b-row>
-   <b-collapse id="more" class="mt-2">
+   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
     <b-col cols="6">
        <b-table-simple  responsive :bordered="true" :fixed=true>
@@ -54,6 +54,8 @@
         <b-nav-item to="metric"  active-class="active" >数据指标</b-nav-item>
         <b-nav-item to="log"   active-class="active" >设备日志</b-nav-item>
         <b-nav-item to="map"   active-class="active" >设备位置</b-nav-item>
+        <b-nav-item to="subdevice"   active-class="active" >子设备</b-nav-item>
+        <b-nav-item to="debug"   active-class="active" >设备调试</b-nav-item>
       </b-nav>
       <router-view class="content" :form=form></router-view>
     </b-col>
@@ -121,6 +123,7 @@ export default {
   },
   data(){
     return {
+      visible:true,
       form:{
         id:0||this.$route.params.id,
       },

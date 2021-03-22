@@ -6,7 +6,6 @@ import device from "./device"
 import group from "./group"
 import organization from "./organization"
 import user from "./user"
-import gateway from "./gateway"
 import dashboard from "./dashboard"
 
 
@@ -29,17 +28,8 @@ var routes = [
       ...device,
       ...product,
       ...group,
-      ...gateway,
       ...organization,
-      ...user,
-      {
-        path: 'gateway',
-        component: require('../pages/gateway/Index').default,
-        name: 'gateway',
-        meta:{
-          name:"setting"
-        }
-      }
+      ...user
     ],
   },
   {

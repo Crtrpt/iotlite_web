@@ -64,6 +64,22 @@ const device  =[
         name:"deviceDetailMap"
       }
     },
+    {
+      path: 'subdevice',
+      component: require('../pages/device/device/SubDevice').default,
+      name: 'deviceSubDevice',
+      meta:{
+        name:"deviceSubDevice"
+      }
+    },
+    {
+      path: 'debug',
+      component: require('../pages/device/device/Debug').default,
+      name: 'deviceDebug',
+      meta:{
+        name:"deviceDebug"
+      }
+    },
   ]
 }
 ]

@@ -27,12 +27,7 @@ server.interceptors.request.use(
 
 server.interceptors.response.use(
   function (response) {
-    if (response.data.code === 0) {
-      return response.data
-    } else {
-      //其他错误处理
-      return Promise.reject(new Error(response.data.msg))
-    }
+    return response.data
   },
   function (error) {
     return Promise.reject(error)
