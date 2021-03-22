@@ -54,6 +54,8 @@
         <b-nav-item to="metric"  active-class="active" >数据指标</b-nav-item>
         <b-nav-item to="log"   active-class="active" >设备日志</b-nav-item>
         <b-nav-item to="map"   active-class="active" >设备位置</b-nav-item>
+        <b-nav-item to="subdevice"   active-class="active" >子设备</b-nav-item>
+        <b-nav-item to="debug"   active-class="active" >设备调试</b-nav-item>
       </b-nav>
       <router-view class="content" :form=form></router-view>
     </b-col>

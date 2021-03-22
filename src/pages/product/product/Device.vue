@@ -25,6 +25,7 @@
           <template v-slot:cell(deviceGroup)="data">
                      <DeviceGroup v-model="data.item.deviceGroup" />
           </template>
+          
       </b-table>
         <div style="box-sizing: border-box;">
         <vue-context ref="menu" v-slot="{ data }">
@@ -120,6 +121,11 @@ export default {
             label: '创建时间',
             sortable: true
           },
+          // {
+          //   key: 'ops',
+          //   label: '操作',
+          //   sortable: true
+          // },
         ],
       items: [
          
