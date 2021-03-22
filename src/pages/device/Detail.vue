@@ -3,7 +3,7 @@
   <b-row class="mb-2">
     <b-col cols="12">
       <h3>设备信息# {{form.name}} </h3>
-      <p class="small">{{form.ver}} 
+      <p class="small">{{form.ver||null}} 
         <b-icon v-if="form.ver!=form.product.ver" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 

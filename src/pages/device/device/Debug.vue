@@ -2,20 +2,20 @@
   <div>
       <b-row class="mt-2 mb-2">
         <b-col> 
-           <b-button-toolbar>
-                   
-                    <b-button-group  class="mr-2">
-                      <b-form-input class="tool_input" v-model="query.words" placeholder="搜索"></b-form-input>
-                    </b-button-group>
-                     <b-button-group  class="mr-2 col-3">
-                        <DateTimePicker  v-model="query.date" DateTimePicker />
-                    </b-button-group>
+            <b-button-toolbar>
+              <b-button-group>
+                <b-button  variant="primary" >上线</b-button>
+                <b-button  size="sm" variant="outline-primary">下线</b-button>
+              </b-button-group>
+             
             </b-button-toolbar>
         </b-col>
       </b-row>
-     
-
-      在线调试
+      <b-row>
+        <b-col>
+          交互日志
+        </b-col>
+      </b-row>
   </div>
 </template>
 
