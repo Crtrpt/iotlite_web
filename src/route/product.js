@@ -56,7 +56,15 @@ const product  =[
       meta:{
         name:"productDeviceList"
       }
-    }
+    },
+    {
+      path: 'version',
+      component: require('../pages/product/product/Version').default,
+      name: 'productDetailVersion',
+      meta:{
+        name:"productDetailVersion"
+      }
+    },
   ]
 }
 ]

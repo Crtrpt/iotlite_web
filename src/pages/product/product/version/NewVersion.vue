@@ -1,53 +1,40 @@
 <template>
   <div>
     <b-form ref="new" @submit="onSubmit" >
-       <b-tabs  class="simple-tab">
-         <b-tab title="基础" active>
-                <b-form-group
-        label="名称:"
-        description="产品名称"
+      <b-form-group
+        label="版本:"
+        description="语义化版本号 如 v0.0.1"
       >
         <b-form-input
-          v-model="form.name"
+          v-model="form.version"
           type="text"
           required
-          placeholder="输入产品名称"
+          placeholder="输入要发布的版本"
         ></b-form-input>
       </b-form-group>
       <b-form-group
         label="描述:"
-        description="产品描述"
+        description="对发布版本的简短描述"
       >
         <b-form-input
-          v-model="form.description"
+          v-model="form.verDescription"
           type="text"
           required
-          placeholder="输入对产品的描述"
+          placeholder="输入对发布版本的描述"
         ></b-form-input>
       </b-form-group>
-      <b-form-group
-        label="型号:"
-        description="产品型号"
+
+       <b-form-group
+        label="最低支持的硬件的版本:"
+        description="最低支持的硬件的版本"
       >
         <b-form-input
-          v-model="form.model"
+          v-model="form.minHdVersion"
           type="text"
           required
-          placeholder="型号"
+          placeholder="最低支持的硬件版本"
         ></b-form-input>
       </b-form-group>
-      <b-form-group
-        label="接入适配器:"
-        description="接入适配器"
-      >
-        <AdapterSelect v-model="form.adapterId"></AdapterSelect>
-      </b-form-group>
-         </b-tab>
-          <b-tab title="高级">
-
-         </b-tab>
-       </b-tabs>
-
      
        <b-button type="submit" variant="primary">提交</b-button>
     </b-form>
@@ -55,13 +42,15 @@
 </template>
 
 <script>
-import {product} from "../../api/product"
-import AdapterSelect from '../../components/product/AdapterSelect.vue'
+import {product} from "../../../../api/product"
 
 export default {
-  name:"New",
+  name:"NewVersion",
+  props:{
+    productSn:String
+  },
   components:{
-    AdapterSelect
+    
   },
   data(){
     return {
@@ -74,7 +63,12 @@ export default {
     onSubmit(){
        var _this=this;
        
-        product.save(this.form).then((res)=>{
+        product.saveNewVersion({
+          ...this.form,
+          ...{
+            productSn:this.productSn
+          }
+        }).then((res)=>{
             if(res.code==0){
               console.log("保存成功")
               _this.$emit("close",true);

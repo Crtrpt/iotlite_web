@@ -45,6 +45,12 @@ const product={
     },
     setProductMetas:(ctx)=>{
       return request.post("product/setProductMetas",ctx)
+    },
+    versionList:(ctx)=>{
+      return request.get("product/version/list",ctx)
+    },
+    saveNewVersion:(ctx)=>{
+      return request.post("product/version/save",ctx)
     }
 }
 

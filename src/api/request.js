@@ -20,14 +20,9 @@ const serialize = function(obj) {
 }
 
 const catchError = function (err) {
-    let msg = err ? err.message : null
-    if (msg) {
-        // 处理缓存
-        let obj = JSON.parse(msg)
-        if (obj.type === 'CANCELTTYPE.CACHE') {
-            return obj.data
-        }
-    }
+    console.log("出现错误")
+    console.log(err)
+    return err;
 }
 
 const request={
@@ -42,7 +37,7 @@ const request={
         return server.get(url+queryString, options).catch(err => {
             let ret = catchError(err)
             if (ret) {
-                return ret
+                
             }
         })
     },
