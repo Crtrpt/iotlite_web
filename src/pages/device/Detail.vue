@@ -17,7 +17,7 @@
       <DeviceGroup v-model="form.deviceGroup" />
     </b-col>
   </b-row>
-   <b-collapse id="more" class="mt-2">
+   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
     <b-col cols="6">
        <b-table-simple  responsive :bordered="true" :fixed=true>
@@ -123,6 +123,7 @@ export default {
   },
   data(){
     return {
+      visible:true,
       form:{
         id:0||this.$route.params.id,
       },

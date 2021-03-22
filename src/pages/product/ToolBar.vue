@@ -2,8 +2,8 @@
    <b-col cols="12" class="mt-2 mb-2">
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
-                      <b-modal id="new" title="新建产品" hide-footer>
-                        <New />
+                      <b-modal id="new" ref="new" title="新建产品" hide-footer >
+                        <New  @close="closeNew"/>
                       </b-modal>
                       <b-button size="sm" variant="primary" v-b-modal.new  >新建产品</b-button>
 
@@ -35,6 +35,15 @@ export default {
     query:Object
   },
   name:"Toolbar",
-    components:{New,importFile,DateTimePicker},
+  components:{
+    New,importFile,DateTimePicker
+  },
+  methods:{
+    closeNew(){
+      console.log("关闭")
+      this.$refs['new'].hide()
+      this.$emit('refresh',{})
+    }
+  }
 }
 </script>

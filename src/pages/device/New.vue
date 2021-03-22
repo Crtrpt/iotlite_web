@@ -105,7 +105,14 @@ export default {
   },
   methods:{
     onSubmit(){
+      var _this=this;
         device.save(this.form).then((res)=>{
+            if(res.code==0){
+                console.log("saveSuccess")
+                _this.$emit("close",true);
+            }else{
+              //TODO 
+            }
         })
     }
   }

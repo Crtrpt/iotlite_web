@@ -1,7 +1,9 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" >
-      <b-form-group
+    <b-form ref="new" @submit="onSubmit" >
+       <b-tabs  class="simple-tab">
+         <b-tab title="基础" active>
+                <b-form-group
         label="名称:"
         description="产品名称"
       >
@@ -23,7 +25,6 @@
           placeholder="输入对产品的描述"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
         label="型号:"
         description="产品型号"
@@ -35,13 +36,18 @@
           placeholder="型号"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group
         label="接入适配器:"
         description="接入适配器"
       >
         <AdapterSelect v-model="form.adapterId"></AdapterSelect>
       </b-form-group>
+         </b-tab>
+          <b-tab title="高级">
+
+         </b-tab>
+       </b-tabs>
+
      
        <b-button type="submit" variant="primary">提交</b-button>
     </b-form>
@@ -70,7 +76,10 @@ export default {
        
         product.save(this.form).then((res)=>{
             if(res.code==0){
+              console.log("保存成功")
               _this.$emit("close",true);
+            }else{
+              //TODO
             }
         })
     }

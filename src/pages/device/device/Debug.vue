@@ -7,7 +7,6 @@
                 <b-button  variant="primary" >上线</b-button>
                 <b-button  size="sm" variant="outline-primary">下线</b-button>
               </b-button-group>
-             
             </b-button-toolbar>
         </b-col>
       </b-row>
