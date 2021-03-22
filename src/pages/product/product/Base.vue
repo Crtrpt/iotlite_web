@@ -29,8 +29,6 @@
                      <b-tr>
                       <b-td  variant="light" class="text-right">设备数量:</b-td>
                       <b-td>{{form.deviceCount||0}}</b-td>
-                       <b-td  variant="light" class="text-right">维保数量:</b-td>
-                      <b-td>{{form.maintainCount||0}}</b-td>
                     </b-tr>
                   </b-tbody>
                  

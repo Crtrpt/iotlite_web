@@ -3,8 +3,8 @@
   <b-row class="mb-2">
     <b-col cols="12">
       <h3>设备信息# {{form.name}} </h3>
-      <p class="small">{{form.ver||null}} 
-        <b-icon v-if="form.ver!=form.product.ver" icon="arrow-up-square"></b-icon>
+      <p class="small">{{form.version||null}} 
+        <b-icon v-if="form.version!=form.product.version" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
         <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{"↑"}}</b-link>
@@ -33,6 +33,12 @@
                       <b-td>{{form.product.sn}}</b-td>
                       <b-td  variant="light" class="text-right">设备序号:</b-td>
                       <b-td>{{form.sn}}</b-td>
+                    </b-tr>
+                     <b-tr>
+                      <b-td  variant="light" class="text-right">硬件版本:</b-td>
+                      <b-td>{{form.hdVersion||'尚未注册'}}</b-td>
+                      <b-td  variant="light" class="text-right">软件版本:</b-td>
+                      <b-td>{{form.version||'尚未注册'}}</b-td>
                     </b-tr>
                      <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
