@@ -89,6 +89,14 @@ const group  =[
         name:"groupHook"
       }
     },
+    {
+      path: 'setting',
+      component: require('../pages/group/group/Setting').default,
+      name: 'groupSetting',
+      meta:{
+        name:"groupSetting"
+      }
+    },
   ]
 }
 ]
