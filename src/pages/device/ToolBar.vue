@@ -4,7 +4,7 @@
                     <b-button-group  class="mr-2">
                       
                       <b-modal id="new" ref="new" title="新建设备" hide-footer >
-                        <New @close="closeNew"/>
+                        <New @close="closeNew" :preset=form />
                       </b-modal>
                       <b-button size="sm" variant="primary" v-b-modal.new  >{{$t('page.device.new')}}</b-button>
 
@@ -33,7 +33,8 @@ import DateTimePicker from "../../components/date/DateTimePicker"
 
 export default {
   props:{
-    query:Object
+    query:Object,
+    form:Object,
   },
   name:"Toolbar",
     components:{New,importFile,DateTimePicker},

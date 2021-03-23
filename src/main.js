@@ -11,6 +11,7 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import mqttClient from "./api/mqttClient"
 
 import dateUtils from './utils/DateUtils'
+
 Vue.use(dateUtils);
 
 Vue.use(VueLoading)
@@ -83,12 +84,10 @@ export function loadLanguageAsync(lang) {
 }
 
 
-
-
 router.beforeEach((to, from, next) => {
   var lang = to.params.lang
   if (lang===undefined) {
-    lang="en"
+    lang="zh"
   }
   loadLanguageAsync(lang).then(() => next())
 

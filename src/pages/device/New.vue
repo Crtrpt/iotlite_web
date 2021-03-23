@@ -93,6 +93,9 @@ import ProductSelect from '../../components/product/ProductSelect.vue'
 export default {
   components: { ProductSelect },
   name:"New",
+  props:{
+    preset:Object,
+  },
   data(){
     return {
       productType:[
@@ -106,7 +109,10 @@ export default {
   methods:{
     onSubmit(){
       var _this=this;
-        device.save(this.form).then((res)=>{
+        device.save({
+          ...this.form,
+          ...this.preset
+        }).then((res)=>{
             if(res.code==0){
                 console.log("saveSuccess")
                 _this.$emit("close",true);
