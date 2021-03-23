@@ -80,6 +80,22 @@ const device  =[
         name:"deviceDebug"
       }
     },
+    {
+      path: 'hook',
+      component: require('../pages/hook/Hook').default,
+      name: 'deviceHook',
+      meta:{
+        name:"deviceHook"
+      }
+    },
+    {
+      path: 'setting',
+      component: require('../pages/device/device/Setting').default,
+      name: 'deviceSetting',
+      meta:{
+        name:"deviceSetting"
+      }
+    },
   ]
 }
 ]

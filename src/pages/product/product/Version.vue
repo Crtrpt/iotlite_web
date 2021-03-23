@@ -17,27 +17,15 @@
             </template>
           </template>
           
-          <template v-slot:cell(tags)="data">
-                     <Tag v-model="data.item.tags" @input="payload=>changeTags(payload,data.item)" />
+           <template v-slot:cell(createdAt)="data">
+                  {{data.item.createdAt}}
           </template>
-
-          <template v-slot:cell(deviceGroup)="data">
-                     <DeviceGroup v-model="data.item.deviceGroup" />
-          </template>
+          
           
       </b-table>
         <div style="box-sizing: border-box;">
         <vue-context ref="menu" v-slot="{ data }">
-              <li>  <a href="javascript:void(0);" @click="gotoMap(data)" >在地图上显示</a> </li>
-              <li class="v-context__sub">
-                  <a>控制</a>
-                  <ul class="v-context">
-                      <li>
-                          <a>重置</a>
-                      </li>
-                  </ul>
-              </li>
-              <li>  <a href="javascript:void(0);" >删除</a> </li>
+              <li>  <a href="javascript:void(0);" @click="gotoMap(data)" >关于</a> </li>
         </vue-context>
       </div>
       <b-row class="mt-2" v-if="helper.total>10">
@@ -98,17 +86,17 @@ export default {
             sortable: true
           },
           {
-            key: 'device_num',
+            key: 'deviceCount',
             label: '设备数量',
             sortable: true
           },
           {
-            key: 'start_at',
+            key: 'startAt',
             label: '支持开始时间',
             sortable: true
           },
           {
-            key: 'end_at',
+            key: 'endAt',
             label: '支持结束时间',
             sortable: true
           },

@@ -35,6 +35,30 @@
           placeholder="最低支持的硬件版本"
         ></b-form-input>
       </b-form-group>
+
+      <b-form-group
+        label="开始时间:"
+        description="支持开始时间"
+      >
+        <b-form-input
+          v-model="form.startAt"
+          type="date"
+          required
+          placeholder="支持开始时间"
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
+        label="结束时间:"
+        description="支持结束时间"
+      >
+        <b-form-input
+          v-model="form.endAt"
+          type="date"
+          required
+          placeholder="支持结束时间"
+        ></b-form-input>
+      </b-form-group>
      
        <b-button type="submit" variant="primary">提交</b-button>
     </b-form>

@@ -3,11 +3,11 @@
   <b-row class="mb-2">
     <b-col cols="12">
       <h3>设备信息# {{form.name}} </h3>
-      <p class="small">{{form.ver||null}} 
-        <b-icon v-if="form.ver!=form.product.ver" icon="arrow-up-square"></b-icon>
+      <p class="small">{{form.version||null}} 
+        <b-icon v-if="form.version!=form.product.version" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
-        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{"↑"}}</b-link>
+        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{visible?"↑":"↓"}}</b-link>
         </p>
     </b-col>
     <b-col cols="12">
@@ -35,6 +35,12 @@
                       <b-td>{{form.sn}}</b-td>
                     </b-tr>
                      <b-tr>
+                      <b-td  variant="light" class="text-right">硬件版本:</b-td>
+                      <b-td>{{form.hdVersion||'尚未注册'}}</b-td>
+                      <b-td  variant="light" class="text-right">软件版本:</b-td>
+                      <b-td>{{form.version||'尚未注册'}}</b-td>
+                    </b-tr>
+                     <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
                       <b-td>{{form.createdAt}}</b-td>
                       <b-td  variant="light" class="text-right">最后活动时间:</b-td>
@@ -56,6 +62,8 @@
         <b-nav-item to="map"   active-class="active" >设备位置</b-nav-item>
         <b-nav-item to="subdevice"   active-class="active" >子设备</b-nav-item>
         <b-nav-item to="debug"   active-class="active" >设备调试</b-nav-item>
+        <b-nav-item to="hook"  active-class="active"  >消息推送</b-nav-item>
+        <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
       </b-nav>
       <router-view class="content" :form=form></router-view>
     </b-col>

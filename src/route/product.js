@@ -65,6 +65,22 @@ const product  =[
         name:"productDetailVersion"
       }
     },
+    {
+      path: 'hook',
+      component: require('../pages/hook/Hook').default,
+      name: 'productDetailHook',
+      meta:{
+        name:"productDetailHook"
+      }
+    },
+    {
+      path: 'setting',
+      component: require('../pages/product/product/Setting').default,
+      name: 'productDetailSetting',
+      meta:{
+        name:"productDetailSetting"
+      }
+    },
   ]
 }
 ]

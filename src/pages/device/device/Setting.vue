@@ -9,10 +9,10 @@
               class="mb-2"
             >
               <b-card-text>
-                产品下面所有的设备将被删除 产品所在的组也将被删除 请谨慎处理
+                设备将从设备组内删除 删除之后无法恢复 请谨慎操作
               </b-card-text>
 
-              <b-button  variant="danger" @click="remove">彻底删除</b-button>
+              <b-button  variant="danger" @click="remove">删除</b-button>
             </b-card>
 
           <b-form  >
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {product} from "../../../api/product"
+import {device} from "../../../api/device"
 export default {
   name:"Setting",
   props:{
@@ -36,8 +36,10 @@ export default {
   methods:{
     remove(){
       var _this=this;
-      product.remove({
-        id:this.form.id
+      device.remove({
+        id:this.form.id,
+        deviceSn:this.form.sn,
+        productSn:this.form.product.sn,
       }).then((res)=>{
             if(res.code==0){
               _this.$bvModal.msgBoxOk("删除成功")
