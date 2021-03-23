@@ -7,7 +7,7 @@
         <b-icon v-if="form.version!=form.product.version" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
-        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{"↑"}}</b-link>
+        <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{visible?"↑":"↓"}}</b-link>
         </p>
     </b-col>
     <b-col cols="12">
@@ -62,6 +62,8 @@
         <b-nav-item to="map"   active-class="active" >设备位置</b-nav-item>
         <b-nav-item to="subdevice"   active-class="active" >子设备</b-nav-item>
         <b-nav-item to="debug"   active-class="active" >设备调试</b-nav-item>
+        <b-nav-item to="hook"  active-class="active"  >消息推送</b-nav-item>
+        <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
       </b-nav>
       <router-view class="content" :form=form></router-view>
     </b-col>

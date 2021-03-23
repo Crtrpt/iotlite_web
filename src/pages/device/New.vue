@@ -111,7 +111,7 @@ export default {
                 console.log("saveSuccess")
                 _this.$emit("close",true);
             }else{
-              //TODO 
+                _this.$bvModal.msgBoxOk(res.msg)
             }
         })
     }

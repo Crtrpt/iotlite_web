@@ -80,7 +80,15 @@ const group  =[
       meta:{
         name:"groupEnv"
       }
-    }
+    },
+    {
+      path: 'hook',
+      component: require('../pages/hook/Hook').default,
+      name: 'groupHook',
+      meta:{
+        name:"groupHook"
+      }
+    },
   ]
 }
 ]

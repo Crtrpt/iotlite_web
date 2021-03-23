@@ -32,7 +32,8 @@ export default {
   name:"Toolbar",
   methods:{
     closeNew(){
-
+      this.$refs['new'].hide()
+      this.$emit('refresh',{})
     }
   }
 }
