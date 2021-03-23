@@ -74,7 +74,7 @@
         <b-nav-item to="hook"  active-class="active"  >消息推送</b-nav-item>
         <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
       </b-nav>
-      <router-view class="content" :form=form></router-view>
+      <router-view class="content" :form=form :type="'device'"></router-view>
     </b-col>
   </b-row>
 </b-container>

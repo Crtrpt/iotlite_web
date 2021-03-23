@@ -117,14 +117,14 @@ export default {
       helper:{total:0},
       client:null,
       isConnect:false,
-      raw_topic,
+      raw_topic:"",
       logs:[],
       raw:"",
     }
   },
   computed:{
     topic(){
-      console.log(this.form.proxyId);
+     
       if(this.form.proxy==undefined){
         return "/default/"+this.form.product.sn+"/"+this.form.sn
       }else{
