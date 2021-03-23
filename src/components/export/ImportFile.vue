@@ -28,8 +28,8 @@
                     </b-col>
                 </b-overlay>
           </b-modal>
-          <b-button size="sm" variant="outline-primary"  v-b-modal.import >导入</b-button>
-          <b-button size="sm" variant="outline-primary" v-b-modal.export  >导出</b-button>
+          <b-button size="sm" variant="outline-primary"  v-b-modal.import >{{$t('component.import')}}</b-button>
+          <b-button size="sm" variant="outline-primary" v-b-modal.export  >{{$t('component.export')}}</b-button>
       </b-button-group>
 
 </template>

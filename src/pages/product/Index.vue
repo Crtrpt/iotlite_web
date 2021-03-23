@@ -5,7 +5,7 @@
           <div class="widget-header">
             <b-row>
               <b-col>
-                <h4>产品 ({{helper.total||0}})</h4>
+                <h4>{{$t('page.product.name')}} ({{helper.total||0}})</h4>
               </b-col>
               <Toolbar :query=query  @refresh="getList"/>
             </b-row>

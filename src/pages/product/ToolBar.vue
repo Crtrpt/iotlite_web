@@ -5,13 +5,14 @@
                       <b-modal id="new" ref="new" title="新建产品" hide-footer >
                         <New  @close="closeNew"/>
                       </b-modal>
-                      <b-button size="sm" variant="primary" v-b-modal.new  >新建产品</b-button>
+                      
+                      <b-button size="sm" variant="primary" v-b-modal.new  >{{$t('page.product.new')}}</b-button>
 
                     </b-button-group>
                     <importFile></importFile>
 
                     <b-button-group  class="mr-2">
-                      <b-form-input class="tool_input" v-model="query.words" placeholder="搜索"></b-form-input>
+                      <b-form-input class="tool_input" v-model="query.words" :placeholder="$t('component.search')"></b-form-input>
                     </b-button-group>
 
                     <b-button-group  class="mr-2 ">
@@ -19,7 +20,7 @@
                     </b-button-group>
 
                      <b-button-group class="mr-2">
-                      <b-button size="sm" variant="primary" @click="$emit('refresh',{})" >刷新</b-button>
+                      <b-button size="sm" variant="primary" @click="$emit('refresh',{})" >{{$t('component.refresh')}}</b-button>
                     </b-button-group>
 
                   </b-button-toolbar>

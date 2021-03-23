@@ -4,7 +4,7 @@
           <div class="widget-header">
               <b-row>
                 <b-col>
-                  <h4>设备({{helper.total||0}})</h4>
+                  <h4>{{$t('page.device.name')}}({{helper.total||0}})</h4>
                 </b-col>
                  <Toolbar  :query=query  @refresh="getList" />
                

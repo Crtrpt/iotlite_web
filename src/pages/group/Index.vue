@@ -5,7 +5,7 @@
           <div class="widget-header">
             <b-row>
               <b-col>
-                <h4>分组 ({{helper.total||0}})</h4>
+                <h4>{{$t('page.group.name')}} ({{helper.total||0}})</h4>
               </b-col>
               <Toolbar :query=query  @refresh="getList"/>
             </b-row>

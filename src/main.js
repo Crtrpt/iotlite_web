@@ -30,6 +30,8 @@ import "./assets/css/custom-pagination.css"
 import "./assets/css/custom-list-group.css"
 import "./assets/css/tab.css"
 
+const axios = require('axios')
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -44,11 +46,51 @@ Vue.config.productionTip = true
 Vue.use(VueI18n)
 
 const i18n = new VueI18n({
-  locale: 'en', // set locale
-  messages: lang
+  locale: 'zh', // set locale
+  messages: lang,
+  fallbackLocale: 'zh',
 })
 
+
+const loadedLanguages = ['zh'] // 我们的预装默认语言
+
+function setI18nLanguage (lang) {
+  i18n.locale = lang
+  axios.defaults.headers.common['Accept-Language'] = lang
+  document.querySelector('html').setAttribute('lang', lang)
+  return lang
+}
+
+export function loadLanguageAsync(lang) {
+  // 如果语言相同
+  if (i18n.locale === lang) {
+    return Promise.resolve(setI18nLanguage(lang))
+  }
+
+  // 如果语言已经加载
+  if (loadedLanguages.includes(lang)) {
+    return Promise.resolve(setI18nLanguage(lang))
+  }
+
+  // 如果尚未加载语言
+  return import(/* webpackChunkName: "lang-[request]" */ `@/i18n/messages/${lang}.js`).then(
+    messages => {
+      i18n.setLocaleMessage(lang, messages.default)
+      loadedLanguages.push(lang)
+      return setI18nLanguage(lang)
+    }
+  )
+}
+
+
+
+
 router.beforeEach((to, from, next) => {
+  var lang = to.params.lang
+  if (lang===undefined) {
+    lang="en"
+  }
+  loadLanguageAsync(lang).then(() => next())
 
   if(to.name===from.name){
     console.log("全局导航守卫");
