@@ -2,7 +2,7 @@
    <b-col cols="12" class="mt-2 mb-2" style="pading-left:0px;pading-right:0px">
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
-                      <b-modal id="new" title="新建分组" hide-footer>
+                      <b-modal id="new" ref="new" title="新建分组" hide-footer>
                         <New  @close="closeNew"/>
                       </b-modal>
                       <b-button size="sm" variant="primary" v-b-modal.new  >新建分组</b-button>

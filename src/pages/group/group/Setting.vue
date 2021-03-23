@@ -38,6 +38,8 @@ export default {
       }).then((res)=>{
             if(res.code==0){
               _this.$bvModal.msgBoxOk("删除成功")
+
+              _this.$router.push({name:"group"})
             }else{
               _this.$bvModal.msgBoxOk(res.msg)
             }
