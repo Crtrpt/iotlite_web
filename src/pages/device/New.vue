@@ -41,11 +41,26 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group
-        label="产品型号:"
-        description="产品型号"
-      >
-        <ProductSelect v-model="form.productId"></ProductSelect>
+     
+        <b-row>
+          <div class="col-6">
+             <b-form-group
+                label="产品:"
+                description="产品"
+              >
+            <ProductSelect v-model="form.productId"></ProductSelect>
+             </b-form-group>
+          </div>
+          <div class="col-6" v-if="form.productId!=null">
+              <b-form-group
+                label="版本:"
+                description="版本"
+              >
+            <ProductVersionSelect v-model="form.version" :productId=form.productId>
+            </ProductVersionSelect>
+          </b-form-group>
+          </div>
+        </b-row>
       </b-form-group>
       </b-tab>
       <b-tab title="高级">
@@ -90,8 +105,9 @@
 <script>
 import {device} from "../../api/device"
 import ProductSelect from '../../components/product/ProductSelect.vue'
+import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue'
 export default {
-  components: { ProductSelect },
+  components: { ProductSelect ,ProductVersionSelect},
   name:"New",
   props:{
     preset:Object,
