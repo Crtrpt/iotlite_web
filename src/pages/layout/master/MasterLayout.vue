@@ -4,7 +4,7 @@
       <div class="main-container" id="container">
           <div class="overlay"></div>
           <div class="search-overlay"></div>
-         <LeftNav  v-if="showLogin" />
+         <LeftNav  v-if="showLogin"  />
           <div id="content" class="main-content" :style='{
               "marginLeft":showLogin?"212px":"0px"
           }'>

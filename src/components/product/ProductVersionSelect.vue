@@ -1,20 +1,20 @@
 <template>
-    <treeselect v-model="v" :multiple="false" :options="options"  @input="change"  />
+    <treeselect v-model="v" :multiple="false" :options="options"  @input="change" 
+    placeholder="选择产品版本" />
 </template>
 
 <script>
 
   import Treeselect from '@riophae/vue-treeselect'
-  // import the styles
   import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 import { product } from '../../api/product.js'
 
 export default {
-    name:"ProductSelect",
+    name:"ProductVersionSelect",
     components: { Treeselect },
     props:{
-        value:Number,
+        value:String,
         productId:Number,
     },
     watch:{
@@ -26,15 +26,26 @@ export default {
     },
     data(){
         return {
-            v:0,
+            v:"开发板",
             options:[
+                {
+                    "id": -1,
+                    "label": "开发版",
+                }
             ]
         }
     },
     mounted(){
         var _this=this;
-        this.v=this.value
-       
+        if(this.value==null){
+            this.v=-1;
+        }else{
+             for(const opt in this.options) {
+                if(opt.label==v){
+                    this.v=opt.id
+                }
+            }
+        }
     },
     methods:{
         refresh(){
@@ -47,7 +58,13 @@ export default {
             })
         },
         change(v){
-            this.$emit("input",v);
+            for(const opt in this.options) {
+                if(opt.id==v){
+                    this.$emit("input",opt.label);
+                    break;
+                }
+            }
+           
         }
     }
 }

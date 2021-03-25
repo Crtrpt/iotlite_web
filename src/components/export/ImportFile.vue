@@ -1,5 +1,5 @@
 <template>
-      <b-button-group class="mr-2" >
+      <b-button-group class="mr-2"  v-if="false">
           <b-modal id="import" title="导入" size="lg" cancel-title="取消" ok-title="确认">
               <b-row>
                  <b-col>
