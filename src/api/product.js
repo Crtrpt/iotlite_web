@@ -54,6 +54,12 @@ const product={
     },
     allVersion:(ctx)=>{
       return request.get("product/version/all",ctx)
+    },
+    versionInfo:(ctx)=>{
+      return request.get("product/version/query",ctx)
+    },
+    removeVersion:(ctx)=>{
+      return request.post("product/version/remove",ctx)
     }
 }
 

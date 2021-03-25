@@ -6,7 +6,6 @@
 
   import Treeselect from '@riophae/vue-treeselect'
   // import the styles
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 import { product } from '../../api/product.js'
 

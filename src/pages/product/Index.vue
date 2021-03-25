@@ -83,8 +83,7 @@ export default {
       })
     },
     detail(row){
-      console.log(row);
-      this.$router.push({name: 'productDetail',params: { id: row.id }})
+      this.$router.push({name: 'productDetail',params: { sn: row.sn }})
     }
   }
 }

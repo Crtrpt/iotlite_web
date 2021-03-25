@@ -114,9 +114,6 @@ export default {
   },
   data(){
     return {
-      productType:[
-          "设备","网关"
-      ],
       form:{
         count:1
       }
