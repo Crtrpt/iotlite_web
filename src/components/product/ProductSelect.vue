@@ -1,12 +1,11 @@
 <template>
-    <treeselect v-model="v" :multiple="false" :options="options"  @input="change"  />
+    <treeselect v-model="v" :multiple="false" :options="options"  @input="change"
+    placeholder="选择设备的产品"  />
 </template>
 
 <script>
 
   import Treeselect from '@riophae/vue-treeselect'
-  // import the styles
-  import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 import { product } from '../../api/product.js'
 

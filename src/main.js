@@ -30,6 +30,7 @@ import "./assets/css/custom-modal.css"
 import "./assets/css/custom-pagination.css"
 import "./assets/css/custom-list-group.css"
 import "./assets/css/tab.css"
+import "./assets/css/vue-treeselect.css"
 
 const axios = require('axios')
 
