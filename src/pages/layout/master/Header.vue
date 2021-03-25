@@ -8,6 +8,15 @@
                 </li>
             </ul>
 
+               <ul class="navbar-item flex-row ml-md-0 ml-auto">
+                    <li class="nav-item align-self-center ">
+                      <b-button variant="link" @click="$store.commit('layout/toggleMenu')">
+                      <b-icon style="color:#e0e6ed" icon="blockquote-left" v-if="this.$store.getters['layout/showLeftMenu']" />
+                      <b-icon style="color:#e0e6ed" icon="blockquote-right" v-if="!this.$store.getters['layout/showLeftMenu']" />
+                      </b-button>
+                    </li>
+               </ul>
+
             <!-- <ul class="navbar-item flex-row ml-md-0 ml-auto">
                 <li class="nav-item align-self-center search-animated">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search toggle-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -41,14 +50,19 @@
 
                 <b-dropdown 
                   toggle-tag="a"
-                  toggle-class="nav-link dropdown-toggle user "
+                  toggle-class="nav-link dropdown-toggle user text-decoration-none  btn-link"
                   variant="link"
+                   no-caret
                   class="nav-item dropdown user-profile-dropdown ">
                     <template #button-content class="nav-link dropdown-toggle user">
                           <img src="img/profile-16.jpeg" alt="avatar">
                     </template>
-                    <b-dropdown-item class="dropdown-item">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+
+                    <b-dropdown-item class="dropdown-item" @click="$router.push({name:'team'})">
+                      我的团队</b-dropdown-item>
+                    <b-dropdown-item class="dropdown-item" @click="$router.push({name:'profile'})">
+                      个人信息</b-dropdown-item>
+                    <b-dropdown-item class="dropdown-item" @click="logout()">
                       退出</b-dropdown-item>
                 </b-dropdown>
             </ul>
@@ -58,7 +72,12 @@
 
 <script>
 export default {
-  name:"Header"
+  name:"Header",
+  methods:{
+    logout(){
+      console.log("退出登录")
+    }
+  }
 }
 </script>
 

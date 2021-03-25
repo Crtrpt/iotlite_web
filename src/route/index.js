@@ -7,6 +7,7 @@ import group from "./group"
 import organization from "./organization"
 import user from "./user"
 import dashboard from "./dashboard"
+import team from "./team";
 
 
 var routes = [
@@ -29,7 +30,8 @@ var routes = [
       ...product,
       ...group,
       ...organization,
-      ...user
+      ...user,
+      ...team,
     ],
   },
   {

@@ -1,20 +1,19 @@
 <template>
   <div class="master_layout">
     <Header />
-    <SubHeader />
       <div class="main-container" id="container">
           <div class="overlay"></div>
           <div class="search-overlay"></div>
-         <LeftNav  />
-          <div id="content" class="main-content">
+         <LeftNav  v-if="showLogin" />
+          <div id="content" class="main-content" :style='{
+              "marginLeft":showLogin?"212px":"0px"
+          }'>
               <div class="layout-px-spacing">
                   <div class="row layout-top-spacing">
                         <router-view  ></router-view>
                   </div>
               </div>
           </div>
-          
-          
       </div>
     <Footer />
   </div>
@@ -29,11 +28,14 @@ import SubHeader from './SubHeader.vue';
 export default {
   name: 'MasterLayout',
   computed: {
+    showLogin(){
+       return  this.$store.getters['layout/showLeftMenu']
+    }
   },
   components: { Header,Footer,LeftNav,SubHeader},
   data(){
     return {
-      showLogin:false
+     
     }
   }
 };

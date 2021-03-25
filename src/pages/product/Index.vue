@@ -13,7 +13,7 @@
           
           <div class="widget-content" >
             <b-row>
-              <b-col col cols="2"  v-for="p in items" :key="p.id">
+              <b-col xl="3" lg="4" md="4" sm="6"  v-for="p in items" :key="p.id">
                 <b-card   class="mt-2 product_card" >
                     <template>
                       <h5  @click="detail(p)" class="mb-1">{{p.name}}</h5>

@@ -3,7 +3,6 @@
       <h4>
         推送
       </h4>
-
       <b-tabs >
         <b-tab title="推送列表">
           <b-row>
