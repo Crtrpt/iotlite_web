@@ -24,7 +24,7 @@
                         <b-card-text>
 
                           <div class="card_sub_script_left_top">
-                            <b-link v-b-tooltip.hover :title="'产品版本:'+p.product.sn"   >
+                            <b-link v-b-tooltip.hover :title="'产品:'+p.product.name+' 序号:'+p.product.sn "  >
                               <b-icon   icon="app-indicator"></b-icon>  {{p.sn}}
                             </b-link>
                           </div>

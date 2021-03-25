@@ -24,7 +24,7 @@
                   <b-tbody>
                     <b-tr>
                       <b-td  variant="light" class="text-right">产品名称:</b-td>
-                      <b-td> <a class="primary" href="javascript:void(0);" @click="goProduct(form.proxy)">
+                      <b-td> <a class="primary" href="javascript:void(0);" @click="goProduct(form)">
                             {{form.product.name}}
                             </a></b-td>
                       <b-td  variant="light" class="text-right">设备名称:</b-td>
@@ -106,7 +106,7 @@ export default {
   },
   methods:{
     goProduct(device){
-      this.$router.push({name: 'productDetail',params: { id: device.product.id }})
+      this.$router.push({name: 'productDetail',params: { sn: device.product.sn }})
     },
     goDevice(device){
         this.$router.push({name: 'deviceDetail',params: { id: device.id }})

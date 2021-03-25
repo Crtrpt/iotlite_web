@@ -1,11 +1,11 @@
 <template>
   <div>
      <b-row>
-      <Toolbar :form=form :query=query @refresh="getList"/>
+      <Toolbar :query=query @refresh="getList"/>
      </b-row>
-      <b-table hover :items="items" :fields="fields"
+      <b-table hover :items="items" :fields="fields"  
       @row-contextmenu="(item, index, event)=>{event.preventDefault();$refs.menu.open(event,item)}" 
-      @row-dblclicked="gotoVersion"
+      @row-dblclicked="gotoDevice"
       selectable>
           <template #cell(selected)="{ rowSelected }">
             <template v-if="rowSelected">
@@ -18,15 +18,27 @@
             </template>
           </template>
           
-           <template v-slot:cell(createdAt)="data">
-                  {{data.item.createdAt}}
+          <template v-slot:cell(tags)="data">
+                     <Tag v-model="data.item.tags" @input="payload=>changeTags(payload,data.item)" />
           </template>
-          
+
+          <template v-slot:cell(deviceGroup)="data">
+                     <DeviceGroup v-model="data.item.deviceGroup" />
+          </template>
           
       </b-table>
         <div style="box-sizing: border-box;">
         <vue-context ref="menu" v-slot="{ data }">
-              <li>  <a href="javascript:void(0);" @click="gotoMap(data)" >关于</a> </li>
+              <li>  <a href="javascript:void(0);" @click="gotoMap(data)" >在地图上显示</a> </li>
+              <li class="v-context__sub">
+                  <a>控制</a>
+                  <ul class="v-context">
+                      <li>
+                          <a>重置</a>
+                      </li>
+                  </ul>
+              </li>
+              <li>  <a href="javascript:void(0);" >删除</a> </li>
         </vue-context>
       </div>
       <b-row class="mt-2" v-if="helper.total>10">
@@ -44,7 +56,7 @@ import VueContext from 'vue-context';
 import {product} from "../../../api/product"
 import {device} from "../../../api/device"
 import Tag from '../../../components/tags/Tag.vue'
-import Toolbar from "./version/VerToolBar.vue"
+import Toolbar from "../../device/ToolBar"
 import DeviceGroup from '../../../components/tags/DeviceGroup.vue'
 
 import 'vue-context/dist/css/vue-context.css'
@@ -66,46 +78,54 @@ export default {
        },
 
        fields: [
+        //  {
+        //   key: 'selected',
+        //   label: 'selected'
+        //  },
+          {
+            key: 'sn',
+            label: '设备序号',
+            sortable: true
+          },
+          {
+            key: 'name',
+            label: '设备名称',
+            sortable: true
+          },
+          // {
+          //   key: 'description',
+          //   label: '设备描述',
+          //   sortable: true
+          // },
+          {
+            key: 'location',
+            label: '设备位置',
+            sortable: true
+          },
+          {
+            key: 'version',
+            label: '产品版本',
+            sortable: true
+          },
+           {
+            key: 'tags',
+            label: '标签',
+            sortable: true
+          },
+          {
+            key: 'deviceGroup',
+            label: '分组',
+          },
           {
             key: 'createdAt',
             label: '创建时间',
             sortable: true
           },
-          {
-            key: 'version',
-            label: '软件版本',
-            sortable: true
-          },
-          {
-            key: 'minHdVersion',
-            label: '硬件版本',
-            sortable: true
-          },
-          {
-            key: 'verDescription',
-            label: '更新内容简介',
-            sortable: true
-          },
-          {
-            key: 'deviceCount',
-            label: '设备数量',
-            sortable: true
-          },
-          {
-            key: 'startAt',
-            label: '支持开始时间',
-            sortable: true
-          },
-          {
-            key: 'endAt',
-            label: '支持结束时间',
-            sortable: true
-          },
-           {
-            key: 'op',
-            label: '操作',
-            sortable: true
-          }
+          // {
+          //   key: 'ops',
+          //   label: '操作',
+          //   sortable: true
+          // },
         ],
       items: [
          
@@ -130,15 +150,29 @@ export default {
     this.getList();
   },
   methods:{
-    gotoVersion(item,idx,e){
+    gotoMap(data){
+      this.$router.push({name: 'productDetailMap',query:{
+        deviceSn:data.sn
+      }})
+    },
+    changeTags(payload,d){
+      device.changeTags({
+        sn:d.sn,
+        productSn:this.form.sn,
+        tags:payload
+      }).then(res=>{
+      })
+    },
+    gotoDevice(item,idx,e){
       console.log(item);
-      this.$router.push({name: 'version',params: { sn: this.form.sn ,version:item.version }})
+      this.$router.push({name: 'deviceDetail',params: { id: item.id }})
     },
     getList(){
       var _this=this;
-       product.versionList(Object.assign(
+       product.deviceList(Object.assign(
        {
           productSn:this.form.sn,
+          version:this.form.version,
        },this.query
        )).then((res)=>{
           _this.items=res.data.list;

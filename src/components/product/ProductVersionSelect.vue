@@ -17,7 +17,7 @@ export default {
         productId:Number,
     },
     watch:{
-        productId:{
+        'productId':{
             handler:function(){
                 this.refresh();
             }
@@ -45,21 +45,23 @@ export default {
                 }
             }
         }
+         this.refresh();
     },
     methods:{
         refresh(){
             console.log("获取全部版本")
             var _this=this;
             product.allVersion({
-            id:this.productId
+                id:this.productId
             }).then(res=>{
                 _this.options=res.data;
             })
         },
         change(v){
             for(const opt in this.options) {
-                if(opt.id==v){
-                    this.$emit("input",opt.label);
+             
+                if(this.options[opt].id==v){
+                    this.$emit("input",this.options[opt].label);
                     break;
                 }
             }

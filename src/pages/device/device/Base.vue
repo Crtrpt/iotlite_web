@@ -8,6 +8,7 @@
                'text-success':ctr.expect==ctr.value,
                'text-danger':ctr.expect!=ctr.value,
              }">{{form.snap[ctr.name]||ctr.value||'null'}}</b-link>
+              {{ctr.unit||'unit'}}
 
             <b-link  :id="'last_at-'+ctr.name" ></b-link>
              </b-card-text>

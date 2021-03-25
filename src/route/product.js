@@ -9,7 +9,7 @@ const product  =[
     }
   },
   {
-  path: 'product/:id',
+  path: 'product/:sn',
   component: require('../pages/product/Detail').default,
   name: 'productDetail',
   redirect: { name: 'productDetailBase' },
@@ -82,6 +82,49 @@ const product  =[
       }
     },
   ]
-}
+  },
+  {
+    path: 'product/:sn/version/:version',
+    component: require('../pages/version/Detail').default,
+    name: 'version',
+    redirect: { name: 'versionBase' },
+    meta:{
+      name:"productDetail"
+    },
+    children:[
+      {
+        path: 'base',
+        component: require('../pages/version/version/Base').default,
+        name: 'versionBase',
+        meta:{
+          name:"versionBase"
+        }
+      },
+      {
+        path: 'model',
+        component: require('../pages/version/version/Model').default,
+        name: 'versionModel',
+        meta:{
+          name:"versionModel"
+        }
+      },
+      {
+        path: 'device',
+        component: require('../pages/version/version/Device').default,
+        name: 'versionDevice',
+        meta:{
+          name:"versionDevice"
+        }
+      },
+      {
+        path: 'setting',
+        component: require('../pages/version/version/Setting').default,
+        name: 'versionSetting',
+        meta:{
+          name:"versionSetting"
+        }
+      }
+    ]
+  }
 ]
 export default product
