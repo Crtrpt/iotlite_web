@@ -1,9 +1,9 @@
 <template>
     <VueCtkDateTimePicker color="#1a1c2d" 
-    button-now-translation="现在" 
+    :button-now-translation="$t('component.now')" 
     :range='true'
     :noLabel="true"
-    label="选择时间范围" v-model="value.date" />
+    :label="$t('component.timeSelect')" v-model="value.date" />
 </template>
 
 <script>

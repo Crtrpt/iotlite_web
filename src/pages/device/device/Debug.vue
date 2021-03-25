@@ -117,13 +117,20 @@ export default {
       helper:{total:0},
       client:null,
       isConnect:false,
+      raw_topic:"",
       logs:[],
       raw:"",
     }
   },
   computed:{
     topic(){
-      return "/default/"+this.form.product.sn+"/"+this.form.sn
+     
+      if(this.form.proxy==undefined){
+        return "/default/"+this.form.product.sn+"/"+this.form.sn
+      }else{
+        return "/default/"+this.form.proxy.product.sn+"/"+this.form.proxy.sn
+      }
+      
     }
   },
   methods:{
@@ -190,7 +197,7 @@ export default {
       this.client.publish(this.topic,payload)
     },
     sendRaw(){
-      this.logs.push('topic: '+this.topic+' payload:'+this.raw);
+      this.logs.push('topic: '+this.raw_topic+' payload:'+this.raw);
       this.client.publish(this.topic,this.raw)
     }
   }

@@ -42,7 +42,7 @@ export default {
             if(res.code==0){
               _this.$bvModal.msgBoxOk("删除成功")
             }else{
-              _this.$bvModal.msgBoxOk(res.msg)
+              _this.$router.push({name:"product"})
             }
       })
     }

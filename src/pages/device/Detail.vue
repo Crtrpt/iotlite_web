@@ -24,7 +24,9 @@
                   <b-tbody>
                     <b-tr>
                       <b-td  variant="light" class="text-right">产品名称:</b-td>
-                      <b-td>{{form.product.name}}</b-td>
+                      <b-td> <a class="primary" href="javascript:void(0);" @click="goProduct(form.proxy)">
+                            {{form.product.name}}
+                            </a></b-td>
                       <b-td  variant="light" class="text-right">设备名称:</b-td>
                       <b-td>{{form.name}}</b-td>
                     </b-tr>
@@ -46,6 +48,13 @@
                       <b-td  variant="light" class="text-right">最后活动时间:</b-td>
                       <b-td>{{timestamp2Str(form.snap.lastAt)||'暂无'}}</b-td>
                     </b-tr>
+                    <b-tr v-if="form.proxy!=null">
+                      <b-td  variant="light" class="text-right">上级设备类型:</b-td>
+                      <b-td><a class="primary" href="javascript:void(0);" @click="goProduct(form.proxy)">
+                        {{form.proxy.product.name}} </a></b-td>
+                      <b-td  variant="light" class="text-right">上级设备序号:</b-td>
+                      <b-td><a class="primary" href="javascript:void(0);" @click="goDevice(form.proxy)">{{form.proxy.sn}}</a> </b-td>
+                    </b-tr>
                   </b-tbody>
        </b-table-simple>
     </b-col>
@@ -65,7 +74,7 @@
         <b-nav-item to="hook"  active-class="active"  >消息推送</b-nav-item>
         <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
       </b-nav>
-      <router-view class="content" :form=form></router-view>
+      <router-view class="content" :form=form :type="'device'"></router-view>
     </b-col>
   </b-row>
 </b-container>
@@ -96,6 +105,12 @@ export default {
     this.getInfo()
   },
   methods:{
+    goProduct(device){
+      this.$router.push({name: 'productDetail',params: { id: device.product.id }})
+    },
+    goDevice(device){
+        this.$router.push({name: 'deviceDetail',params: { id: device.id }})
+    },
     getInfo(){
       var _this=this;
       console.log(this.$route.params.id)
@@ -148,6 +163,13 @@ export default {
         },
         
       ],
+    }
+  },
+  watch:{
+    "$route.path":function(newV,oldV){
+        console.log("获取新数据")
+        this.form.id=this.$route.params.id;
+         this.getInfo()
     }
   }
 }

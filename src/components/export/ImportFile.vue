@@ -1,5 +1,5 @@
 <template>
-      <b-button-group class="mr-2" >
+      <b-button-group class="mr-2"  v-if="false">
           <b-modal id="import" title="导入" size="lg" cancel-title="取消" ok-title="确认">
               <b-row>
                  <b-col>
@@ -28,8 +28,8 @@
                     </b-col>
                 </b-overlay>
           </b-modal>
-          <b-button size="sm" variant="outline-primary"  v-b-modal.import >导入</b-button>
-          <b-button size="sm" variant="outline-primary" v-b-modal.export  >导出</b-button>
+          <b-button size="sm" variant="outline-primary"  v-b-modal.import >{{$t('component.import')}}</b-button>
+          <b-button size="sm" variant="outline-primary" v-b-modal.export  >{{$t('component.export')}}</b-button>
       </b-button-group>
 
 </template>

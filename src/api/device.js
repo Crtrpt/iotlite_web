@@ -34,6 +34,9 @@ const device={
     groupList:(ctx)=>{
       return request.get("device/groupList",ctx)
     },
+    groupRemove:(ctx)=>{
+      return request.post("device/groupRemove",ctx)
+    },
     groupInfo:(ctx)=>{
       return request.get("device/groupInfo",ctx)
     },

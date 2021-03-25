@@ -1,7 +1,7 @@
 <template>
   <div>
        <b-row>
-         <Toolbar :query=query @refresh="getList"/>
+         <Toolbar :query=query :form="{proxyId:form.id}" @refresh="getList"/>
       </b-row>
       
       <b-table hover :items="items" :fields="fields"  
@@ -58,10 +58,12 @@ import Toolbar from "../../device/ToolBar"
 import {device} from "../../../api/device"
 import VueContext from 'vue-context';
 import 'vue-context/dist/css/vue-context.css'
+import Tag from "../../../components/tags/Tag"
+import DeviceGroup from "../../../components/tags/DeviceGroup";
 
 export default {
   name:"Log",
-  components:{DateTimePicker,Toolbar,VueContext},
+  components:{DateTimePicker,Toolbar,VueContext,Tag,DeviceGroup},
   props:{
     form:Object
   },
@@ -101,7 +103,7 @@ export default {
             sortable: true
           },
           {
-            key: 'ver',
+            key: 'version',
             label: '产品版本',
             sortable: true
           },
@@ -156,9 +158,9 @@ export default {
     },
     getList(){
       var _this=this;
-       device.groupDeviceList(Object.assign(
+       device.list(Object.assign(
        {
-          groupId:this.form.id,
+          proxyId:this.form.id,
        },this.query
        )).then((res)=>{
           _this.items=res.data.list;

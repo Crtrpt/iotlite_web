@@ -4,7 +4,7 @@
           <div class="widget-header">
               <b-row>
                 <b-col>
-                  <h4>设备({{helper.total||0}})</h4>
+                  <h4>{{$t('page.device.name')}}({{helper.total||0}})</h4>
                 </b-col>
                  <Toolbar  :query=query  @refresh="getList" />
                
@@ -12,7 +12,7 @@
           </div>
            <div class="widget-content" >
               <b-row>
-                <b-col col cols="2"  v-for="p in items" :key="p.id">
+                <b-col xl="3" lg="4" md="4" sm="6"  v-for="p in items" :key="p.id">
                   
                       <b-card  class="mt-2">
                       <template>

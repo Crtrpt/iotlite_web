@@ -103,7 +103,7 @@ export default {
             sortable: true
           },
           {
-            key: 'ver',
+            key: 'version',
             label: '产品版本',
             sortable: true
           },

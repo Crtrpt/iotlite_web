@@ -1,5 +1,13 @@
 const user =[
   {
+    path: 'profile',
+    component: require('../pages/user/Profile').default,
+    name: 'profile',
+    meta:{
+      name:"profile"
+    }
+  },
+  {
     path: 'user',
     component: require('../pages/user/Index').default,
     name: 'user',

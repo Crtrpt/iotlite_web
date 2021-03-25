@@ -2,15 +2,14 @@
    <b-col cols="12" class="mt-2 mb-2" style="pading-left:0px;pading-right:0px">
                   <b-button-toolbar>
                     <b-button-group  class="mr-2">
-                      <b-modal id="new" title="新建分组" hide-footer>
+                      <b-modal id="new" ref="new" :title="$t('page.group.new')" hide-footer>
                         <New  @close="closeNew"/>
                       </b-modal>
-                      <b-button size="sm" variant="primary" v-b-modal.new  >新建分组</b-button>
+                      <b-button size="sm" variant="primary" v-b-modal.new  >{{$t('page.group.new')}}</b-button>
                     </b-button-group>
-                    <!-- <importFile></importFile> -->
 
                     <b-button-group  class="mr-2">
-                      <b-form-input class="tool_input" v-model="query.words" placeholder="搜索"></b-form-input>
+                      <b-form-input class="tool_input" v-model="query.words" :placeholder="$t('component.search')"></b-form-input>
                     </b-button-group>
 
                     <b-button-group  class="mr-2 ">
@@ -18,7 +17,7 @@
                     </b-button-group>
 
                      <b-button-group class="mr-2">
-                      <b-button size="sm" variant="primary" @click="$emit('refresh',{})" >刷新</b-button>
+                      <b-button size="sm" variant="primary" @click="$emit('refresh',{})" >{{$t('component.refresh')}}</b-button>
                     </b-button-group>
 
                   </b-button-toolbar>
