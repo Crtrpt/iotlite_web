@@ -51,6 +51,9 @@ const product={
     },
     saveNewVersion:(ctx)=>{
       return request.post("product/version/save",ctx)
+    },
+    allVersion:(ctx)=>{
+      return request.get("product/version/all",ctx)
     }
 }
 
