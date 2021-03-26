@@ -17,7 +17,6 @@
       <DeviceGroup v-model="form.deviceGroup" />
     </b-col>
   </b-row>
-   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
     <b-col cols="6">
        <b-table-simple  responsive :bordered="true" :fixed=true>
@@ -42,6 +41,15 @@
                       <b-td  variant="light" class="text-right">软件版本:</b-td>
                       <b-td>{{form.version||'尚未注册'}}</b-td>
                     </b-tr>
+                  </b-tbody>
+       </b-table-simple>
+    </b-col>
+  </b-row>
+   <b-collapse id="more" class="mt-2"  v-model="visible">
+  <b-row>
+    <b-col cols="6">
+       <b-table-simple  responsive :bordered="true" :fixed=true>
+                  <b-tbody>
                      <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
                       <b-td>{{form.createdAt}}</b-td>
@@ -54,6 +62,11 @@
                         {{form.proxy.product.name}} </a></b-td>
                       <b-td  variant="light" class="text-right">上级设备序号:</b-td>
                       <b-td><a class="primary" href="javascript:void(0);" @click="goDevice(form.proxy)">{{form.proxy.sn}}</a> </b-td>
+                    </b-tr>
+
+                    <b-tr >
+                      <b-td  variant="light" class="text-right">更新策略:</b-td>
+                      <b-td> {{form.updateStrategy}}</b-td>
                     </b-tr>
                   </b-tbody>
        </b-table-simple>
@@ -146,7 +159,7 @@ export default {
   },
   data(){
     return {
-      visible:true,
+      visible:false,
       form:{
         id:0||this.$route.params.id,
       },

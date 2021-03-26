@@ -1,8 +1,22 @@
 <template>
-    <div>
-        <div ref="editor">
-        </div>
-    </div>
+    <b-row class="mt-2">
+        <b-col cols="6">
+            <b-tabs>
+                <NewProperty  v-model="spec.property"  />
+                <NewEvent  v-model="spec.event" />
+                <Control v-model="spec.control"/>
+                <Alarm v-model="spec.alarm"/>
+                <!-- <b-tab title="控制">
+                </b-tab> 
+                 <b-tab title="告警">
+                </b-tab>  -->
+            </b-tabs>
+        </b-col>
+        <b-col cols="6">
+            <div ref="editor">
+            </div>
+        </b-col>
+    </b-row>
 </template>
 
 <script>
@@ -26,9 +40,13 @@ import 'codemirror/addon/fold/foldgutter.css';
 import 'codemirror/addon/fold/foldcode.js';
 import 'codemirror/addon/fold/foldgutter.js';  
 import 'codemirror/addon/fold/brace-fold.js';  
-
+import NewProperty from './NewProperty.vue'
+import NewEvent from './NewEvent.vue'
+import Control from './Control.vue'
+import Alarm from './Alarm.vue'
 
 export default {
+  components: { NewProperty, NewEvent,Control,Alarm },
     name:"ModelEditor",
     props:{
         data:Object
@@ -36,16 +54,31 @@ export default {
     data(){
         return {
             instance:null,
+            spec:{
+                property:[],
+                events:[],
+                contrl:[],
+                alarm:[],
+            },
+        }
+    },
+    watch:{
+        spec:{
+            handler(){
+                this.instance.setValue(JSON.stringify(this.spec, null, 4));
+            },
+            deep:true
         }
     },
     methods:{
+       
         changeTheme(){
             // console.log(this.instance.setOption("theme", "idea"));
         }
     },
     mounted(){
-        // console.log(this.$refs.editor)
-        // console.log(this.data);
+        this.spec=JSON.parse(this.data.value);
+        // this.spec=JSON.parse(this.data.value);
         this.instance= CodeMirror(this.$refs.editor, {
             value: this.data.value||"",
             mode:  this.data.mode,
@@ -55,7 +88,6 @@ export default {
             foldGutter: true,
             gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
         });
-        // console.log(this.instance);
     }
 }
 </script>

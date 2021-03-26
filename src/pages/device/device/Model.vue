@@ -22,9 +22,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.form);
     this.d.value=JSON.stringify(this.form.spec,null,2);
-    console.log(this.d.value);
   }
 }
 </script>
