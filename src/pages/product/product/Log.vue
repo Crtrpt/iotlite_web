@@ -6,15 +6,15 @@
 
 <script>
 export default {
-  name:"Log",
-  data(){
-    return {
-      list:[
-        { version: 'table cell', desc: 'table cell', deviceCount: 'table cell' },
-      ]
+    name:"Log",
+    data(){
+        return {
+            list:[
+                { version: 'table cell', desc: 'table cell', deviceCount: 'table cell' },
+            ]
+        };
     }
-  }
-}
+};
 </script>
 
 <style scoped>

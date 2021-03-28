@@ -14,43 +14,44 @@
 </template>
 
 <script>
-import ModelEditor from '../../../components/modelEditor/ModelEditor.vue'
-import {product} from "../../../api/product"
+import ModelEditor from '../../../components/modelEditor/ModelEditor.vue';
+import {product} from "../../../api/product";
 export default {
-  components: { ModelEditor },
-  props:{
-    form:Object
-  },
-  name:"Model",
-  data(){
-    return {
-        d:{
-            type:"codeEditor",
-            mode:"javascript",
-            value:JSON.stringify(this.form.spec,null,2),
+    components: { ModelEditor },
+    props:{
+        form:Object
+    },
+    name:"Model",
+    data(){
+        return {
+            d:{
+                type:"codeEditor",
+                mode:"javascript",
+                value:JSON.stringify(this.form.spec,null,2),
+            }
+        };
+    },
+    methods:{
+        saveModel(){
+            var _this=this;
+            console.log(this.$refs.editor.instance.getValue());
+            product.saveModel({
+                productSn:this.form.sn,
+                spec:this.$refs.editor.instance.getValue()
+            }).then((res)=>{
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("保存成功");
+                    _this.$emit('refresh',{});
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
         }
+    },
+    mounted(){
+        this.d.value=JSON.stringify(this.form.spec,null,2);
     }
-  },
-  methods:{
-    saveModel(){
-      var _this=this;
-      console.log(this.$refs.editor.instance.getValue())
-      product.saveModel({
-           productSn:this.form.sn,
-           spec:this.$refs.editor.instance.getValue()
-      }).then((res)=>{
-          if(res.code==0){
-              _this.$bvModal.msgBoxOk("保存成功")
-          }else{
-              _this.$bvModal.msgBoxOk(res.msg)
-          }
-      })
-    }
-  },
-  mounted(){
-    this.d.value=JSON.stringify(this.form.spec,null,2);
-  }
-}
+};
 </script>
 
 <style scoped>

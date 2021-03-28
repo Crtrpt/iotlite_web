@@ -24,17 +24,18 @@
 
 import NewVersion from "./NewVersion";
 export default {
-  props:{
-    form:Object,
-    query:Object
-  },
-  components:{NewVersion},
-  name:"Toolbar",
-  methods:{
-    closeNew(){
-      this.$refs['new'].hide()
-      this.$emit('refresh',{})
+    props:{
+        form:Object,
+        query:Object
+    },
+    components:{NewVersion},
+    name:"Toolbar",
+    methods:{
+        closeNew(){
+          
+            this.$refs['new'].hide();
+            this.$emit('refresh',{});
+        }
     }
-  }
-}
+};
 </script>

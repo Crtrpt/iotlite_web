@@ -20,16 +20,16 @@
 </template>
 
 <script>
-import {product} from "../../../api/product"
+import {product} from "../../../api/product";
 export default {
-  name:"Base",
-  props:{
-    form:Object
-  },
-  methods:{
+    name:"Base",
+    props:{
+        form:Object
+    },
+    methods:{
   
-  }
-}
+    }
+};
 </script>
 
 <style scoped>

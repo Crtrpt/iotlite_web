@@ -14,10 +14,10 @@ export default {
     components: { Treeselect },
     props:{
         value:String,
-        productId:Number,
+        productSn:String,
     },
     watch:{
-        'productId':{
+        'productSn':{
             handler:function(){
                 this.refresh();
             }
@@ -52,7 +52,7 @@ export default {
             console.log("获取全部版本")
             var _this=this;
             product.allVersion({
-                id:this.productId
+                sn:this.productSn
             }).then(res=>{
                 _this.options=res.data;
             })

@@ -17,7 +17,6 @@
       <DeviceGroup v-model="form.deviceGroup" />
     </b-col>
   </b-row>
-   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
     <b-col cols="6">
        <b-table-simple  responsive :bordered="true" :fixed=true>
@@ -42,6 +41,15 @@
                       <b-td  variant="light" class="text-right">软件版本:</b-td>
                       <b-td>{{form.version||'尚未注册'}}</b-td>
                     </b-tr>
+                  </b-tbody>
+       </b-table-simple>
+    </b-col>
+  </b-row>
+   <b-collapse id="more" class="mt-2"  v-model="visible">
+  <b-row>
+    <b-col cols="6">
+       <b-table-simple  responsive :bordered="true" :fixed=true>
+                  <b-tbody>
                      <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
                       <b-td>{{form.createdAt}}</b-td>
@@ -54,6 +62,11 @@
                         {{form.proxy.product.name}} </a></b-td>
                       <b-td  variant="light" class="text-right">上级设备序号:</b-td>
                       <b-td><a class="primary" href="javascript:void(0);" @click="goDevice(form.proxy)">{{form.proxy.sn}}</a> </b-td>
+                    </b-tr>
+
+                    <b-tr >
+                      <b-td  variant="light" class="text-right">更新策略:</b-td>
+                      <b-td> {{form.updateStrategy}}</b-td>
                     </b-tr>
                   </b-tbody>
        </b-table-simple>
@@ -81,98 +94,96 @@
 </template>
 
 <script>
-import {device} from "../../api/device"
-import Tag from "../../components/tags/Tag"
+import {device} from "../../api/device";
+import Tag from "../../components/tags/Tag";
 import DeviceGroup from "../../components/tags/DeviceGroup";
-import mqttClient from "../../api/mqttClient"
-import eventHub from "../../api/eventhub"
+import mqttClient from "../../api/mqttClient";
+import eventHub from "../../api/eventhub";
 export default {
-  name:"deviceDetail",
-  components:{
-    Tag,DeviceGroup
-  },
-  destroyed(){
-      var _this=this;
-      mqttClient.unsubscribe(_this.topic,(err)=>{
-          console.log("取消订阅成功: "+_this.topic)
-      })
-      //取消事件订阅
-      eventHub.off(_this.eventSource,(e)=>{
+    name:"deviceDetail",
+    components:{
+        Tag,DeviceGroup
+    },
+    destroyed(){
+        var _this=this;
+        mqttClient.unsubscribe(_this.topic,(err)=>{
+            console.log("取消订阅成功: "+_this.topic);
+        });
+        //取消事件订阅
+        eventHub.off(_this.eventSource,(e)=>{
 
-      })
-  },
-  mounted(){
-    this.getInfo()
-  },
-  methods:{
-    goProduct(device){
-      this.$router.push({name: 'productDetail',params: { sn: device.product.sn }})
+        });
     },
-    goDevice(device){
-        this.$router.push({name: 'deviceDetail',params: { id: device.id }})
+    mounted(){
+        this.getInfo();
     },
-    getInfo(){
-      var _this=this;
-      console.log(this.$route.params.id)
-      device.info({
-        id:this.form.id
-      }).then(res=>{
-        _this.form=res.data
+    methods:{
+        goProduct(device){
+            this.$router.push({name: 'productDetail',params: { sn: device.product.sn }});
+        },
+        goDevice(device){
+            this.$router.push({name: 'deviceDetail',params: { id: device.id }});
+        },
+        getInfo(){
+            var _this=this;
+            console.log(this.$route.params.id);
+            device.info({
+                id:this.form.id
+            }).then(res=>{
+                _this.form=res.data;
         
-        mqttClient.subscribe(_this.topic,(err)=>{
-         
+                mqttClient.subscribe(_this.topic,(err)=>{
 
-          eventHub.on(_this.eventSource,(e)=>{
-              var msg=JSON.parse(e);
-              // console.log("解析"+msg.action)
-              if(msg.action=="property"){
-                // console.log("变更")
-                _this.form.snap[msg.name]=msg.value
-              }
-          })
-        })
-
+                    eventHub.on(_this.eventSource,(e)=>{
+                        var msg=JSON.parse(e);
+                        // console.log("解析"+msg.action)
+                        if(msg.action=="property"){
+                            // console.log("变更")
+                            _this.form.snap[msg.name]=msg.value;
+                        }
+                    });
+                });
      
-      })
-    }
-  },
-  computed:{
-    topic(){
-        return "/device/"+this.form.product.sn+"/"+this.form.sn+"/"+"#"
+            });
+        }
     },
-    eventSource(){
-        return "/device/"+this.form.product.sn+"/"+this.form.sn+"/"
-    }
-  },
-  data(){
-    return {
-      visible:true,
-      form:{
-        id:0||this.$route.params.id,
-      },
-      list:[
-        {
-          id:"",
-          name:"燃气",
-          description:"CQ2010"
+    computed:{
+        topic(){
+            return "/device/"+this.form.product.sn+"/"+this.form.sn+"/"+"#";
         },
-        {
-          id:"",
-          name:"烟感",
-          description:"CQ2010"
-        },
+        eventSource(){
+            return "/device/"+this.form.product.sn+"/"+this.form.sn+"/";
+        }
+    },
+    data(){
+        return {
+            visible:false,
+            form:{
+                id:0||this.$route.params.id,
+            },
+            list:[
+                {
+                    id:"",
+                    name:"燃气",
+                    description:"CQ2010"
+                },
+                {
+                    id:"",
+                    name:"烟感",
+                    description:"CQ2010"
+                },
         
-      ],
+            ],
+        };
+    },
+    watch:{
+        "$route.path":function(newV,oldV){
+            console.log("获取新数据");
+            this.form.id=this.$route.params.id;
+            this.getInfo();
+        }
     }
-  },
-  watch:{
-    "$route.path":function(newV,oldV){
-        console.log("获取新数据")
-        this.form.id=this.$route.params.id;
-         this.getInfo()
-    }
-  }
-}
+};
 </script>
 
 <style scoped>

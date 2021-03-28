@@ -13,7 +13,7 @@ export default {
     name:"ProductSelect",
     components: { Treeselect },
     props:{
-        value:Number,
+        value:String,
     },
     data(){
         return {
@@ -35,7 +35,12 @@ export default {
     },
     methods:{
         change(v){
-            this.$emit("input",v);
+            for(const opt in this.options) {
+                if(this.options[opt].id==v){
+                    this.$emit("input",this.options[opt].sn);
+                    break;
+                }
+            }
         }
     }
 }

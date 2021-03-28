@@ -54,61 +54,63 @@
         <b-nav-item to="hook"  active-class="active">消息推送</b-nav-item>
         <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
       </b-nav>
-      <router-view  class="content" :form=form  :type="'product'"></router-view>
+      <router-view  class="content" :form=form  :type="'product'"
+        @refresh=getInfo
+      ></router-view>
     </b-col>
   </b-row>
 </b-container>
 </template>
 
 <script>
-import {product} from "../../api/product"
-import Tag from "../../components/tags/Tag"
+import {product} from "../../api/product";
+import Tag from "../../components/tags/Tag";
 export default {
-  name:"ProductDetail",
+    name:"ProductDetail",
  
-  components:{
-    Tag
-  },
-  mounted(){
-    this.getInfo()
-  },
-  methods:{
-    copy(){
-      console.log("复制")
+    components:{
+        Tag
     },
-    refreshProductKey(){
-     product.refreshProductKey({productSn:this.form.sn}).then(res=>{
-       console.log("更新完成")
-     })
+    mounted(){
+        this.getInfo();
     },
-    changeTags(payload){
-      var _this=this;
-      product.changeTags({
-        productSn:this.form.sn,
-        tags:payload
-      }).then(res=>{
-      })
+    methods:{
+        copy(){
+            console.log("复制");
+        },
+        refreshProductKey(){
+            product.refreshProductKey({productSn:this.form.sn}).then(res=>{
+                console.log("更新完成");
+            });
+        },
+        changeTags(payload){
+            var _this=this;
+            product.changeTags({
+                productSn:this.form.sn,
+                tags:payload
+            }).then(res=>{
+            });
+        },
+        getInfo(){
+            var _this=this;
+            product.info({
+                sn:this.form.sn
+            }).then(res=>{
+                _this.form=res.data;
+            });
+        }
     },
-    getInfo(){
-      var _this=this;
-      product.info({
-        sn:this.form.sn
-      }).then(res=>{
-        _this.form=res.data
-      })
+    data(){
+        return {
+            visible:false,
+            form:{
+                sn:0||this.$route.params.sn,
+            },
+            list:[        
+            ],
+        };
     }
-  },
-  data(){
-    return {
-      visible:false,
-      form:{
-        sn:0||this.$route.params.sn,
-      },
-      list:[        
-      ],
-    }
-  }
-}
+};
 </script>
 
 <style scoped>

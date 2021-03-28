@@ -48,15 +48,15 @@
                 label="产品:"
                 description="产品"
               >
-            <ProductSelect v-model="form.productId"></ProductSelect>
+            <ProductSelect v-model="form.productSn"></ProductSelect>
              </b-form-group>
           </div>
-          <div class="col-6" v-if="form.productId!=null">
+          <div class="col-6" v-if="form.productSn!=null">
               <b-form-group
                 label="版本:"
                 description="版本"
               >
-            <ProductVersionSelect v-model="form.version" :productId=form.productId>
+            <ProductVersionSelect v-model="form.version" :productSn=form.productSn>
             </ProductVersionSelect>
           </b-form-group>
           </div>

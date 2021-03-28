@@ -83,8 +83,22 @@
                     </b-form-group>
                 </div>
 
+                 <div v-if="hook.protocol=='sse'">
+                    <b-form-group
+                        label="server地址:"
+                        description="订阅sse服务器的地址 例如 http://127.0.0.1:5302"
+                      >
+                    <b-form-input
+                      v-model="hook.sse"
+                      disabled
+                      placeholder="sse订阅服务器的地址"
+                      required
+                    ></b-form-input>
+                    </b-form-group>
+                </div>
+
                 <b-button @click="save()" variant="primary">保存</b-button>
-                <b-button  @click="test()" class="ml-2" variant="danger">测试</b-button>
+                <b-button @click="test()" class="ml-2" variant="danger">测试</b-button>
               </b-form>
             </b-col>
           </b-row>
@@ -98,6 +112,7 @@
 </template>
 
 <script>
+import {hook} from "../../api/hook";
 export default {
   name:"Hook",
   props:{
@@ -108,11 +123,11 @@ export default {
     hookKey(){
       switch (this.type) {
         case "device":
-          return "/"+this.form.product.sn+"/"+this.form.sn
+          return "hook@device@"+this.form.product.sn+","+this.form.sn
         case "product":
-           return "/"+this.form.product.sn;
+           return "hook@product@"+this.form.product.sn;
         case "group":
-          return "/"+this.form.id;
+          return "hook@group@"+this.form.id;
         default:
           break;
       }
@@ -121,19 +136,34 @@ export default {
   data(){
     return {
       hook:this.form.hook||{},
+      logs:[],
       options:[
           { value: null, text: '请选择推送' },
           { value: 'http', text: 'http推送' },
           { value: 'mqtt', text: 'mqtt 推送' },
-      ]
+          { value: 'sse', text: 'sse 推送' },
+      ],
+      
     }
   },
   methods:{
     save(){
-      console.log(this.hook)
+        hook.save({
+          key:this.hookKey,
+          data:this.hook,
+        })
     },
     test(){
-
+      var _this=this;
+      console.log(this.hook);
+      if(this.hook.protocol=="sse"){
+        var source = new EventSource('http://127.0.0.1:5302/sse');
+        source.onmessage = function (event) {
+            console.log('id: ' + event.lastEventId + ', data: ' + event.data);
+            _this.logs.push(event.data);
+        };
+      }
+     
     }
   }
 }

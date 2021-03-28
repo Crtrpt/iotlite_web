@@ -7,19 +7,12 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-    crossorigin=""/>
+    <link rel="stylesheet" href="./css/leaflet.css" />
+    <script src="./js/leaflet.js" ></script>
 
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
-
-    <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
-    <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
-
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/britecharts@2/dist/bundled/britecharts.min.js"></script> -->
+    <link rel="stylesheet" href="./css/leaflet-geoman.css" />
+    <script src="./js/leaflet-geoman.min.js"></script>
+    
     <script>
       window.leaflet =window.L;
     </script>
@@ -31,12 +24,6 @@
     </div>
     <!-- built files will be auto injected -->
   </body>
-  <!-- <link  href="./css/main.css" rel="stylesheet" type="text/css">
-  <link  href="./css/structure.css" rel="stylesheet" type="text/css">
-  <link  href="./css/dash.css" rel="stylesheet" type="text/css">
-  <link  href="./css/switch.css" rel="stylesheet" type="text/css">
-  <link  href="./css/custom-modal.css" rel="stylesheet" type="text/css">
-  <link  href="./css/breadcrumb.css" rel="stylesheet" type="text/css"> -->
   <style>
     #app {
       min-height: 100vh;

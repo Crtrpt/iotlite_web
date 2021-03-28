@@ -32,42 +32,42 @@
 </template>
 
 <script>
-import {organization} from "../../api/organization"
+import {organization} from "../../api/organization";
 export default {
-  name:"New",
-  props:{
-    data:{
-      type:Object
-    }
-  },
-  data(){
-    return {
-      OrganizationType:[
-          "烟感","燃气"
-      ],
-      form:{
-          uuid:"",
-          fid:"0"
-      }
-    }
-  },
-  mounted(){
-    this.form.fid=this.data.organizationId||0
-  },
-  methods:{
-    onSubmit(){
-      var _this=this;
-        organization.save(this.form).then((res)=>{
-          console.log(_this.$bvModal.hide("new"));
-            if(res.code==0){
-              _this.$bvModal.msgBoxOk("保存成功")
-            }else{
-              _this.$bvModal.msgBoxOk(res.msg)
+    name:"New",
+    props:{
+        data:{
+            type:Object
+        }
+    },
+    data(){
+        return {
+            OrganizationType:[
+                "烟感","燃气"
+            ],
+            form:{
+                uuid:"",
+                fid:"0"
             }
-        })
+        };
+    },
+    mounted(){
+        this.form.fid=this.data.organizationId||0;
+    },
+    methods:{
+        onSubmit(){
+            var _this=this;
+            organization.save(this.form).then((res)=>{
+                console.log(_this.$bvModal.hide("new"));
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("保存成功");
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>
