@@ -55,49 +55,49 @@
 </template>
 
 <script>
-import New from "./New"
-import OrganizationTree from "../../components/organizationTree/OrganizationTree"
-import {organization} from "../../api/organization"
+import New from "./New";
+import OrganizationTree from "../../components/organizationTree/OrganizationTree";
+import {organization} from "../../api/organization";
 export default {
-  name:"Organization",
-  components:{New,OrganizationTree},
-  mounted(){
-    this.getList();
-  },
-  watch:{
-    "query":{
-      deep:true,
-      handler:function(){
-        this.getList()
-      }
-    }
-  },
-  methods:{
-    getList(){
-      var _this=this;
-      organization.list(_this.query).then((res)=>{
-          _this.items=res.data.list;
-          _this.total=res.total;
-      })
+    name:"Organization",
+    components:{New,OrganizationTree},
+    mounted(){
+        this.getList();
     },
-  },
-  data(){
-    return {
-      displayOrganizationTree:false,
-      helper:{
-          total:0,
-      },
-      query:{
-        organizationId: 0,
-        words:"",
-        pageNum:1,
-        pageSize:10,
-      },
-      items:[
-      ]
+    watch:{
+        "query":{
+            deep:true,
+            handler:function(){
+                this.getList();
+            }
+        }
+    },
+    methods:{
+        getList(){
+            var _this=this;
+            organization.list(_this.query).then((res)=>{
+                _this.items=res.data.list;
+                _this.total=res.total;
+            });
+        },
+    },
+    data(){
+        return {
+            displayOrganizationTree:false,
+            helper:{
+                total:0,
+            },
+            query:{
+                organizationId: 0,
+                words:"",
+                pageNum:1,
+                pageSize:10,
+            },
+            items:[
+            ]
+        };
     }
-  }
-}
+};
 </script>
 
 <style scoped>

@@ -1,12 +1,12 @@
 import { sha256 } from 'js-sha256';
-import {server} from './server.js'
+import {server} from './server.js';
 
 const sign=function (params) {
     params=params+"&t="+((new Date()).valueOf()*1000-1605367991000)+"&";
-    const signStr=  sha256(params).substring(0,10)
+    const signStr=  sha256(params).substring(0,10);
     params=params+"sign="+signStr;
-    return params
-}
+    return params;
+};
 
 const serialize = function(obj) {
     var str = [];
@@ -17,46 +17,45 @@ const serialize = function(obj) {
         }
         
     return sign(str.join("&"));
-}
+};
 
 const catchError = function (err) {
-    console.log("出现错误")
-    console.log(err)
+    console.log("出现错误");
+    console.log(err);
     return err;
-}
+};
 
 const request={
     get:(url,queryString, options)=>{
         queryString=serialize(queryString);
         if(queryString==""){
-            queryString=""
+            queryString="";
         }else{
-            queryString="?"+queryString
+            queryString="?"+queryString;
         }
 
         return server.get(url+queryString, options).catch(err => {
-            let ret = catchError(err)
+            let ret = catchError(err);
             if (ret) {
                 
             }
-        })
+        });
     },
     post:(url,data, options)=>{
         return server.post(url,data, options).catch(err => {
-            let ret = catchError(err)
+            let ret = catchError(err);
             if (ret) {
-                return ret
+                return ret;
             }
-        })
+        });
     },
     upload:(url,data, options)=>{
         return server.post(url,data, options).catch(err => {
-            console.log(err)
-        })
+            console.log(err);
+        });
     }
-}
-
+};
 
 export {
     request
-}
+};

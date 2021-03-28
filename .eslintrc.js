@@ -25,10 +25,11 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     // 'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-    // "indent": ["error", 4],
-    // "quotes": ["off"],
-    // "semi": ["error", "always"],
-    // "eqeqeq": "warn"
+    "indent": ["error", 4],
+    "quotes": ["off"],
+    "semi": ["error", "always"],
+    "eqeqeq": "warn",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
   },
   extends: [
     "prettier"

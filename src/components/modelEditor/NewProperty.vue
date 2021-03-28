@@ -15,10 +15,10 @@
                     </b-button-group>
                     <b-row v-for="(p,i) in value" :key="i" class="mt-2">
                             <b-col>{{p.name}}</b-col>
-                            <b-col>{{p.type}}</b-col>
-                            <b-col>{{p.unit}}</b-col>
-                            <b-col>{{p.threshold}}</b-col>
-                            <b-col>
+                            <b-col cols="1">{{p.type}}</b-col>
+                            <b-col cols="1">{{p.unit}}</b-col>
+                            <b-col cols="1">{{p.threshold}}</b-col>
+                            <b-col cols="3">
                                 <b-button-group>
                                     <b-button size="sm" variant="primary" @click="editProperty(p,i)">编辑</b-button>
                                     <b-button size="sm" variant="outline-primary" @click="removeProperty(i)">删除</b-button>
@@ -30,52 +30,52 @@
 
 <script>
 export default {
-  name:"newProperty",
-  props:{
-    value:Array,
-  },
-  data(){
-    return {
-          curDevice:{},
-          idx:-1,
-    }
-  },
-  methods:{
+    name:"newProperty",
+    props:{
+        value:Array,
+    },
+    data(){
+        return {
+            curDevice:{},
+            idx:-1,
+        };
+    },
+    methods:{
         createProperty(){
-            this.curDevice={}
-            this.idx=-1
-            this.$refs['new-property'].show()
+            this.curDevice={};
+            this.idx=-1;
+            this.$refs['new-property'].show();
         },
         editProperty(p,i){
             this.curDevice=p;
             this.idx=i;
-            this.$refs['new-property'].show()
+            this.$refs['new-property'].show();
         },
         removeProperty(i){
-             var v=[];
-             this.value.forEach((ele,idx) => {
-               if(idx==i){
-               }else{
-                 v.push(ele)
-               }
-             });
-              this.$emit("input",v)
+            var v=[];
+            this.value.forEach((ele,idx) => {
+                if(idx==i){
+                }else{
+                    v.push(ele);
+                }
+            });
+            this.$emit("input",v);
         },
         createNewProperty(){
-           var v=this.value;
-           if(v==null){
-             v=[];
-           }
-           if(this.idx==-1){
+            var v=this.value;
+            if(v==null){
+                v=[];
+            }
+            if(this.idx==-1){
                 v.push(this.curDevice);
-           }else{
-               v[this.idx]=this.curData;
-           }
-           this.$emit("input",v)
-           this.$refs['new-property'].hide()
+            }else{
+                v[this.idx]=this.curData;
+            }
+            this.$emit("input",v);
+            this.$refs['new-property'].hide();
         },
-  }
-}
+    }
+};
 </script>
 
 <style>

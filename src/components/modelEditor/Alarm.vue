@@ -33,52 +33,52 @@
 
 <script>
 export default {
-  name:"Control",
-  props:{
-    value:Array,
-  },
-  data(){
-    return {
-          curData:{},
-          idx:-1,
-    }
-  },
-  methods:{
-      createAlarm(){
-            this.curData={}
-            this.idx=-1
-            this.$refs['new-alarm'].show()
+    name:"Alarm",
+    props:{
+        value:Array,
+    },
+    data(){
+        return {
+            curData:{},
+            idx:-1,
+        };
+    },
+    methods:{
+        createAlarm(){
+            this.curData={};
+            this.idx=-1;
+            this.$refs['new-alarm'].show();
         },
         editAlarm(p,i){
             this.curData=p;
             this.idx=i;
-            this.$refs['new-alarm'].show()
+            this.$refs['new-alarm'].show();
         },
         removeAlarm(i){
-             var v=[];
-             this.value.forEach((ele,idx) => {
-               if(idx==i){
-               }else{
-                 v.push(ele)
-               }
-             });
-              this.$emit("input",v)
+            var v=[];
+            this.value.forEach((ele,idx) => {
+                if(idx==i){
+                }else{
+                    v.push(ele);
+                }
+            });
+            this.$emit("input",v);
         },
         createNewAlarm(){
-           var v=this.value;
-           if(v==null){
-             v=[];
-           }
-           if(this.idx==-1){
+            var v=this.value;
+            if(v==null){
+                v=[];
+            }
+            if(this.idx==-1){
                 v.push(this.curData);
-           }else{
-               v[this.idx]=curData;
-           }
-           this.$emit("input",v)
-           this.$refs['new-alarm'].hide()
+            }else{
+                v[this.idx]=curData;
+            }
+            this.$emit("input",v);
+            this.$refs['new-alarm'].hide();
         },
-  }
-}
+    }
+};
 </script>
 
 <style>

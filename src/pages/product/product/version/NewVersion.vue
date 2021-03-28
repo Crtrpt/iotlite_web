@@ -66,43 +66,43 @@
 </template>
 
 <script>
-import {product} from "../../../../api/product"
+import {product} from "../../../../api/product";
 
 export default {
-  name:"NewVersion",
-  props:{
-    productSn:String
-  },
-  components:{
+    name:"NewVersion",
+    props:{
+        productSn:String
+    },
+    components:{
     
-  },
-  data(){
-    return {
-      form:{
+    },
+    data(){
+        return {
+            form:{
 
-      }
-    }
-  },
-  methods:{
-    onSubmit(){
-       var _this=this;
-       
-        product.saveNewVersion({
-          ...this.form,
-          ...{
-            productSn:this.productSn
-          }
-        }).then((res)=>{
-            if(res.code==0){
-              console.log("保存成功")
-              _this.$emit("close",true);
-            }else{
-              _this.$bvModal.msgBoxOk(res.msg)
             }
-        })
+        };
+    },
+    methods:{
+        onSubmit(){
+            var _this=this;
+       
+            product.saveNewVersion({
+                ...this.form,
+                ...{
+                    productSn:this.productSn
+                }
+            }).then((res)=>{
+                if(res.code==0){
+                    console.log("保存成功");
+                    _this.$emit("close",true);
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

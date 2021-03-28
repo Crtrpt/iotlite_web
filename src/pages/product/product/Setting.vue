@@ -16,9 +16,6 @@
             </b-card>
 
           <b-form  >
-
-
-            
             
           </b-form>
         </b-col>
@@ -27,27 +24,27 @@
 </template>
 
 <script>
-import {product} from "../../../api/product"
+import {product} from "../../../api/product";
 export default {
-  name:"Setting",
-  props:{
-    form:Object
-  },
-  methods:{
-    remove(){
-      var _this=this;
-      product.remove({
-        id:this.form.id
-      }).then((res)=>{
-            if(res.code==0){
-              _this.$bvModal.msgBoxOk("删除成功")
-            }else{
-              _this.$router.push({name:"product"})
-            }
-      })
+    name:"Setting",
+    props:{
+        form:Object
+    },
+    methods:{
+        remove(){
+            var _this=this;
+            product.remove({
+                id:this.form.id
+            }).then((res)=>{
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("删除成功");
+                }else{
+                    _this.$router.push({name:"product"});
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

@@ -3,10 +3,9 @@
   "editor.renderControlCharacters": true,
   "window.zoomLevel": 1,
   "search.followSymlinks": false,
-  "editor.formatOnSave": false,
-  "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll": true,
   },
   "eslint.validate": [
     "javascript",
