@@ -60,6 +60,9 @@ const product={
     },
     removeVersion:(ctx)=>{
         return request.post("product/version/remove",ctx);
+    },
+    saveAccess:(ctx)=>{
+        return request.post("product/saveAccess",ctx);
     }
 };
 

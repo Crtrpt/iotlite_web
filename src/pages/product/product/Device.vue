@@ -103,6 +103,11 @@ export default {
                     sortable: true
                 },
                 {
+                    key: 'hdVersion',
+                    label: '硬件版本',
+                    sortable: true
+                },
+                {
                     key: 'version',
                     label: '产品版本',
                     sortable: true

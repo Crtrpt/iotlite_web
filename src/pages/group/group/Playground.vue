@@ -9,49 +9,48 @@
             </b-button-toolbar>
          </b-col>
         <b-col cols="12" >
-           <model-editor ref="editor" :data=d />
+           <GroupModelEditor ref="editor" :data=d />
         </b-col>
       </b-row>
   </div>
 </template>
 
-
 <script>
-import ModelEditor from '../../../components/modelEditor/ModelEditor.vue'
-import {device} from "../../../api/device"
+import GroupModelEditor from '../../../components/groupModelEditor/GroupModelEditor.vue';
+import {device} from "../../../api/device";
 export default {
-  components: { ModelEditor },
-  props:{
-    form:Object
-  },
-  name:"Playground",
-  data(){
-    return {
-        d:{
-            type:"codeEditor",
-            mode:"groovy",
-            value:this.form.spec,
+    components: { GroupModelEditor },
+    props:{
+        form:Object
+    },
+    name:"Playground",
+    data(){
+        return {
+            d:{
+                type:"codeEditor",
+                mode:"groovy",
+                value:this.form.spec,
+            }
+        };
+    },
+    methods:{
+        saveModel(){
+            var _this=this;
+            device.saveGroupPlayground({
+                id:this.form.id,
+                spec:this.$refs.editor.instance.getValue()
+            }).then((res)=>{
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("保存成功");
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
         }
+    },
+    mounted(){
+        this.d.value=JSON.stringify(this.form.spec,null,2);
     }
-  },
-  methods:{
-    saveModel(){
-      var _this=this;
-      device.saveGroupPlayground({
-           id:this.form.id,
-           spec:this.$refs.editor.instance.getValue()
-      }).then((res)=>{
-          if(res.code==0){
-              _this.$bvModal.msgBoxOk("保存成功")
-          }else{
-              _this.$bvModal.msgBoxOk(res.msg)
-          }
-      })
-    }
-  },
-  mounted(){
-    this.d.value=JSON.stringify(this.form.spec,null,2);
-  }
 
-}
+};
 </script>

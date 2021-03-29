@@ -53,118 +53,123 @@
 
 <script>
 import VueContext from 'vue-context';
-import {product} from "../../../api/product"
-import {device} from "../../../api/device"
-import Tag from '../../../components/tags/Tag.vue'
-import Toolbar from "../../device/ToolBar"
-import DeviceGroup from '../../../components/tags/DeviceGroup.vue'
+import {product} from "../../../api/product";
+import {device} from "../../../api/device";
+import Tag from '../../../components/tags/Tag.vue';
+import Toolbar from "../../device/ToolBar";
+import DeviceGroup from '../../../components/tags/DeviceGroup.vue';
 
-import 'vue-context/dist/css/vue-context.css'
+import 'vue-context/dist/css/vue-context.css';
 
 export default {
-  name:"Device",
-  components:{Toolbar,Tag,VueContext,DeviceGroup},
-  props:{
-    form:Object
-  },
-  data(){
-    return {
-      helper:{total:0},
-      query:{
-        date:{},
-        words:"",
-        pageNum:1,
-        pageSize:10,
-       },
+    name:"Device",
+    components:{Toolbar,Tag,VueContext,DeviceGroup},
+    props:{
+        form:Object
+    },
+    data(){
+        return {
+            helper:{total:0},
+            query:{
+                date:{},
+                words:"",
+                pageNum:1,
+                pageSize:10,
+            },
 
-       fields: [
-        //  {
-        //   key: 'selected',
-        //   label: 'selected'
-        //  },
-          {
-            key: 'sn',
-            label: '设备序号',
-            sortable: true
-          },
-          {
-            key: 'product.name',
-             label: '产品',
-            sortable: true
-          },
-          {
-            key: 'name',
-            label: '设备名称',
-            sortable: true
-          },
+            fields: [
+                //  {
+                //   key: 'selected',
+                //   label: 'selected'
+                //  },
+                {
+                    key: 'sn',
+                    label: '设备序号',
+                    sortable: true
+                },
+                {
+                    key: 'product.name',
+                    label: '产品',
+                    sortable: true
+                },
+                {
+                    key: 'name',
+                    label: '设备名称',
+                    sortable: true
+                },
          
-          {
-            key: 'location',
-            label: '设备位置',
-            sortable: true
-          },
-          {
-            key: 'ver',
-            label: '产品版本',
-            sortable: true
-          },
-          {
-            key: 'tags',
-            label: '标签',
-            sortable: true
-          },
-          {
-            key: 'deviceGroup',
-            label: '分组',
-          },
-          {
-            key: 'createdAt',
-            label: '创建时间',
-            sortable: true
-          },
-        ],
-      items: [
+                {
+                    key: 'location',
+                    label: '设备位置',
+                    sortable: true
+                },
+                {
+                    key: 'hdVersion',
+                    label: '硬件版本',
+                    sortable: true
+                },
+                {
+                    key: 'version',
+                    label: '产品版本',
+                    sortable: true
+                },
+                {
+                    key: 'tags',
+                    label: '标签',
+                    sortable: true
+                },
+                {
+                    key: 'deviceGroup',
+                    label: '分组',
+                },
+                {
+                    key: 'createdAt',
+                    label: '创建时间',
+                    sortable: true
+                },
+            ],
+            items: [
          
-      ]
+            ]
+        };
+    },
+    watch:{
+        "query":{
+            handler(){
+                this.getList();
+            },
+            deep:true
+        }
+    },
+    mounted(){
+        this.getList();
+    },
+    methods:{
+        changeTags(payload,d){
+            device.changeTags({
+                sn:d.sn,
+                productSn:d.product.sn,
+                tags:payload
+            }).then(res=>{
+            });
+        },
+        gotoDevice(item,idx,e){
+            console.log(item);
+            this.$router.push({name: 'deviceDetail',params: { id: item.id }});
+        },
+        getList(){
+            var _this=this;
+            device.groupDeviceList(Object.assign(
+                {
+                    groupId:this.form.id,
+                },this.query
+            )).then((res)=>{
+                _this.items=res.data.list;
+                _this.helper.total=res.data.total;
+            });
+        },
     }
-  },
-  watch:{
-    "query":{
-      handler(){
-        this.getList()
-      },
-      deep:true
-    }
-  },
-  mounted(){
-    this.getList();
-  },
-  methods:{
-     changeTags(payload,d){
-      device.changeTags({
-        sn:d.sn,
-        productSn:d.product.sn,
-        tags:payload
-      }).then(res=>{
-      })
-    },
-    gotoDevice(item,idx,e){
-      console.log(item);
-      this.$router.push({name: 'deviceDetail',params: { id: item.id }})
-    },
-    getList(){
-      var _this=this;
-       device.groupDeviceList(Object.assign(
-       {
-          groupId:this.form.id,
-       },this.query
-       )).then((res)=>{
-          _this.items=res.data.list;
-          _this.helper.total=res.data.total;
-      })
-    },
-  }
-}
+};
 </script>
 
 <style scoped>

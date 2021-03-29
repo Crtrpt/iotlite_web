@@ -27,22 +27,22 @@
   </b-col>
 </template>
 <script>
-import importFile from "../../components/export/ImportFile"
-import New from "./New"
-import DateTimePicker from "../../components/date/DateTimePicker"
+import importFile from "../../components/export/ImportFile";
+import New from "./New";
+import DateTimePicker from "../../components/date/DateTimePicker";
 
 export default {
-  props:{
-    query:Object,
-    form:Object,
-  },
-  name:"Toolbar",
+    props:{
+        query:Object,
+        form:Object,
+    },
+    name:"Toolbar",
     components:{New,importFile,DateTimePicker},
-  methods:{
-    closeNew(){
-      this.$refs['new'].hide()
-      this.$emit('refresh',{})
+    methods:{
+        closeNew(){
+            this.$refs['new'].hide();
+            this.$emit('refresh',{});
+        }
     }
-  }
-}
+};
 </script>

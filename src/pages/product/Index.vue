@@ -37,56 +37,55 @@
 </template>
 
 <script>
-import Toolbar from "./ToolBar"
-import {product} from "../../api/product"
+import Toolbar from "./ToolBar";
+import {product} from "../../api/product";
 
-
-import New from "./New"
-import Tag from "../../components/tags/Tag"
+import New from "./New";
+import Tag from "../../components/tags/Tag";
 export default {
-  name:"Product",
-  components:{New,Toolbar,Tag},
-  data(){
-    return {
-      total:0,
-      helper:{
-        total:0,
-      },
-      query:{
-        date:{},
-        organizationId:0,
-        words:"",
-        pageNum:1,
-        pageSize:10,
-      },
-      items:[        
-      ],
-    }
-  },
-  mounted(){
-    this.getList();
-  },
-  methods:{
-     changeTags(payload,p){
-      var _this=this;
-      product.changeTags({
-        productSn:p.sn,
-        tags:payload
-      }).then(res=>{
-      })
+    name:"Product",
+    components:{New,Toolbar,Tag},
+    data(){
+        return {
+            total:0,
+            helper:{
+                total:0,
+            },
+            query:{
+                date:{},
+                organizationId:0,
+                words:"",
+                pageNum:1,
+                pageSize:10,
+            },
+            items:[        
+            ],
+        };
     },
-    getList(){
-      var _this=this;
-      product.list(this.query).then((res)=>{
-          _this.items=res.data.list;
-          _this.helper.total=res.data.total;
-      })
+    mounted(){
+        this.getList();
     },
-    detail(row){
-      this.$router.push({name: 'productDetail',params: { sn: row.sn }})
+    methods:{
+        changeTags(payload,p){
+            var _this=this;
+            product.changeTags({
+                productSn:p.sn,
+                tags:payload
+            }).then(res=>{
+            });
+        },
+        getList(){
+            var _this=this;
+            product.list(this.query).then((res)=>{
+                _this.items=res.data.list;
+                _this.helper.total=res.data.total;
+            });
+        },
+        detail(row){
+            this.$router.push({name: 'productDetail',params: { sn: row.sn }});
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

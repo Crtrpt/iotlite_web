@@ -31,8 +31,8 @@
 
                     <b-dropdown-item class="dropdown-item" @click="$router.push({name:'team'})">
                       我的团队</b-dropdown-item>
-                    <b-dropdown-item class="dropdown-item" @click="$router.push({name:'profile'})">
-                      个人信息</b-dropdown-item>
+                    <!-- <b-dropdown-item class="dropdown-item" @click="$router.push({name:'profile'})">
+                      个人信息</b-dropdown-item> -->
                     <b-dropdown-item class="dropdown-item" @click="$router.push({name:'login'})">
                       退出</b-dropdown-item>
                 </b-dropdown>

@@ -4,6 +4,18 @@
         <b-col cols="6">
 
            <b-card
+              title="产品可见"
+              tag="article"
+              class="mb-2"
+            >
+            <b-card-text>
+                <b-form-radio-group v-model="access" :options="options" name="radio-validation">
+                </b-form-radio-group>
+            </b-card-text>
+                 <b-button  variant="primary" @click="saveAccess">保存</b-button>
+            </b-card>
+
+           <b-card
               title="删除设备"
               tag="article"
               class="mb-2"
@@ -16,9 +28,6 @@
             </b-card>
 
           <b-form  >
-
-
-            
             
           </b-form>
         </b-col>
@@ -27,29 +36,54 @@
 </template>
 
 <script>
-import {device} from "../../../api/device"
+import {device} from "../../../api/device";
 export default {
-  name:"Setting",
-  props:{
-    form:Object
-  },
-  methods:{
-    remove(){
-      var _this=this;
-      device.remove({
-        id:this.form.id,
-        deviceSn:this.form.sn,
-        productSn:this.form.product.sn,
-      }).then((res)=>{
-            if(res.code==0){
-              _this.$bvModal.msgBoxOk("删除成功")
-            }else{
-               _this.$router.push({name:"device"})
-            }
-      })
+    name:"Setting",
+    props:{
+        form:Object
+    },
+    data(){
+        return {  
+            access: this.form.access||"Public",
+            options: [
+                { text: '所有人', value: "Public" },
+                { text: '仅自己', value: "Private" },
+                { text: '团队', value: "Team" }
+            ]
+        };
+    },
+    methods:{
+        saveAccess(){
+            var _this=this;
+            device.saveAccess({
+                sn:this.form.sn,
+                productSn:this.form.product.sn,
+                access:this.access,
+            }).then((res)=>{
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("保存成功");
+                    _this.$emit('refresh',{});
+                }else{
+                    _this.$bvModal.msgBoxOk("保存失败");
+                }
+            });
+        },
+        remove(){
+            var _this=this;
+            device.remove({
+                id:this.form.id,
+                deviceSn:this.form.sn,
+                productSn:this.form.product.sn,
+            }).then((res)=>{
+                if(res.code==0){
+                    _this.$bvModal.msgBoxOk("删除成功");
+                }else{
+                    _this.$router.push({name:"device"});
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

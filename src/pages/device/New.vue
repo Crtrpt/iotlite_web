@@ -94,6 +94,15 @@
           placeholder="设备创建的批次"
         ></b-form-input>
       </b-form-group>
+
+      <b-form-group
+                  label="访问权限:"
+                  description="谁可以看到这个产品"
+                >
+               <b-form-radio-group v-model="form.access" :options="accessOptions" name="radio-validation">
+                </b-form-radio-group>
+      </b-form-group>
+
       </b-tab>
     </b-tabs>
        <b-button type="submit" variant="primary">保存</b-button>
@@ -113,6 +122,12 @@ export default {
     },
     data(){
         return {
+
+            accessOptions: [
+                { text: '所有人', value: "Public" },
+                { text: '仅自己', value: "Private" },
+                { text: '团队', value: "Team" }
+            ],
             form:{
                 count:1
             }
