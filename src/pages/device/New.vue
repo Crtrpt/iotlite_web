@@ -40,7 +40,6 @@
           placeholder="输入设备描述"
         ></b-form-input>
       </b-form-group>
-
      
         <b-row>
           <div class="col-6">
@@ -103,39 +102,39 @@
 </template>
 
 <script>
-import {device} from "../../api/device"
-import ProductSelect from '../../components/product/ProductSelect.vue'
-import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue'
+import {device} from "../../api/device";
+import ProductSelect from '../../components/product/ProductSelect.vue';
+import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue';
 export default {
-  components: { ProductSelect ,ProductVersionSelect},
-  name:"New",
-  props:{
-    preset:Object,
-  },
-  data(){
-    return {
-      form:{
-        count:1
-      }
-    }
-  },
-  methods:{
-    onSubmit(){
-      var _this=this;
-        device.save({
-          ...this.form,
-          ...this.preset
-        }).then((res)=>{
-            if(res.code==0){
-                console.log("saveSuccess")
-                _this.$emit("close",true);
-            }else{
-                _this.$bvModal.msgBoxOk(res.msg)
+    components: { ProductSelect ,ProductVersionSelect},
+    name:"New",
+    props:{
+        preset:Object,
+    },
+    data(){
+        return {
+            form:{
+                count:1
             }
-        })
+        };
+    },
+    methods:{
+        onSubmit(){
+            var _this=this;
+            device.save({
+                ...this.form,
+                ...this.preset
+            }).then((res)=>{
+                if(res.code==0){
+                    console.log("saveSuccess");
+                    _this.$emit("close",true);
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

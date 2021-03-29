@@ -2,10 +2,10 @@ import {request} from './request.js';
 
 const auth={
     login:(ctx)=>{
-        return request.post("login",ctx);
+        return request.post("auth/login",ctx);
     },
     register:(ctx)=>{
-        return request.post("signup",ctx);
+        return request.post("auth/signup",ctx);
     },
     /**
      * 短信验证

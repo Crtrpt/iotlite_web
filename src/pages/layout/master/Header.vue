@@ -17,9 +17,6 @@
                     </li>
                </ul>
 
-
-            
-
             <ul class="navbar-item flex-row ml-md-auto">
 
                 <b-dropdown 
@@ -29,14 +26,14 @@
                    no-caret
                   class="nav-item dropdown user-profile-dropdown ">
                     <template #button-content class="nav-link dropdown-toggle user">
-                          <img src="img/profile-16.jpeg" alt="avatar">
+                        {{$store.getters['auth/username']}}  <img src="img/profile-16.jpeg" alt="avatar">
                     </template>
 
                     <b-dropdown-item class="dropdown-item" @click="$router.push({name:'team'})">
                       我的团队</b-dropdown-item>
                     <b-dropdown-item class="dropdown-item" @click="$router.push({name:'profile'})">
                       个人信息</b-dropdown-item>
-                    <b-dropdown-item class="dropdown-item" @click="logout()">
+                    <b-dropdown-item class="dropdown-item" @click="$router.push({name:'login'})">
                       退出</b-dropdown-item>
                 </b-dropdown>
             </ul>
@@ -46,13 +43,13 @@
 
 <script>
 export default {
-  name:"Header",
-  methods:{
-    logout(){
-      console.log("退出登录")
+    name:"Header",
+    methods:{
+        logout(){
+            console.log("退出登录");
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

@@ -30,30 +30,30 @@
 </template>
 
 <script>
-import {device} from "../../api/device"
+import {device} from "../../api/device";
 
 export default {
-  name:"New",
-  data(){
-    return {
-      form:{
+    name:"New",
+    data(){
+        return {
+            form:{
 
-      }
-    }
-  },
-  methods:{
-    onSubmit(){
-       var _this=this;
-        device.groupSave(this.form).then((res)=>{
-            if(res.code==0){
-              _this.$emit("close",true);
-            }else{
-              _this.$bvModal.msgBoxOk(res.msg)
             }
-        })
+        };
+    },
+    methods:{
+        onSubmit(){
+            var _this=this;
+            device.groupSave(this.form).then((res)=>{
+                if(res.code==0){
+                    _this.$emit("close",true);
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>
