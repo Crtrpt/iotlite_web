@@ -6,9 +6,9 @@
             <b-input v-model="form.name"></b-input>
           </b-form-group>
           <b-form-group label="团队介绍">
-             <b-input v-model="form.description"></b-input>
+             <b-form-textarea v-model="form.description"></b-form-textarea>
           </b-form-group>
-          <b-button @click="save">保存</b-button>
+          <b-button variant="primary" @click="save">保存</b-button>
         </form>
     </b-modal>
     <a v-b-modal.new_team href="javascript:void(0);">创建团队</a>
