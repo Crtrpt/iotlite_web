@@ -1,46 +1,46 @@
 const user =[
-  {
-    path: 'profile',
-    component: require('../pages/user/Profile').default,
-    name: 'profile',
-    meta:{
-      name:"profile"
-    }
-  },
-  {
-    path: 'user',
-    component: require('../pages/user/Index').default,
-    name: 'user',
-    meta:{
-      name:"user"
-    }
-  },
-  {
-    path: 'user/:id',
-    component: require('../pages/user/Detail').default,
-    name: 'userDetail',
-    redirect: { name: 'userDetailBase' },
-    meta:{
-      name:"userDetail"
+    {
+        path: 'profile',
+        component: require('../pages/user/Profile').default,
+        name: 'profile',
+        meta:{
+            name:"profile"
+        }
     },
-    children:[
-      {
-        path: 'base',
-        component: require('../pages/user/user/Base').default,
-        name: 'userDetailBase',
+    {
+        path: 'user',
+        component: require('../pages/user/Index').default,
+        name: 'user',
         meta:{
-          name:"userDetailBase"
+            name:"user"
         }
-      },
-      {
-        path: 'log',
-        component: require('../pages/user/user/Log').default,
-        name: 'userDetailLog',
+    },
+    {
+        path: 'user/:id',
+        component: require('../pages/user/Detail').default,
+        name: 'userDetail',
+        redirect: { name: 'userDetailBase' },
         meta:{
-          name:"userDetailLog"
-        }
-      },
-    ]
-  },
-]
-export default user
+            name:"userDetail"
+        },
+        children:[
+            {
+                path: 'base',
+                component: require('../pages/user/user/Base').default,
+                name: 'userDetailBase',
+                meta:{
+                    name:"userDetailBase"
+                }
+            },
+            {
+                path: 'log',
+                component: require('../pages/user/user/Log').default,
+                name: 'userDetailLog',
+                meta:{
+                    name:"userDetailLog"
+                }
+            },
+        ]
+    },
+];
+export default user;

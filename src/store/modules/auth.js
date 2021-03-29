@@ -1,12 +1,16 @@
 // initial state
 var state = {
-  isLogin:false||(window.localStorage.token==undefined?false:true),
-  username:window.localStorage.username
+    isLogin:false,
+    user:{
+        name:"",
+    }
 };
 
 // getters
 var getters = {
-
+    username:(state)=>{
+        return state.user.name;
+    }
 };
 
 // actions
@@ -15,18 +19,21 @@ var actions = {
 
 // mutations
 var mutations = {
-  login(state){
-    state.isLogin=true
-  },
-  logout(state){
-    state.isLogin=false
-  }
+    login(state,payload){
+        state.isLogin=true;
+        state.token=payload.data.token;
+        state.user=payload.data.user;
+    },
+    logout(state){
+        state.isLogin=false;
+        state.token=null;
+    }
 };
 
 export default {
-  namespaced: true,
-  state,
-  getters,
-  actions,
-  mutations
-}
+    namespaced: true,
+    state,
+    getters,
+    actions,
+    mutations
+};

@@ -1,20 +1,26 @@
 import {request} from './request.js';
 
-const product={
+const team={
     remove:(ctx)=>{
-        return request.post("product/remove",ctx);
+        return request.post("team/remove",ctx);
     },
     info:(ctx)=>{
-        return request.get("product/info",ctx);
+        return request.get("team/info",ctx);
     },
     list:(ctx)=>{
-        return request.get("product/list",ctx);
+        return request.get("team/list",ctx);
     },
     all:(ctx)=>{
-        return request.get("product/all",ctx);
-    }
+        return request.get("team/all",ctx);
+    },
+    listOfOwner:(ctx)=>{
+        return request.get("team/listofOwner",ctx);
+    },
+    save:(ctx)=>{
+        return request.post("team/save",ctx);
+    },
 };
 
 export {
-    product
+    team
 };

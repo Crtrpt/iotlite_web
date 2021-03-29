@@ -40,7 +40,6 @@
           placeholder="输入设备描述"
         ></b-form-input>
       </b-form-group>
-
      
         <b-row>
           <div class="col-6">
@@ -95,6 +94,15 @@
           placeholder="设备创建的批次"
         ></b-form-input>
       </b-form-group>
+
+      <b-form-group
+                  label="访问权限:"
+                  description="谁可以看到这个产品"
+                >
+               <b-form-radio-group v-model="form.access" :options="accessOptions" name="radio-validation">
+                </b-form-radio-group>
+      </b-form-group>
+
       </b-tab>
     </b-tabs>
        <b-button type="submit" variant="primary">保存</b-button>
@@ -103,39 +111,45 @@
 </template>
 
 <script>
-import {device} from "../../api/device"
-import ProductSelect from '../../components/product/ProductSelect.vue'
-import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue'
+import {device} from "../../api/device";
+import ProductSelect from '../../components/product/ProductSelect.vue';
+import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue';
 export default {
-  components: { ProductSelect ,ProductVersionSelect},
-  name:"New",
-  props:{
-    preset:Object,
-  },
-  data(){
-    return {
-      form:{
-        count:1
-      }
-    }
-  },
-  methods:{
-    onSubmit(){
-      var _this=this;
-        device.save({
-          ...this.form,
-          ...this.preset
-        }).then((res)=>{
-            if(res.code==0){
-                console.log("saveSuccess")
-                _this.$emit("close",true);
-            }else{
-                _this.$bvModal.msgBoxOk(res.msg)
+    components: { ProductSelect ,ProductVersionSelect},
+    name:"New",
+    props:{
+        preset:Object,
+    },
+    data(){
+        return {
+
+            accessOptions: [
+                { text: '所有人', value: "Public" },
+                { text: '仅自己', value: "Private" },
+                { text: '团队', value: "Team" }
+            ],
+            form:{
+                count:1
             }
-        })
+        };
+    },
+    methods:{
+        onSubmit(){
+            var _this=this;
+            device.save({
+                ...this.form,
+                ...this.preset
+            }).then((res)=>{
+                if(res.code==0){
+                    console.log("saveSuccess");
+                    _this.$emit("close",true);
+                }else{
+                    _this.$bvModal.msgBoxOk(res.msg);
+                }
+            });
+        }
     }
-  }
-}
+};
 </script>
 
 <style scoped>

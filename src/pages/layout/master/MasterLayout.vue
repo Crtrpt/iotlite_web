@@ -26,18 +26,18 @@ import Footer from './Footer';
 import SubHeader from './SubHeader.vue';
 
 export default {
-  name: 'MasterLayout',
-  computed: {
-    showLogin(){
-       return  this.$store.getters['layout/showLeftMenu']
-    }
-  },
-  components: { Header,Footer,LeftNav,SubHeader},
-  data(){
-    return {
+    name: 'MasterLayout',
+    computed: {
+        showLogin(){
+            return  this.$store.getters['layout/showLeftMenu'];
+        }
+    },
+    components: { Header,Footer,LeftNav,SubHeader},
+    data(){
+        return {
      
+        };
     }
-  }
 };
 </script>
 
@@ -47,7 +47,5 @@ export default {
   height: 100vh;
   flex-direction: column;
 }
-
-
 
 </style>

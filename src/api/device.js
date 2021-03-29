@@ -57,6 +57,9 @@ const device={
     },
     groupStateClean:(ctx)=>{
         return request.post("device/groupStateClean",ctx);
+    },
+    saveAccess:(ctx)=>{
+        return request.post("device/saveAccess",ctx);
     }
 };
 
