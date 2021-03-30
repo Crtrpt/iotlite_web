@@ -18,8 +18,11 @@
             </template>
           </template>
           
+            <template v-slot:cell(version)="data">
+               {{data.item.releaseType}}{{data.item.version}}
+          </template>
            <template v-slot:cell(createdAt)="data">
-                  {{data.item.createdAt}}
+                  {{timestamp2Str(data.item.createdAt)||"暂无"}}
           </template>
           
       </b-table>

@@ -14,7 +14,7 @@
   </b-row>
   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row >
-         <b-col cols="6">
+         <b-col cols="8">
            <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
                     <b-tr>
@@ -36,6 +36,10 @@
                      <b-tr>
                       <b-td  variant="light" class="text-right">设备数量:</b-td>
                       <b-td>{{form.deviceCount||0}}</b-td>
+                    </b-tr>
+                      <b-tr>
+                      <b-td  variant="light" class="text-right">发行类型:</b-td>
+                      <b-td>{{form.releaseType}}</b-td>
                     </b-tr>
                   </b-tbody>
                  
@@ -59,37 +63,37 @@
 
 <script>
 
-import {product} from "../../api/product"
-import Tag from "../../components/tags/Tag"
+import {product} from "../../api/product";
+import Tag from "../../components/tags/Tag";
 
 export default {
-  name:"versionDetail",
+    name:"versionDetail",
 
-  components:{
-    Tag
-  },
-  mounted(){
-    this.getInfo()
-  }, 
-  methods:{
-     getInfo(){
-      var _this=this;
-      product.versionInfo({
-        sn:this.form.sn,
-        version:this.form.version
-      }).then(res=>{
-        _this.form=res.data
-      })
+    components:{
+        Tag
+    },
+    mounted(){
+        this.getInfo();
+    }, 
+    methods:{
+        getInfo(){
+            var _this=this;
+            product.versionInfo({
+                sn:this.form.sn,
+                version:this.form.version
+            }).then(res=>{
+                _this.form=res.data;
+            });
+        }
+    },
+    data(){
+        return {
+            visible:true,
+            form:{
+                sn:0||this.$route.params.sn,
+                version:this.$route.params.version,
+            }
+        };
     }
-  },
-  data(){
-    return {
-      visible:true,
-      form:{
-        sn:0||this.$route.params.sn,
-        version:this.$route.params.version,
-      }
-    }
-  }
-}
+};
 </script>

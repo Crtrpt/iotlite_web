@@ -14,7 +14,7 @@
   </b-row>
   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row >
-         <b-col cols="6">
+         <b-col cols="8">
            <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
                     <b-tr>

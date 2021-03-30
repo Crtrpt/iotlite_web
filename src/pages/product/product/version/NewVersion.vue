@@ -37,6 +37,7 @@
       </b-form-group>
 
       <b-form-group
+      
         label="开始时间:"
         description="支持开始时间"
       >
@@ -59,6 +60,15 @@
           placeholder="支持结束时间"
         ></b-form-input>
       </b-form-group>
+      
+      <b-form-group label="发行类型" description="发行类型" > 
+                                    <b-form-radio-group
+                                        id="release-options"
+                                        v-model="form.releaseType"
+                                        :options="releaseTypeOptions"
+                                        name="side-options"
+                                    ></b-form-radio-group>
+                              </b-form-group>
      
        <b-button type="submit" variant="primary">提交</b-button>
     </b-form>
@@ -78,8 +88,13 @@ export default {
     },
     data(){
         return {
+            releaseTypeOptions:[
+                { text: '正式版', value: 'GA' },
+                { text: '测试版', value: 'Beta' },
+                { text: '开发板', value: 'Alpha' },
+            ],
             form:{
-
+                releaseType:0
             }
         };
     },

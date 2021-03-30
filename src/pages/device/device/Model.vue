@@ -37,7 +37,7 @@ export default {
             console.log(this.$refs.editor.instance.getValue());
             device.saveModel({
                 sn:this.form.sn,
-                productSn:this.form.productSn,
+                productSn:this.form.product.sn,
                 spec:this.$refs.editor.instance.getValue()
             }).then((res)=>{
                 if(res.code===0){

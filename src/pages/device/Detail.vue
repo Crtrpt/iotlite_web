@@ -18,7 +18,7 @@
     </b-col>
   </b-row>
   <b-row>
-    <b-col cols="6">
+    <b-col cols="8">
        <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
                     <b-tr>
@@ -39,7 +39,7 @@
                       <b-td  variant="light" class="text-right">硬件版本:</b-td>
                       <b-td>{{form.hdVersion||'尚未注册'}}</b-td>
                       <b-td  variant="light" class="text-right">软件版本:</b-td>
-                      <b-td>{{form.version||'尚未注册'}}</b-td>
+                      <b-td>{{form.releaseType}}-{{form.version||'尚未注册'}}</b-td>
                     </b-tr>
                   </b-tbody>
        </b-table-simple>
@@ -47,7 +47,7 @@
   </b-row>
    <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
-    <b-col cols="6">
+    <b-col cols="8">
        <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
                      <b-tr>
@@ -80,12 +80,12 @@
         <b-nav-item to="model"  active-class="active" >物模型</b-nav-item>
         <b-nav-item to="control"  active-class="active" >设备控制</b-nav-item>
         <b-nav-item to="metric"  active-class="active" >数据指标</b-nav-item>
-        <b-nav-item to="log"   active-class="active" >设备日志</b-nav-item>
+        <b-nav-item to="log"   active-class="active" v-if="form.releaseType=='Alpha'" >设备日志</b-nav-item>
         <b-nav-item to="map"   active-class="active" >设备位置</b-nav-item>
         <b-nav-item to="subdevice"   active-class="active" >子设备</b-nav-item>
-        <b-nav-item to="debug"   active-class="active" >设备调试</b-nav-item>
-        <b-nav-item to="hook"  active-class="active"  >消息推送</b-nav-item>
-        <b-nav-item to="setting"  active-class="active"  >设置</b-nav-item>
+        <b-nav-item to="debug"   active-class="active" v-if="form.releaseType=='Alpha'" >设备调试</b-nav-item>
+        <b-nav-item to="hook"  active-class="active"  v-if="form.releaseType=='Alpha'" >消息推送</b-nav-item>
+        <b-nav-item to="setting"  active-class="active" >设置</b-nav-item>
       </b-nav>
       <router-view class="content" :form=form :type="'device'"></router-view>
     </b-col>
