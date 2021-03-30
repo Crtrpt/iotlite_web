@@ -6,7 +6,15 @@
                               <b-form-group label="名称" description="控制名称" > <b-form-input v-model="curData.name" placeholder="属性名称" required ></b-form-input> </b-form-group>
                               <b-form-group label="描述" description="对控制的描述" > <b-form-input v-model="curData.desc" placeholder="描述" required ></b-form-input> </b-form-group>
 
-                              <b-form-group label="执行的操作" description="执行的操作" > 
+                               <b-form-group label="能力来源" description="服务端提供的能力还是设备端提供的能力" > 
+                                    <b-form-radio-group
+                                        id="side-options"
+                                        v-model="curData.side"
+                                        :options="sideOptions"
+                                        name="side-options"
+                                    ></b-form-radio-group>
+                              </b-form-group>
+                              <b-form-group  v-if="curData.side==1" label="执行的操作" description="执行的操作" > 
                                 <b-form-textarea v-model="curData.action" placeholder="执行的操作" required >
                                   </b-form-textarea> </b-form-group>
                               <b-button variant="primary" @click="createNewControl">保存</b-button>
@@ -17,6 +25,7 @@
                     <b-row v-for="(p,i) in value" :key="i" class="mt-2">
                             <b-col>{{p.name}}</b-col>
                             <b-col>{{p.desc}}</b-col>
+                            <b-col cols="1">{{p.side==0?"↑":"↓"}}</b-col>
                             <b-col>
                                 <b-button-group>
                                     <b-button size="sm" variant="primary" @click="editControl(p,i)">编辑</b-button>
@@ -29,52 +38,58 @@
 
 <script>
 export default {
-  name:"Control",
-  props:{
-    value:Array,
-  },
-  data(){
-    return {
-          curData:{},
-          idx:-1,
-    }
-  },
-  methods:{
-      createControl(){
-            this.curData={}
-            this.idx=-1
-            this.$refs['new-control'].show()
+    name:"Control",
+    props:{
+        value:Array,
+    },
+    data(){
+        return {
+            sideOptions:[
+                { text: '设备侧', value: 0 },
+                { text: '服务侧', value: 1 },
+            ],
+            curData:{
+                side:0
+            },
+            idx:-1,
+        };
+    },
+    methods:{
+        createControl(){
+            this.curData={};
+            this.idx=-1;
+            this.$refs['new-control'].show();
         },
         editControl(p,i){
             this.curData=p;
             this.idx=i;
-            this.$refs['new-control'].show()
+            this.$refs['new-control'].show();
         },
         removeControl(i){
-             var v=[];
-             this.value.forEach((ele,idx) => {
-               if(idx==i){
-               }else{
-                 v.push(ele)
-               }
-             });
-              this.$emit("input",v)
+            var v=[];
+            this.value.forEach((ele,idx) => {
+                if(idx==i){
+                }else{
+                    v.push(ele);
+                }
+            });
+            this.$emit("input",v);
         },
         createNewControl(){
-           var v=this.value;
-           if(v==null){
-             v=[];
-           }
-           if(this.idx==-1){
+            var v=this.value;
+            if(v==null){
+                v=[];
+            }
+            if(this.idx==-1){
                 v.push(this.curData);
-           }else{
-               v[this.idx]=this.curData;
-           }
-           this.$emit("input",v)
-           this.$refs['new-control'].hide()
+            }else{
+                v[this.idx]=this.curData;
+            }
+            this.$emit("input",v);
+            this.$refs['new-control'].hide();
         },
-  }
-}
+    }
+};
 </script>
 
 <style>

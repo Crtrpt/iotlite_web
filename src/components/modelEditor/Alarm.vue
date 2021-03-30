@@ -8,9 +8,17 @@
 
                               <b-form-group label="报警级别" description="报警级别" > <b-form-input v-model="curData.level" placeholder="级别" required ></b-form-input> </b-form-group>
 
-                              <b-form-group label="触发条件" description="触发条件" >
+                                 <b-form-group label="能力来源" description="服务端提供的能力还是设备端提供的能力" > 
+                                    <b-form-radio-group
+                                        id="side-options"
+                                        v-model="curData.side"
+                                        :options="sideOptions"
+                                        name="side-options"
+                                    ></b-form-radio-group>
+                              </b-form-group>
+                              <b-form-group v-if="curData.side==1" label="触发条件" description="触发条件" >
                                  <b-form-textarea v-model="curData.condition" placeholder="触发条件" required ></b-form-textarea> </b-form-group>
-                              <b-form-group label="回复条件" description="回复条件" > 
+                              <b-form-group v-if="curData.side==1" label="回复条件" description="回复条件" > 
                                 <b-form-textarea v-model="curData.resume" placeholder="恢复条件" ></b-form-textarea> </b-form-group>
 
                               <b-button variant="primary" @click="createNewAlarm">保存</b-button>
@@ -21,6 +29,7 @@
                     <b-row v-for="(p,i) in value" :key="i" class="mt-2">
                             <b-col>{{p.name}}</b-col>
                             <b-col>{{p.desc}}</b-col>
+                            <b-col cols="1">{{p.side==0?"↑":"↓"}}</b-col>
                             <b-col>
                                 <b-button-group>
                                     <b-button size="sm" variant="primary" @click="editAlarm(p,i)">编辑</b-button>
@@ -39,7 +48,13 @@ export default {
     },
     data(){
         return {
-            curData:{},
+            sideOptions:[
+                { text: '设备侧', value: 0 },
+                { text: '服务侧', value: 1 },
+            ],
+            curData:{
+                side:0
+            },
             idx:-1,
         };
     },

@@ -4,6 +4,24 @@
         <b-col cols="6">
 
             <b-card
+              title="基本信息"
+              tag="article"
+              class="mt-2 mb-2"
+            >
+            <b-card-text>
+                <form>
+                    <b-form-group description="产品的名称">
+                            <b-input v-model="form.name" placeholder="产品名称"></b-input>
+                    </b-form-group>
+                    <b-form-group description="产品的简单描述信息">
+                <b-input v-model="form.description" placeholder="描述信息"></b-input>
+                    </b-form-group>
+                </form>
+            </b-card-text>
+                 <b-button  variant="primary" @click="saveBase">保存</b-button>
+            </b-card>
+
+            <b-card
               title="产品可见"
               tag="article"
               class="mb-2"
@@ -53,6 +71,20 @@ export default {
         };
     },
     methods:{
+        saveBase(){
+            product.saveBase({
+                sn:this.form.sn,
+                name:this.form.name,
+                description:this.form.description,
+            }).then((res)=>{
+                if(res.code===0){
+                    _this.$bvModal.msgBoxOk("保存成功");
+                    _this.$emit('refresh',{});
+                }else{
+                    _this.$bvModal.msgBoxOk("保存失败");
+                }
+            });
+        },
         saveAccess(){
             product.saveAccess({
                 sn:this.form.sn,
