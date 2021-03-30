@@ -1,8 +1,8 @@
 <template>
   <b-row class="mt-2">
-      <b-col cols="2" v-for="(ctr,i) in  form.product.spec.control" :key="i">
+      <b-col cols="3" v-for="(ctr,i) in  form.spec.control" :key="i">
             
-        <b-card  @click="deviceControl(ctr)" >
+        <b-card  @click="deviceControl(ctr)" class="mb-2">
           <template>
                <a href="javascript:void(0);"> <h5  class="mb-1">{{ctr.name}}</h5>
                </a>

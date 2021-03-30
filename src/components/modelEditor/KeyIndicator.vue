@@ -1,0 +1,96 @@
+<template>
+    <b-tab title="关键指标">
+                   <b-button-group class="mt-2 mb-2">
+                        <b-modal ref="new-alarm" title="指标" hide-footer>
+                            <b-form>
+                              <b-form-group label="名称" description="名称" > <b-form-input v-model="curData.name" placeholder="名称" required ></b-form-input> </b-form-group>
+                              <b-form-group label="描述" description="描述" > <b-form-input v-model="curData.desc" placeholder="对指标的描述" required ></b-form-input> </b-form-group>
+
+                                 <b-form-group label="能力来源" description="服务端提供的能力还是设备端提供的能力" > 
+                                    <b-form-radio-group
+                                        id="side-options"
+                                        v-model="curData.side"
+                                        :options="sideOptions"
+                                        name="side-options"
+                                    ></b-form-radio-group>
+                              </b-form-group>
+                              <b-form-group v-if="curData.side==1" label="数据来源" description="数据来源" >
+                                 <b-form-textarea v-model="curData.source" placeholder="数据来源" required ></b-form-textarea> </b-form-group>
+                              <b-button variant="primary" @click="createNewAlarm">保存</b-button>
+                            </b-form>
+                        </b-modal>
+                        <b-button variant="primary" @click="createAlarm">增加指标</b-button>
+                    </b-button-group>
+                    <b-row v-for="(p,i) in value" :key="i" class="mt-2">
+                            <b-col>{{p.name}}</b-col>
+                            <b-col>{{p.desc}}</b-col>
+                            <b-col cols="1">{{p.side==0?"↑":"↓"}}</b-col>
+                            <b-col>
+                                <b-button-group>
+                                    <b-button size="sm" variant="primary" @click="editAlarm(p,i)">编辑</b-button>
+                                    <b-button size="sm" variant="outline-primary" @click="removeAlarm(i)">删除</b-button>
+                                </b-button-group>
+                            </b-col>
+                    </b-row>
+  </b-tab>
+</template>
+
+<script>
+export default {
+    name:"KeyIndicator",
+    props:{
+        value:Array,
+    },
+    data(){
+        return {
+            sideOptions:[
+                { text: '设备侧', value: 0 },
+                { text: '服务侧', value: 1 },
+            ],
+            curData:{
+                side:0
+            },
+            idx:-1,
+        };
+    },
+    methods:{
+        createAlarm(){
+            this.curData={};
+            this.idx=-1;
+            this.$refs['new-alarm'].show();
+        },
+        editAlarm(p,i){
+            this.curData=p;
+            this.idx=i;
+            this.$refs['new-alarm'].show();
+        },
+        removeAlarm(i){
+            var v=[];
+            this.value.forEach((ele,idx) => {
+                if(idx==i){
+                }else{
+                    v.push(ele);
+                }
+            });
+            this.$emit("input",v);
+        },
+        createNewAlarm(){
+            var v=this.value;
+            if(v==null){
+                v=[];
+            }
+            if(this.idx==-1){
+                v.push(this.curData);
+            }else{
+                v[this.idx]=curData;
+            }
+            this.$emit("input",v);
+            this.$refs['new-alarm'].hide();
+        },
+    }
+};
+</script>
+
+<style>
+
+</style>

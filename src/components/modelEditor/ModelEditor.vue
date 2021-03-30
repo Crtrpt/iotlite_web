@@ -7,10 +7,7 @@
                 <NewEvent  v-model="spec.event" />
                 <Control v-model="spec.control"/>
                 <Alarm v-model="spec.alarm"/>
-                <!-- <b-tab title="控制">
-                </b-tab> 
-                 <b-tab title="告警">
-                </b-tab>  -->
+                <KeyIndicator v-model="spec.metric"/>
             </b-tabs>
         </b-col>
         <b-col cols="6">
@@ -46,9 +43,10 @@ import NewEvent from './NewEvent.vue';
 import Control from './Control.vue';
 import Alarm from './Alarm.vue';
 import Basic from './Basic.vue';
+import KeyIndicator from './KeyIndicator.vue';
 
 export default {
-    components: { NewProperty, NewEvent,Control,Alarm,Basic },
+    components: { NewProperty, NewEvent,Control,Alarm,Basic,KeyIndicator },
     name:"ModelEditor",
     props:{
         data:Object
@@ -67,6 +65,7 @@ export default {
                 event:[],
                 control:[],
                 alarm:[],
+                metric:[],
             },
         };
     },
