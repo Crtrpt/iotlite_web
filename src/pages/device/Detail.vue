@@ -17,11 +17,13 @@
       <DeviceGroup v-model="form.deviceGroup" />
     </b-col>
   </b-row>
+ 
+   <b-collapse id="more" class="mt-2"  v-model="visible">
   <b-row>
     <b-col cols="8">
        <b-table-simple  responsive :bordered="true" :fixed=true>
                   <b-tbody>
-                    <b-tr>
+                                        <b-tr>
                       <b-td  variant="light" class="text-right">产品名称:</b-td>
                       <b-td> <a class="primary" href="javascript:void(0);" @click="goProduct(form)">
                             {{form.product.name}}
@@ -41,15 +43,6 @@
                       <b-td  variant="light" class="text-right">软件版本:</b-td>
                       <b-td>{{form.releaseType}}-{{form.version||'尚未注册'}}</b-td>
                     </b-tr>
-                  </b-tbody>
-       </b-table-simple>
-    </b-col>
-  </b-row>
-   <b-collapse id="more" class="mt-2"  v-model="visible">
-  <b-row>
-    <b-col cols="8">
-       <b-table-simple  responsive :bordered="true" :fixed=true>
-                  <b-tbody>
                      <b-tr>
                       <b-td  variant="light" class="text-right">创建时间:</b-td>
                       <b-td>{{form.createdAt}}</b-td>
