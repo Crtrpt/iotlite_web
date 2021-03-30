@@ -8,6 +8,14 @@
                               <b-form-group label="类型" description="属性的类型" > <b-form-input v-model="curDevice.type" placeholder="类型" required ></b-form-input> </b-form-group>
                               <b-form-group label="单位" description="属性的单位" > <b-form-input v-model="curDevice.unit" placeholder="单位" required ></b-form-input> </b-form-group>
                               <b-form-group label="刻度" description="属性的刻度" > <b-form-input v-model="curDevice.threshold" placeholder="刻度" required ></b-form-input> </b-form-group>
+                              <b-form-group label="上报方式" description="属性上报方式" > 
+                                    <b-form-radio-group
+                                        id="active-options"
+                                        v-model="curDevice.active"
+                                        :options="actionOptions"
+                                        name="active-options"
+                                    ></b-form-radio-group>
+                              </b-form-group>
                               <b-button variant="primary" @click="createNewProperty">保存</b-button>
                             </b-form>
                         </b-modal>
@@ -18,6 +26,7 @@
                             <b-col cols="1">{{p.type}}</b-col>
                             <b-col cols="1">{{p.unit}}</b-col>
                             <b-col cols="1">{{p.threshold}}</b-col>
+                            <b-col cols="1">{{p.active==0?"↑":"↓"}}</b-col>
                             <b-col cols="3">
                                 <b-button-group>
                                     <b-button size="sm" variant="primary" @click="editProperty(p,i)">编辑</b-button>
@@ -38,7 +47,12 @@ export default {
         return {
             curDevice:{},
             idx:-1,
+            actionOptions:[
+                { text: '主动上报', value: 0 },
+                { text: '被动查询', value: 1 },
+            ],
         };
+
     },
     methods:{
         createProperty(){
@@ -54,7 +68,7 @@ export default {
         removeProperty(i){
             var v=[];
             this.value.forEach((ele,idx) => {
-                if(idx==i){
+                if(idx===i){
                 }else{
                     v.push(ele);
                 }
@@ -63,10 +77,10 @@ export default {
         },
         createNewProperty(){
             var v=this.value;
-            if(v==null){
+            if(v===null){
                 v=[];
             }
-            if(this.idx==-1){
+            if(this.idx===-1){
                 v.push(this.curDevice);
             }else{
                 v[this.idx]=this.curData;

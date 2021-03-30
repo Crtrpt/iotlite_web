@@ -136,10 +136,12 @@ export default {
 
                     eventHub.on(_this.eventSource,(e)=>{
                         var msg=JSON.parse(e);
-                        // console.log("解析"+msg.action)
-                        if(msg.action=="property"){
-                            // console.log("变更")
-                            _this.form.snap[msg.name]=msg.value;
+                       
+                        if(msg.action==="property"){
+                            for (const p in msg.payload) {
+                                _this.form.snap[p]=msg.payload[p];
+                            }
+                            
                         }
                     });
                 });

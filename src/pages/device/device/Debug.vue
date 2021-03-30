@@ -15,6 +15,9 @@
          <b-col cols="6">
             <b-tabs>
               <b-tab title="属性" active>
+                    <b-button-group class="mt-2 mb-2">
+                      <b-button variant="primary" @click="batchSave">批量提交</b-button>
+                    </b-button-group>
                      <b-table-simple hover  caption-top responsive>
                          <b-thead head-variant="dark">
                             <b-tr>
@@ -41,26 +44,7 @@
                         </b-tbody>
                      </b-table-simple>
               </b-tab>
-              <b-tab title="操作">
-                    事件
-                    <b-list-group>
-                      <b-list-group-item v-for="(l,i) in form.spec.event" :key="i">
-                        <a @click="event(l)"> {{l.name}} {{l.desc}} </a>
-                      </b-list-group-item>
-                    </b-list-group>
-                    报警
-                    <b-list-group>
-                      <b-list-group-item v-for="(l,i) in form.spec.alarm" :key="i">
-                       <a @click="alarm(l)"> {{l.name}} {{l.desc}} </a>
-                      </b-list-group-item>
-                    </b-list-group>
-                    控制
-                     <b-list-group>
-                      <b-list-group-item v-for="(l,i) in form.spec.control" :key="i">
-                      <a @click="control(l)"> {{l.name}} {{l.desc}} </a>
-                      </b-list-group-item>
-                    </b-list-group>
-              </b-tab>
+             
                <b-tab title="topic">
                       <b-form >
                         <b-form-group
@@ -101,107 +85,96 @@
 </template>
 
 <script>
-import DateTimePicker from "../../../components/date/DateTimePicker"
+import DateTimePicker from "../../../components/date/DateTimePicker";
 
-import mqtt from 'mqtt'
-import {device} from "../../../api/device"
-import { json } from 'd3-fetch'
+import mqtt from 'mqtt';
+import {device} from "../../../api/device";
+import { json } from 'd3-fetch';
 export default {
-  name:"Debug",
-  components:{DateTimePicker},
-  props:{
-    form:Object
-  },
-  data(){
-    return {
-      helper:{total:0},
-      client:null,
-      isConnect:false,
-      raw_topic:"",
-      logs:[],
-      raw:"",
-    }
-  },
-  computed:{
-    topic(){
+    name:"Debug",
+    components:{DateTimePicker},
+    props:{
+        form:Object
+    },
+    data(){
+        return {
+            helper:{total:0},
+            client:null,
+            isConnect:false,
+            raw_topic:"",
+            logs:[],
+            raw:"",
+        };
+    },
+    computed:{
+        topic(){
      
-      if(this.form.proxy==undefined){
-        return "/default/"+this.form.product.sn+"/"+this.form.sn
-      }else{
-        return "/default/"+this.form.proxy.product.sn+"/"+this.form.proxy.sn
-      }
+            if(this.form.proxy==undefined){
+                return "/default/"+this.form.product.sn+"/"+this.form.sn;
+            }else{
+                return "/default/"+this.form.proxy.product.sn+"/"+this.form.proxy.sn;
+            }
       
+        }
+    },
+    methods:{
+        online(){
+            var _this=this;
+            _this.logs.push("启动设备");
+            var client = this.client  = mqtt.connect(process.env.VUE_APP_MQTT,{port:4203});
+            client.on('connect', function () {
+                _this.isConnect=true;
+                _this.logs.push("连接成功");
+            });
+            client.on('disconnect', function () {
+                _this.isConnect=false;
+                _this.logs.push("断开连接");
+            });
+            client.on("message",function(){
+                console.log(message.toString());
+                _this.logs.push("收到消息");
+            });
+        },
+        offline(){
+            console.log(this.client);
+            this.logs.push("设备下线");
+            this.client.end(true);
+        },
+        action(p){
+            var  name=p.name;
+            var  payload=new Map();
+            payload[p.name]=p.newValue;
+            var payload={
+                action:"property",
+                payload:payload
+            };
+            payload=JSON.stringify(payload);
+            this.logs.push('topic: '+this.topic+' payload:'+payload);
+            this.client.publish(this.topic,payload);
+        },
+        batchSave(){
+
+            var  payload=new Map();
+            this.form.spec.property.forEach(e => {
+                if(e.newValue!==e.value){
+                    payload[e.name]=e.newValue;
+                }
+            });
+            var payload={
+                action:"property",
+                payload:payload
+            };
+            payload=JSON.stringify(payload);
+            this.logs.push('topic: '+this.topic+' payload:'+payload);
+            this.client.publish(this.topic,payload);
+
+        },
+        sendRaw(){
+            this.logs.push('topic: '+this.raw_topic+' payload:'+this.raw);
+            this.client.publish(this.topic,this.raw);
+        }
     }
-  },
-  methods:{
-    online(){
-     var _this=this;
-     _this.logs.push("启动设备")
-     var client = this.client  = mqtt.connect(process.env.VUE_APP_MQTT,{port:4203})
-      client.on('connect', function () {
-        _this.isConnect=true;
-        _this.logs.push("连接成功")
-      });
-      client.on('disconnect', function () {
-        _this.isConnect=false;
-        _this.logs.push("断开连接")
-      });
-      client.on("message",function(){
-        console.log(message.toString())
-        _this.logs.push("收到消息")
-      })
-    },
-    offline(){
-      console.log(this.client);
-      this.logs.push("设备下线")
-      this.client.end(true);
-    },
-    control(p){
-      var payload={
-        action:"control",
-        name:p.name,
-        payload:p.newValue,
-      }
-      payload=JSON.stringify(payload)
-      this.logs.push('topic: '+this.topic+' payload:'+payload);
-      this.client.publish(this.topic,payload)
-    },
-    alarm(p){
-      var payload={
-        action:"alarm",
-        name:p.name,
-        payload:p.newValue,
-      }
-      payload=JSON.stringify(payload)
-      this.logs.push('topic: '+this.topic+' payload:'+payload);
-      this.client.publish(this.topic,payload)
-    },
-    event(p){
-       var payload={
-        action:"event",
-        name:p.name,
-        payload:p.newValue,
-      }
-      payload=JSON.stringify(payload)
-      this.logs.push('topic: '+this.topic+' payload:'+payload);
-      this.client.publish(this.topic,payload)
-    },
-    action(p){
-      var payload={
-        action:"property",
-        name:p.name,
-        value:p.newValue,
-      }
-      payload=JSON.stringify(payload)
-      this.logs.push('topic: '+this.topic+' payload:'+payload);
-      this.client.publish(this.topic,payload)
-    },
-    sendRaw(){
-      this.logs.push('topic: '+this.raw_topic+' payload:'+this.raw);
-      this.client.publish(this.topic,this.raw)
-    }
-  }
-}
+};
 </script>
 
 <style scoped>

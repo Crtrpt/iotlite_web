@@ -10,48 +10,48 @@
 <script>
 import VueTagsInput from '@johmun/vue-tags-input/dist/vue-tags-input';
 export default {
-  name:"Tag",
-  components:{
-    VueTagsInput
-  },
-  props:{
-    value:Array
-  },
-  data(){
-    return {
-      tag: ''
-    }
-  },
-  computed: {
-    tags (){
-      if(this.value!=null){
-        var tags=[];
-        this.value.forEach((e)=>{
-          tags.push({
-            text:e,
-            tiClasses:[
-              "ti-valid"
-            ]
-          })
-        })
-      return tags;
-      }else{
-        return [];
-      }
+    name:"Tag",
+    components:{
+        VueTagsInput
+    },
+    props:{
+        value:Array
+    },
+    data(){
+        return {
+            tag: ''
+        };
+    },
+    computed: {
+        tags (){
+            if(this.value!=null){
+                var tags=[];
+                this.value.forEach((e)=>{
+                    tags.push({
+                        text:e,
+                        tiClasses:[
+                            "ti-valid"
+                        ]
+                    });
+                });
+                return tags;
+            }else{
+                return [];
+            }
      
+        }
+    },
+    methods:{
+        change(newTags){
+            console.log(this.value);
+            var payload=[];
+            newTags.forEach(t => {
+                payload.push(t.text);
+            });
+            this.$emit("input",payload);
+        }
     }
-  },
-  methods:{
-    change(newTags){
-       console.log(this.value);
-      var payload=[]
-      newTags.forEach(t => {
-        payload.push(t.text)
-      });
-      this.$emit("input",payload);
-    }
-  }
-}
+};
 </script>
 
 <style lang="css">
@@ -59,7 +59,10 @@ export default {
   .vue-tags-input {
     background: none !important;
   }
-
+  .vue-tags-input .ti-new-tag-input-wrapper {
+    padding-left: 0px !important;
+    margin-left: 0px !important;
+  }
   .vue-tags-input .ti-new-tag-input {
     background: transparent;
     color: #b7c4c9;

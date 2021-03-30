@@ -60,7 +60,17 @@ const device={
     },
     saveAccess:(ctx)=>{
         return request.post("device/saveAccess",ctx);
-    }
+    },
+    saveBase:(ctx)=>{
+        return request.post("device/saveBase",ctx);
+    },
+    saveGroupBase:(ctx)=>{
+        return request.post("device/saveGroupBase",ctx);
+    },
+    //开发者版本直接更新设备物模型
+    saveModel:(ctx)=>{
+        return request.post("device/saveModel",ctx);
+    },
 };
 
 export {

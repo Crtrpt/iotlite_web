@@ -63,6 +63,9 @@ const product={
     },
     saveAccess:(ctx)=>{
         return request.post("product/saveAccess",ctx);
+    },
+    saveBase:(ctx)=>{
+        return request.post("product/saveBase",ctx);
     }
 };
 

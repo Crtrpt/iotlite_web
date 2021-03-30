@@ -10,32 +10,35 @@
           <b-card-text>
             <vue-loading v-if="ctr.status!=null" class="card_sub_script" type="spin" color="var(--primary)" :size="{ width: '20px', height: '20px' }"></vue-loading>
             {{ctr.desc}}</b-card-text>
+            <template #footer>
+              &nbsp;{{timestamp2Str(form.snap[ctr.name+":last_at"])||"暂无"}}
+            </template>
         </b-card>
       </b-col>
   </b-row>
 </template>
 
 <script>
-import {device} from "../../../api/device"
+import {device} from "../../../api/device";
 export default {
-  name:"Model",
-  props:{
-    form:Object
-  },
-  mounted(){
-    console.log(this.form);
-  },
-  methods:{
-    deviceControl(ctr){
-        this.$set(ctr,"status","4347389")
-        device.action({
-          productSn:this.form.product.sn,
-          deviceSn:this.form.sn,
-          name:ctr.name
-        });
+    name:"Model",
+    props:{
+        form:Object
     },
-  }
-}
+    mounted(){
+        console.log(this.form);
+    },
+    methods:{
+        deviceControl(ctr){
+            this.$set(ctr,"status","4347389");
+            device.action({
+                productSn:this.form.product.sn,
+                deviceSn:this.form.sn,
+                name:ctr.name
+            });
+        },
+    }
+};
 </script>
 
 <style scoped>

@@ -3,8 +3,7 @@
       <h4>
         推送
       </h4>
-      <b-tabs >
-        <b-tab title="推送列表">
+
           <b-row>
             <b-col cols=3>
               <b-form >
@@ -24,6 +23,17 @@
                       v-model="hook.url"
                       type="url"
                       placeholder="请输入要推送的url的地址"
+                      required
+                    ></b-form-input>
+                    </b-form-group>
+
+                    <b-form-group
+                        label="token:"
+                        description="认证token"
+                      >
+                    <b-form-input
+                      v-model="hook.token"
+                      placeholder="请输入http推送认证的token"
                       required
                     ></b-form-input>
                     </b-form-group>
@@ -70,7 +80,6 @@
                       placeholder="输入mqtt的用户名"
                     ></b-form-input>
                     </b-form-group>
-
                    
                       <b-form-group
                         label="password:"
@@ -98,73 +107,67 @@
                 </div>
 
                 <b-button @click="save()" variant="primary">保存</b-button>
-                <b-button @click="test()" class="ml-2" variant="danger">测试</b-button>
+                <!-- <b-button @click="test()" class="ml-2" variant="danger">测试</b-button> -->
               </b-form>
             </b-col>
           </b-row>
-        
-        </b-tab>
-        <b-tab title="推送日志">
-          推送日志
-        </b-tab>
-      </b-tabs>
     </div>
 </template>
 
 <script>
 import {hook} from "../../api/hook";
 export default {
-  name:"Hook",
-  props:{
-    form:Object,
-    type:String,
-  },
-  computed:{
-    hookKey(){
-      switch (this.type) {
-        case "device":
-          return "hook@device@"+this.form.product.sn+","+this.form.sn
-        case "product":
-           return "hook@product@"+this.form.product.sn;
-        case "group":
-          return "hook@group@"+this.form.id;
-        default:
-          break;
-      }
-    }
-  },
-  data(){
-    return {
-      hook:this.form.hook||{},
-      logs:[],
-      options:[
-          { value: null, text: '请选择推送' },
-          { value: 'http', text: 'http推送' },
-          { value: 'mqtt', text: 'mqtt 推送' },
-          { value: 'sse', text: 'sse 推送' },
-      ],
-      
-    }
-  },
-  methods:{
-    save(){
-        hook.save({
-          key:this.hookKey,
-          data:this.hook,
-        })
+    name:"Hook",
+    props:{
+        form:Object,
+        type:String,
     },
-    test(){
-      var _this=this;
-      console.log(this.hook);
-      if(this.hook.protocol=="sse"){
-        var source = new EventSource('http://127.0.0.1:5302/sse');
-        source.onmessage = function (event) {
-            console.log('id: ' + event.lastEventId + ', data: ' + event.data);
-            _this.logs.push(event.data);
+    computed:{
+        hookKey(){
+            switch (this.type) {
+            case "device":
+                return "hook@device@"+this.form.product.sn+","+this.form.sn;
+            case "product":
+                return "hook@product@"+this.form.product.sn;
+            case "group":
+                return "hook@group@"+this.form.id;
+            default:
+                break;
+            }
+        }
+    },
+    data(){
+        return {
+            hook:this.form.hook||{},
+            logs:[],
+            options:[
+                { value: null, text: '请选择推送' },
+                { value: 'http', text: 'http推送' },
+                // { value: 'mqtt', text: 'mqtt 推送' },
+                // { value: 'sse', text: 'sse 推送' },
+            ],
+      
         };
-      }
+    },
+    methods:{
+        save(){
+            hook.save({
+                key:this.hookKey,
+                data:this.hook,
+            });
+        },
+        test(){
+            var _this=this;
+            console.log(this.hook);
+            if(this.hook.protocol=="sse"){
+                var source = new EventSource('http://127.0.0.1:5302/sse');
+                source.onmessage = function (event) {
+                    console.log('id: ' + event.lastEventId + ', data: ' + event.data);
+                    _this.logs.push(event.data);
+                };
+            }
      
+        }
     }
-  }
-}
+};
 </script>
