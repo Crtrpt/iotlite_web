@@ -19,6 +19,9 @@ const team={
     save:(ctx)=>{
         return request.post("team/save",ctx);
     },
+    memberlist:(ctx)=>{
+        return request.post("team/memberlist",ctx);
+    }
 };
 
 export {

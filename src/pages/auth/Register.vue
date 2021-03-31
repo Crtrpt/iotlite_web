@@ -14,6 +14,9 @@
            <b-form-group label="用户名" description="显示的用户名(必填)">
             <b-input v-model="form.username"/>
           </b-form-group>
+          <b-form-group label="邮箱" description="用户邮箱(必填)">
+            <b-input v-model="form.email"/>
+          </b-form-group>
           <b-form-group label="密码"  description="登录密码(必填)">
             <b-input v-model="help.password" type="password"/>
           </b-form-group>

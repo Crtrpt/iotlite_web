@@ -70,7 +70,7 @@
     <b-col>
       <b-nav tabs>
         <b-nav-item to="base"  active-class="active" >基础信息</b-nav-item>
-        <b-nav-item to="model"  active-class="active" >物模型</b-nav-item>
+        <b-nav-item to="model"  active-class="active" v-if="form.releaseType=='Alpha'">物模型</b-nav-item>
         <b-nav-item to="control"  active-class="active" >设备控制</b-nav-item>
         <b-nav-item to="metric"  active-class="active" >数据指标</b-nav-item>
         <b-nav-item to="log"   active-class="active" v-if="form.releaseType=='Alpha'" >设备日志</b-nav-item>

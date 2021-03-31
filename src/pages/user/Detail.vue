@@ -6,19 +6,6 @@
       <p>desc</p>
     </b-col>
   </b-row>
-  <!-- <b-row>
-    <b-col col cols="12" class="mt-2 mb-2">
-      <b-button-toolbar key-nav aria-label="Toolbar with button groups">
-        <b-button-group >
-          <b-button variant="secondary">Edit</b-button>
-        </b-button-group>
-
-        <b-button-group  class="ml-1">
-          <b-button variant="secondary">Export</b-button>
-        </b-button-group>
-      </b-button-toolbar>
-    </b-col>
-  </b-row> -->
   <b-row>
     <b-col>
       <b-nav tabs>
@@ -33,25 +20,13 @@
 
 <script>
 export default {
-  name:"userDetail",
-  data(){
-    return {
-      list:[
-        {
-          id:"",
-          name:"燃气",
-          description:"CQ2010"
-        },
-        {
-          id:"",
-          name:"烟感",
-          description:"CQ2010"
-        },
-        
-      ],
+    name:"userDetail",
+    data(){
+        return {
+
+        };
     }
-  }
-}
+};
 </script>
 
 <style scoped>
