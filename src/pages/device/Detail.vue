@@ -4,7 +4,6 @@
     <b-col cols="12">
       <h3>设备信息# {{form.name}} </h3>
       <p class="small">{{form.version||null}} 
-        <b-icon v-if="form.version!=form.product.version" icon="arrow-up-square"></b-icon>
       </p>
       <p>{{form.description}} 
         <b-link  class="link" href="javascript:void(0);" v-b-toggle.more> {{visible?"↑":"↓"}}</b-link>
@@ -155,19 +154,10 @@ export default {
             visible:false,
             form:{
                 id:0||this.$route.params.id,
+                product:{},
+                snap:{}
             },
             list:[
-                {
-                    id:"",
-                    name:"燃气",
-                    description:"CQ2010"
-                },
-                {
-                    id:"",
-                    name:"烟感",
-                    description:"CQ2010"
-                },
-        
             ],
         };
     },
