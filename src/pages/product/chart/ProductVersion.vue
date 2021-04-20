@@ -1,19 +1,16 @@
 <template>
-      <b-card title="设备在线情况">
-                       <div>
-      设备总数 xx
-      在线 01
-      离线 20
+  <b-card title="设备在线情况">
+    <div>
+      设备总数 xx 在线 01 离线 20
     </div>
-                  </b-card>
-    
+  </b-card>
 </template>
 
 <script>
 export default {
-  name:"DeviceCount",
-  props:{
-    productId:Number
-  }
-}
+  name: "DeviceCount",
+  props: {
+    productId: Number,
+  },
+};
 </script>

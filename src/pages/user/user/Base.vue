@@ -1,15 +1,13 @@
 <template>
   <div>
-      基础信息
+    基础信息
   </div>
 </template>
 
 <script>
 export default {
-  name:"Base"
-}
+  name: "Base",
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

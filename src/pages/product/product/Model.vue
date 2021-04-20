@@ -39,7 +39,7 @@ export default {
                 productSn:this.form.sn,
                 spec:this.$refs.editor.instance.getValue()
             }).then((res)=>{
-                if(res.code==0){
+                if(res.code===0){
                     _this.$bvModal.msgBoxOk("保存成功");
                     _this.$emit('refresh',{});
                 }else{

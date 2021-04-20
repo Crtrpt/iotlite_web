@@ -1,26 +1,23 @@
 <template>
   <div class="user_layout">
     <Header />
-      <router-view class="content"></router-view>
+    <router-view class="content"></router-view>
     <Footer />
   </div>
 </template>
 
 <script>
-import Header from '../master/Header';
+import Header from "../master/Header";
 
-import Footer from '../master/Footer';
+import Footer from "../master/Footer";
 
 export default {
-  name: 'UserLayout',
-  computed: {
+  name: "UserLayout",
+  computed: {},
+  components: { Header, Footer },
+  data() {
+    return {};
   },
-  components: { Header,Footer},
-  data(){
-    return {
-      
-    }
-  }
 };
 </script>
 
