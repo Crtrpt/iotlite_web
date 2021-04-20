@@ -129,7 +129,7 @@ export default {
         },
         {
           key: "deviceGroup",
-          label: "分组",
+          label: "场景",
         },
         {
           key: "createdAt",

@@ -2,7 +2,7 @@
   <b-container fluid>
     <b-row class="mb-2">
       <b-col cols="12">
-        <h3>分组# {{ form.name }}</h3>
+        <h3>场景# {{ form.name }}</h3>
         <p>{{ form.description }}</p>
       </b-col>
     </b-row>

@@ -18,7 +18,15 @@
                   active-class="active"
                   :to="{ name: 'deviceDetail', params: { id: p.id } }"
                 >
-                  <h5 class="mb-1">{{ p.name }}</h5>
+                  <h5 class="mb-1">
+                    <b-avatar
+                      :src="p.product.icon"
+                      variant="light"
+                      class="mr-2"
+                      icon="app"
+                    ></b-avatar>
+                    <span>{{ p.name }}</span>
+                  </h5>
                 </router-link>
               </template>
 
@@ -28,7 +36,8 @@
                     v-b-tooltip.hover
                     :title="'产品:' + p.product.name + ' 序号:' + p.product.sn"
                   >
-                    <b-icon icon="app-indicator"></b-icon> {{ p.sn }}
+                    <b-icon icon="app-indicator"></b-icon>
+                    {{ p.product.name }}
                   </b-link>
                 </div>
 
@@ -44,8 +53,6 @@
                     {{ p.ver }} <b-icon icon="bookmark"></b-icon>
                   </b-link>
                 </div>
-                {{ p.description }}
-                {{ p.product.name }}
                 <Tag
                   v-model="p.tags"
                   @input="(payload) => changeTags(payload, p)"

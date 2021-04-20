@@ -28,6 +28,7 @@
     "split.js": "^1.6.2",
     "three": "^0.125.2",
     "vue": "^2.6.12",
+    "vue-avatar-cropper": "^1.0.9",
     "vue-context": "^6.0.0",
     "vue-ctk-date-time-picker": "^2.5.0",
     "vue-i18n": "^8.21.1",

@@ -2,7 +2,11 @@
   <b-container fluid>
     <b-row class="mb-2">
       <b-col cols="12">
-        <h3>产品# {{ form.name }}</h3>
+        <h3>
+          产品# {{ form.name }}
+          <b-avatar :src="form.icon" variant="light" icon="app"></b-avatar>
+        </h3>
+
         <p class="small">{{ form.version }}</p>
         <p>
           {{ form.description }}

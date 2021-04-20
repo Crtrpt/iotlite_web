@@ -5,10 +5,10 @@
         <b-card title="基本信息" tag="article" class="mt-2 mb-2">
           <b-card-text>
             <form>
-              <b-form-group description="分组名称">
-                <b-input v-model="form.name" placeholder="分组名称"></b-input>
+              <b-form-group description="场景名称">
+                <b-input v-model="form.name" placeholder="场景名称"></b-input>
               </b-form-group>
-              <b-form-group description="对分组的简单描述信息">
+              <b-form-group description="对场景的简单描述信息">
                 <b-input
                   v-model="form.description"
                   placeholder="描述信息"

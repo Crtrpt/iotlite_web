@@ -2,7 +2,7 @@
   <vue-tags-input
     v-model="tag"
     :tags="tags"
-    placeholder="添加分组"
+    placeholder="添加场景"
     disabled
     @tags-changed="(newTags) => change(newTags)"
   >

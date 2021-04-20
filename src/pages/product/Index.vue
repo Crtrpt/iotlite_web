@@ -15,10 +15,17 @@
           <b-col xl="3" lg="4" md="4" sm="6" v-for="p in items" :key="p.id">
             <b-card class="mt-2 product_card">
               <template>
-                <h5 @click="detail(p)" class="mb-1">{{ p.name }}</h5>
+                <h5 @click="detail(p)" class="mb-2">
+                  <b-avatar
+                    :src="p.icon"
+                    variant="light"
+                    class="mr-2"
+                    icon="app"
+                  ></b-avatar>
+                  <span>{{ p.name }}</span>
+                </h5>
               </template>
               <b-card-text>
-                {{ p.description }}
                 <div class="card_sub_script">
                   {{ p.ver }}<b-icon icon="bookmark"></b-icon>
                 </div>

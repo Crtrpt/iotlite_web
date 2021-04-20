@@ -91,11 +91,14 @@ export default {
         { text: "仅自动", value: "auto" },
       ],
       accessOptions: [
-        { text: "所有人", value: "Public" },
         { text: "仅自己", value: "Private" },
         { text: "团队", value: "Team" },
       ],
-      form: {},
+      form: {
+        access: "Private",
+        discover: "all",
+        cert: "none",
+      },
     };
   },
   methods: {

@@ -26,6 +26,9 @@ export default {
     tags() {
       if (this.value !== null) {
         var tags = [];
+        if (this.value === null) {
+          return tags;
+        }
         this.value.forEach((e) => {
           tags.push({
             text: e,

@@ -5,7 +5,7 @@
         <b-button-toolbar>
           <b-button-group class="mr-2">
             <b-button size="sm" variant="primary" @click="setFence"
-              >分组围栏</b-button
+              >场景围栏</b-button
             >
           </b-button-group>
         </b-button-toolbar>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     setFence() {
-      console.log("设置分组围栏");
+      console.log("设置场景围栏");
     },
     renderFence() {
       var _this = this;

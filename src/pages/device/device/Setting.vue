@@ -56,7 +56,6 @@ export default {
     return {
       access: this.form.access || "Public",
       options: [
-        { text: "所有人", value: "Public" },
         { text: "仅自己", value: "Private" },
         { text: "团队", value: "Team" },
       ],

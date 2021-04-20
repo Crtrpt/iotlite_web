@@ -75,12 +75,12 @@
       </b-form-group>
 
       <b-form-group
-        label="分组:"
-        description="设备加入的分组"
+        label="场景:"
+        description="设备加入的场景"
       >
         <b-form-input
           v-model="form.deviceGroup"
-          placeholder="设备加入的分组 多个分组，分割"
+          placeholder="设备加入的场景 多个场景，分割"
         ></b-form-input>
       </b-form-group>
       
@@ -124,12 +124,12 @@ export default {
     return {
 
       accessOptions: [
-        { text: '所有人', value: "Public" },
         { text: '仅自己', value: "Private" },
         { text: '团队', value: "Team" }
       ],
       form:{
-        count:1
+        count:1,
+        access: "Private",
       }
     };
   },
