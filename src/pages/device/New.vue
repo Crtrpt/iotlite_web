@@ -115,40 +115,40 @@ import {device} from "../../api/device";
 import ProductSelect from '../../components/product/ProductSelect.vue';
 import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue';
 export default {
-    components: { ProductSelect ,ProductVersionSelect},
-    name:"New",
-    props:{
-        preset:Object,
-    },
-    data(){
-        return {
+  components: { ProductSelect ,ProductVersionSelect},
+  name:"New",
+  props:{
+    preset:Object,
+  },
+  data(){
+    return {
 
-            accessOptions: [
-                { text: '所有人', value: "Public" },
-                { text: '仅自己', value: "Private" },
-                { text: '团队', value: "Team" }
-            ],
-            form:{
-                count:1
-            }
-        };
-    },
-    methods:{
-        onSubmit(){
-            var _this=this;
-            device.save({
-                ...this.form,
-                ...this.preset
-            }).then((res)=>{
-                if(res.code==0){
-                    console.log("saveSuccess");
-                    _this.$emit("close",true);
-                }else{
-                    _this.$bvModal.msgBoxOk(res.msg);
-                }
-            });
+      accessOptions: [
+        { text: '所有人', value: "Public" },
+        { text: '仅自己', value: "Private" },
+        { text: '团队', value: "Team" }
+      ],
+      form:{
+        count:1
+      }
+    };
+  },
+  methods:{
+    onSubmit(){
+      var _this=this;
+      device.save({
+        ...this.form,
+        ...this.preset
+      }).then((res)=>{
+        if(res.code===0){
+          console.log("saveSuccess");
+          _this.$emit("close",true);
+        }else{
+          _this.$bvModal.msgBoxOk(res.msg);
         }
+      });
     }
+  }
 };
 </script>
 

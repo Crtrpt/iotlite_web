@@ -1,18 +1,16 @@
 <template>
-  <div class="footer">
-
-  </div>
+  <div class="footer"></div>
 </template>
 
 <script>
 export default {
-  name:"Footer"
-}
+  name: "Footer",
+};
 </script>
 
 <style scoped>
-   .ui.footer.segment {
-     margin: 5em 0em 0em;
-     padding: 5em 0em; 
-    }
+.ui.footer.segment {
+  margin: 5em 0em 0em;
+  padding: 5em 0em;
+}
 </style>
