@@ -1,19 +1,19 @@
 <template>
-  <b-tab title="控制">
+  <b-tab title="关键指标">
     <b-button-group class="mt-2 mb-2">
-      <b-modal ref="new-control" title="控制" hide-footer>
+      <b-modal ref="new-alarm" title="指标" hide-footer>
         <b-form>
-          <b-form-group label="名称" description="控制名称">
+          <b-form-group label="名称" description="名称">
             <b-form-input
               v-model="curData.name"
-              placeholder="属性名称"
+              placeholder="名称"
               required
             ></b-form-input>
           </b-form-group>
-          <b-form-group label="描述" description="对控制的描述">
+          <b-form-group label="描述" description="描述">
             <b-form-input
               v-model="curData.desc"
-              placeholder="描述"
+              placeholder="对指标的描述"
               required
             ></b-form-input>
           </b-form-group>
@@ -31,20 +31,19 @@
           </b-form-group>
           <b-form-group
             v-if="curData.side == 1"
-            label="执行的操作"
-            description="执行的操作"
+            label="数据来源"
+            description="数据来源"
           >
             <b-form-textarea
-              v-model="curData.action"
-              placeholder="执行的操作"
+              v-model="curData.source"
+              placeholder="数据来源"
               required
-            >
-            </b-form-textarea>
+            ></b-form-textarea>
           </b-form-group>
-          <b-button variant="primary" @click="createNewControl">保存</b-button>
+          <b-button variant="primary" @click="createNewAlarm">保存</b-button>
         </b-form>
       </b-modal>
-      <b-button variant="primary" @click="createControl">增加控制</b-button>
+      <b-button variant="primary" @click="createAlarm">增加指标</b-button>
     </b-button-group>
     <b-row v-for="(p, i) in value" :key="i" class="mt-2">
       <b-col>{{ p.name }}</b-col>
@@ -52,13 +51,10 @@
       <b-col cols="1">{{ p.side == 0 ? "↑" : "↓" }}</b-col>
       <b-col>
         <b-button-group>
-          <b-button size="sm" variant="primary" @click="editControl(p, i)"
+          <b-button size="sm" variant="primary" @click="editAlarm(p, i)"
             >编辑</b-button
           >
-          <b-button
-            size="sm"
-            variant="outline-primary"
-            @click="removeControl(i)"
+          <b-button size="sm" variant="outline-primary" @click="removeAlarm(i)"
             >删除</b-button
           >
         </b-button-group>
@@ -69,7 +65,7 @@
 
 <script>
 export default {
-  name: "Control",
+  name: "KeyIndicator",
   props: {
     value: Array,
   },
@@ -86,17 +82,17 @@ export default {
     };
   },
   methods: {
-    createControl() {
+    createAlarm() {
       this.curData = {};
       this.idx = -1;
-      this.$refs["new-control"].show();
+      this.$refs["new-alarm"].show();
     },
-    editControl(p, i) {
+    editAlarm(p, i) {
       this.curData = p;
       this.idx = i;
-      this.$refs["new-control"].show();
+      this.$refs["new-alarm"].show();
     },
-    removeControl(i) {
+    removeAlarm(i) {
       var v = [];
       this.value.forEach((ele, idx) => {
         if (idx == i) {
@@ -106,7 +102,7 @@ export default {
       });
       this.$emit("input", v);
     },
-    createNewControl() {
+    createNewAlarm() {
       var v = this.value;
       if (v == null) {
         v = [];
@@ -114,10 +110,10 @@ export default {
       if (this.idx == -1) {
         v.push(this.curData);
       } else {
-        v[this.idx] = this.curData;
+        v[this.idx] = curData;
       }
       this.$emit("input", v);
-      this.$refs["new-control"].hide();
+      this.$refs["new-alarm"].hide();
     },
   },
 };

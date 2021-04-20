@@ -1,10 +1,7 @@
 module.exports = {
   root: true,
   parser: 'vue-eslint-parser',
-
-  // parser: 'babel-eslint',
   parserOptions: {
-    // 
     "ecmaVersion": 2020,
     "sourceType": "module"
   },
@@ -15,21 +12,16 @@ module.exports = {
     'plugin:vue/essential',
     'standard'
   ],
-  // required to lint *.vue files
   plugins: [
     'vue'
   ],
-  // add your custom rules here
   rules: {
-    // allow async-await
     'generator-star-spacing': 'off',
-    // allow debugger during development
-    // 'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-    "indent": ["error", 4],
+    "indent": ["warn", 2],
     "quotes": ["off"],
-    "semi": ["error", "always"],
+    "semi": ["warn", "always"],
     "eqeqeq": "warn",
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
+    "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 1 }]
   },
   extends: [
     "prettier"

@@ -75,12 +75,12 @@
       </b-form-group>
 
       <b-form-group
-        label="分组:"
-        description="设备加入的分组"
+        label="场景:"
+        description="设备加入的场景"
       >
         <b-form-input
           v-model="form.deviceGroup"
-          placeholder="设备加入的分组 多个分组，分割"
+          placeholder="设备加入的场景 多个场景，分割"
         ></b-form-input>
       </b-form-group>
       
@@ -115,40 +115,40 @@ import {device} from "../../api/device";
 import ProductSelect from '../../components/product/ProductSelect.vue';
 import ProductVersionSelect from '../../components/product/ProductVersionSelect.vue';
 export default {
-    components: { ProductSelect ,ProductVersionSelect},
-    name:"New",
-    props:{
-        preset:Object,
-    },
-    data(){
-        return {
+  components: { ProductSelect ,ProductVersionSelect},
+  name:"New",
+  props:{
+    preset:Object,
+  },
+  data(){
+    return {
 
-            accessOptions: [
-                { text: '所有人', value: "Public" },
-                { text: '仅自己', value: "Private" },
-                { text: '团队', value: "Team" }
-            ],
-            form:{
-                count:1
-            }
-        };
-    },
-    methods:{
-        onSubmit(){
-            var _this=this;
-            device.save({
-                ...this.form,
-                ...this.preset
-            }).then((res)=>{
-                if(res.code==0){
-                    console.log("saveSuccess");
-                    _this.$emit("close",true);
-                }else{
-                    _this.$bvModal.msgBoxOk(res.msg);
-                }
-            });
+      accessOptions: [
+        { text: '仅自己', value: "Private" },
+        { text: '团队', value: "Team" }
+      ],
+      form:{
+        count:1,
+        access: "Private",
+      }
+    };
+  },
+  methods:{
+    onSubmit(){
+      var _this=this;
+      device.save({
+        ...this.form,
+        ...this.preset
+      }).then((res)=>{
+        if(res.code===0){
+          console.log("saveSuccess");
+          _this.$emit("close",true);
+        }else{
+          _this.$bvModal.msgBoxOk(res.msg);
         }
+      });
     }
+  }
 };
 </script>
 
