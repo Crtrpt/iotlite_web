@@ -7,14 +7,14 @@ const auth={
   register:(ctx)=>{
     return request.post("auth/signup",ctx);
   },
-  /**
-     * 短信验证
-     */
-  phoneVerif:(ctx)=>{
-    return request.post("auth/phoneVerif",ctx);
-  },
   logout:(ctx)=>{
     return request.post("auth/logout",ctx);
+  },
+  confirmEmail: (ctx) => {
+    return request.post("auth/confirmEmail",ctx);
+  },
+  resetpassword: (ctx) => {
+    return request.post("auth/resetpassword",ctx);
   }
 };
 
