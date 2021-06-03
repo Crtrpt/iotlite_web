@@ -2,12 +2,20 @@
   <div>
     <b-form ref="new" @submit="onSubmit">
       <b-form-group label="版本:" description="语义化版本号 如 v0.0.1">
-        <b-form-input
-          v-model="form.version"
-          type="text"
-          required
-          placeholder="输入要发布的版本"
-        ></b-form-input>
+        <b-input-group>
+          <b-form-input
+            v-model="form.version"
+            type="text"
+            required
+            placeholder="输入要发布的版本"
+          ></b-form-input>
+          <b-form-input
+            v-model="form.minHdVersion"
+            type="text"
+            required
+            placeholder="最低支持的硬件版本"
+          ></b-form-input>
+        </b-input-group>
       </b-form-group>
       <b-form-group label="描述:" description="对发布版本的简短描述">
         <b-form-input
@@ -18,34 +26,21 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group
-        label="最低支持的硬件的版本:"
-        description="最低支持的硬件的版本"
-      >
-        <b-form-input
-          v-model="form.minHdVersion"
-          type="text"
-          required
-          placeholder="最低支持的硬件版本"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group label="开始时间:" description="支持开始时间">
-        <b-form-input
-          v-model="form.startAt"
-          type="date"
-          required
-          placeholder="支持开始时间"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group label="结束时间:" description="支持结束时间">
-        <b-form-input
-          v-model="form.endAt"
-          type="date"
-          required
-          placeholder="支持结束时间"
-        ></b-form-input>
+      <b-form-group label="支持时间:" description="支持开始时间">
+        <b-input-group>
+          <b-form-input
+            v-model="form.startAt"
+            type="date"
+            required
+            placeholder="支持开始时间"
+          ></b-form-input>
+          <b-form-input
+            v-model="form.endAt"
+            type="date"
+            required
+            placeholder="支持结束时间"
+          ></b-form-input>
+        </b-input-group>
       </b-form-group>
 
       <b-form-group label="发行类型" description="发行类型">
@@ -55,6 +50,20 @@
           :options="releaseTypeOptions"
           name="side-options"
         ></b-form-radio-group>
+      </b-form-group>
+
+      <b-form-group label="更新固件" description="更新固件">
+        <b-form-checkbox
+          v-model="form.updateFirmware"
+          :value="true"
+          :unchecked-value="false"
+        >
+          更新固件
+        </b-form-checkbox>
+      </b-form-group>
+
+      <b-form-group label="设备文件:" v-if="form.updateFirmware">
+        <b-form-file placeholder="选择设备文件"> </b-form-file>
       </b-form-group>
 
       <b-button type="submit" variant="primary">提交</b-button>
@@ -79,6 +88,7 @@ export default {
         { text: "开发板", value: "Alpha" },
       ],
       form: {
+        updateFirmware: false,
         releaseType: 0,
       },
     };
