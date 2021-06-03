@@ -43,6 +43,11 @@ var routes = [
     component: require('../pages/auth/Register').default,
     name: 'register',
   },
+  {
+    path: '/forgetpassword',
+    component: require('../pages/auth/ForgetPassword').default,
+    name: 'forgetpassword',
+  },
   { path: '*', component:  require('../pages/NotFound').default }
 ];
 
