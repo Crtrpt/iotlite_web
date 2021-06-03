@@ -34,18 +34,26 @@
         >
           <template #button-content class="nav-link dropdown-toggle user">
             {{ $store.getters["auth/username"] }}
-            <img src="img/profile-16.jpeg" alt="avatar" />
+            <img
+              class="ml-2"
+              :src="$store.getters['auth/avatar']"
+              alt="avatar"
+            />
           </template>
 
-          <b-dropdown-item class="dropdown-item" @click="$router.push({name:'profile'})">
-                      个人信息</b-dropdown-item> 
+          <b-dropdown-item
+            class="dropdown-item"
+            @click="$router.push({ name: 'profile' })"
+          >
+            个人信息</b-dropdown-item
+          >
           <b-dropdown-item
             class="dropdown-item"
             @click="$router.push({ name: 'team' })"
           >
             我的团队</b-dropdown-item
           >
-         
+
           <b-dropdown-item
             class="dropdown-item"
             @click="$router.push({ name: 'login' })"

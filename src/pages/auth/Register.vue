@@ -22,9 +22,12 @@
                 ></b-col>
               </b-row>
 
-              <b-form-group label="邮箱:" description="用户邮箱(必填)">
-                <b-input v-model="form.email" />
+              <b-form-group label="邮箱:" description="找回密码的时候用到">
+                <b-input-group>
+                  <b-form-input v-model="form.email"></b-form-input>
+                </b-input-group>
               </b-form-group>
+
               <b-form-group label="密码:" description="登录密码(必填)">
                 <b-input v-model="help.password" type="password" />
               </b-form-group>
